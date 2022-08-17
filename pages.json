@@ -6,26 +6,7 @@
 		{
 			"path": "pages/index/index",
 			"style": {
-				"navigationBarTitleText": "",
-				"navigationBarBackgroundColor": "#66CCFF"
-			}
-		},
-		{
-			"path": "pages/monitor/monitor",
-			"style": {
-				"navigationBarTitleText": "uni-app"
-			}
-		},
-		{
-			"path": "pages/warn/warn",
-			"style": {
-				"navigationBarTitleText": "uni-app"
-			}
-		},
-		{
-			"path": "pages/home/home",
-			"style": {
-				"navigationBarTitleText": "uni-app"
+				"navigationBarTitleText": ""
 			}
 		}
 	],
@@ -36,23 +17,25 @@
 		"backgroundColor": "#F8F8F8"
 	},
 	"tabBar": {
+		"selectedColor": "#187759",
 		"list": [
 			{
 				"pagePath": "pages/index/index",
-				"iconPath": "static/tabBar/tabBar_index2.png",
-				"selectedIconPath": "static/tabBar/tabBar_index1.png",
-				"text": "首页"
+				"iconPath": "./static/tabbar/index.png",
+				"selectedIconPath": "./static/tabbar/index-active.png",
+				"text": "首页",
+				"selectedColor": "#187759"
 			},
 			{
 				"pagePath": "pages/monitor/monitor",
-				"iconPath": "static/tabBar/tabBar_monitor2.png",
-				"selectedIconPath": "static/tabBar/tabBar_monitor1.png",
+				"iconPath": "./static/tabbar/monitor.png",
+				"selectedIconPath": "./static/tabbar/monitor-active.png",
 				"text": "厂站监测"
 			},
 			{
 				"pagePath": "pages/warn/warn",
-				"iconPath": "static/tabBar/tabBar_warn2.png",
-				"selectedIconPath": "static/tabBar/tabBar_warn1.png",
+				"iconPath": "./static/tabbar/warn.png",
+				"selectedIconPath": "./static/tabbar/warn-active.png",
 				"text": "告警"
 			}
 		]
