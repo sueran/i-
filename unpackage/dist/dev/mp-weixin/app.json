@@ -1,0 +1,39 @@
+{
+    "pages": [
+        "pages/index/index",
+        "pages/monitor/monitor",
+        "pages/warn/warn"
+    ],
+    "subPackages": [],
+    "window": {
+        "navigationBarTextStyle": "black",
+        "navigationBarTitleText": "uni-app",
+        "navigationBarBackgroundColor": "#F8F8F8",
+        "backgroundColor": "#F8F8F8"
+    },
+    "tabBar": {
+        "selectedColor": "#187759",
+        "list": [
+            {
+                "pagePath": "pages/index/index",
+                "iconPath": "./static/tabbar/index.png",
+                "selectedIconPath": "./static/tabbar/index-active.png",
+                "text": "首页"
+            },
+            {
+                "pagePath": "pages/monitor/monitor",
+                "iconPath": "./static/tabbar/monitor.png",
+                "selectedIconPath": "./static/tabbar/monitor-active.png",
+                "text": "厂站监测"
+            },
+            {
+                "pagePath": "pages/warn/warn",
+                "iconPath": "./static/tabbar/warn.png",
+                "selectedIconPath": "./static/tabbar/warn-active.png",
+                "text": "告警"
+            }
+        ]
+    },
+    "usingComponents": {},
+    "sitemapLocation": "sitemap.json"
+}
