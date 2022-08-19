@@ -8,9 +8,13 @@
 			<view class="monitor">
 				<u-scroll-list indicatorColor="#fff0f0" indicatorActiveColor="#187759">
 					<view class="scroll-list" style="flex-direction: row">
-						<view class="scroll-list__goods-item" v-for="(item, index) in list" :key="index" :class="[
-							index === 9 && 'scroll-list__goods-item--no-margin-right',
-						]">
+						<view 
+							class="scroll-list__goods-item" 
+							v-for="(item, index) in list" 
+							:key="index" 
+							:class="[index === 9 && 'scroll-list__goods-item--no-margin-right',]"
+							@click="handleClick(index)"
+						>
 							<img class="scroll-list__goods-item__image" :src="item.thumb" mode="widthFix" />
 							<text class="scroll-list__goods-item__text">{{
 									item.price
@@ -27,7 +31,7 @@
 				<view class="numberItem">
 
 					<view class="numberItem_item">
-						<img src="../../static/220.png" mode="widthFix"/>
+						<img src="../../static/images/NumberOfSubstations/220.png" mode="widthFix"/>
 						<view class="numberItem_item_name">220kv变电站</view>
 						<view class="numberItem_item_number">
 							<view class="numberItem_item_number_total">
@@ -46,7 +50,7 @@
 					</view>
 
 					<view class="numberItem_item">
-						<img src="../../static/220.png" mode="widthFix"/>
+						<img src="../../static/images/NumberOfSubstations/220.png" mode="widthFix"/>
 						<view class="numberItem_item_name">110kv变电站</view>
 						<view class="numberItem_item_number">
 							<view class="numberItem_item_number_total">
@@ -65,7 +69,7 @@
 					</view>
 
 					<view class="numberItem_item">
-						<img src="../../static/220.png" mode="widthFix"/>
+						<img src="../../static/images/NumberOfSubstations/220.png" mode="widthFix"/>
 						<view class="numberItem_item_name">35kv变电站</view>
 						<view class="numberItem_item_number">
 							<view class="numberItem_item_number_total">
@@ -86,45 +90,43 @@
 			</view>
 			<view class="todayWarnList">
 				<view class="todayWarnList_top">
-					<!-- <view class="todayWarnList_top_title">今日设备警告</view>
-					<view class="todayWarnList_top_more">查看更多></view> -->
 					<text class="todayWarnList_top_title">今日设备警告</text>
 					<u-icon name="arrow-right" bold></u-icon>
 				</view>
 				<view class="todayWarnList_content">
 					<view class="todayWarnList_content_item">
 						<view class="todayWarnList_content_item_img">
-							<img src="../../static/110.png" mode="widthFix"/>
+							<img src="../../static/images/TodayWarning/malfunction.png" mode="widthFix"/>
 						</view>
 						<view class="todayWarnList_content_item_left">故障跳闸</view>
 						<view class="todayWarnList_content_item_right">20</view>
 					</view>
 					<view class="todayWarnList_content_item">
 						<view class="todayWarnList_content_item_img">
-							<img src="../../static/110.png" mode="widthFix"/>
+							<img src="../../static/images/TodayWarning/InsuranceActivities.png" mode="widthFix"/>
 						</view>
-						<view class="todayWarnList_content_item_left">故障跳闸</view>
+						<view class="todayWarnList_content_item_left">保护动作</view>
 						<view class="todayWarnList_content_item_right">20</view>
 					</view>
 					<view class="todayWarnList_content_item">
 						<view class="todayWarnList_content_item_img">
-							<img src="../../static/110.png" mode="widthFix"/>
+							<img src="../../static/images/TodayWarning/abnormal.png" mode="widthFix"/>
 						</view>
-						<view class="todayWarnList_content_item_left">故障跳闸</view>
+						<view class="todayWarnList_content_item_left">装置异常</view>
 						<view class="todayWarnList_content_item_right">20</view>
 					</view>
 					<view class="todayWarnList_content_item">
 						<view class="todayWarnList_content_item_img">
-							<img src="../../static/110.png" mode="widthFix"/>
+							<img src="../../static/images/TodayWarning/abnormalDevice.png" mode="widthFix"/>
 						</view>
-						<view class="todayWarnList_content_item_left">故障跳闸</view>
+						<view class="todayWarnList_content_item_left">装置故障</view>
 						<view class="todayWarnList_content_item_right">20</view>
 					</view>
 					<view class="todayWarnList_content_item">
 						<view class="todayWarnList_content_item_img">
-							<img src="../../static/110.png" mode="widthFix"/>
+							<img src="../../static/images/TodayWarning/remoteSensingSurvey.png" mode="widthFix"/>
 						</view>
-						<view class="todayWarnList_content_item_left">故障跳闸</view>
+						<view class="todayWarnList_content_item_left">遥测越限</view>
 						<view class="todayWarnList_content_item_right">20</view>
 					</view>
 				</view>
@@ -151,71 +153,54 @@ export default {
 	data() {
 		return {
 			InfoNumber: 10,
-			listNum: [
-				{
-					id: 1
-				},
-				{
-					id: 2
-				},
-				{
-					id: 3
-				},
-				{
-					id: 4
-				},
-				{
-					id: 5
-				}
-			],
 			list: [
 				{
 					price: "工作情况",
-					thumb: "https://cdn.uviewui.com/uview/goods/1.jpg",
+					thumb: "../../static/images/operation/workingCondition.png",
 				},
 				{
 					price: "超重载",
-					thumb: "https://cdn.uviewui.com/uview/goods/2.jpg",
+					thumb: "../../static/images/operation/heavyLoad.png",
 				},
 				{
 					price: "负荷曲线",
-					thumb: "https://cdn.uviewui.com/uview/goods/6.jpg",
+					thumb: "../../static/images/operation/load.png",
 				},
 				{
 					price: "缺陷统计",
-					thumb: "https://cdn.uviewui.com/uview/goods/5.jpg",
+					thumb: "../../static/images/operation/imperfection.png",
 				},
 				{
 					price: "置牌一览",
-					thumb: "https://cdn.uviewui.com/uview/goods/2.jpg",
+					thumb: "../../static/images/operation/generalSurvey.png",
 				},
 				{
 					price: "告警抑制",
-					thumb: "https://cdn.uviewui.com/uview/goods/3.jpg",
+					thumb: "../../static/images/operation/warningMessage.png",
 				},
 				{
 					price: "数据传输",
-					thumb: "https://cdn.uviewui.com/uview/goods/4.jpg",
+					thumb: "../../static/images/operation/dataTransmission.png",
 				},
 				{
 					price: "封锁信息",
-					thumb: "https://cdn.uviewui.com/uview/goods/1.jpg",
+					thumb: "../../static/images/operation/blockingInformation.png",
 				},
 				{
 					price: "替代信息",
-					thumb: "https://cdn.uviewui.com/uview/goods/2.jpg",
+					thumb: "../../static/images/operation/alternativeInformation.png",
 				},
 				{
 					price: "设备越限",
-					thumb: "https://cdn.uviewui.com/uview/goods/4.jpg",
+					thumb: "../../static/images/operation/out-of-limit.png",
 				},
 				{
 					price: "可疑量测",
-					thumb: "https://cdn.uviewui.com/uview/goods/1.jpg",
+					thumb: "../../static/images/operation/suspicious.png",
 				},
 				{
 					price: "不刷新量测",
-					thumb: "https://cdn.uviewui.com/uview/goods/2.jpg",
+					thumb: "../../static/images/operation/notUpdate.png",
 				},
 			],
 
@@ -247,6 +232,15 @@ export default {
 		};
 	},
 	methods: {
+		handleClick(e) {
+			switch(e) {
+				case 0:
+					uni.navigateTo({
+						url: '../workingCondition/workingCondition'
+					});
+				break;
+			}
+		},
 		getServerData() {
 			//模拟从服务器获取数据时的延时
 			setTimeout(() => {
@@ -323,17 +317,14 @@ page {
 
 				.scroll-list {
 					@include flex(column);
-					height: 100%;
 					width: 140vw;
 
 					&__goods-item {
 						margin-right: 20px;
-						width: 70px;
-						float: left;
-
+						height: 160rpx;
 						&__image {
-							width: 60px;
-							height: 60px;
+							width: 100rpx;
+							height: 80rpx;
 							border-radius: 4px;
 						}
 
@@ -466,7 +457,7 @@ page {
 						}
 						&_left {
 							flex: 4;
-							margin-left: 30rpx;
+							margin-left: 10rpx;
 						}
 						&_right {
 							flex:1;

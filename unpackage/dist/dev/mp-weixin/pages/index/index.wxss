@@ -66,17 +66,15 @@ page .content .wrap .monitor {
 page .content .wrap .monitor .scroll-list {
   display: flex;
   flex-direction: column;
-  height: 100%;
   width: 140vw;
 }
 page .content .wrap .monitor .scroll-list__goods-item {
   margin-right: 20px;
-  width: 70px;
-  float: left;
+  height: 160rpx;
 }
 page .content .wrap .monitor .scroll-list__goods-item__image {
-  width: 60px;
-  height: 60px;
+  width: 100rpx;
+  height: 80rpx;
   border-radius: 4px;
 }
 page .content .wrap .monitor .scroll-list__goods-item__text {
@@ -199,7 +197,7 @@ page .content .wrap .todayWarnList_content_item_img ._img {
 }
 page .content .wrap .todayWarnList_content_item_left {
   flex: 4;
-  margin-left: 30rpx;
+  margin-left: 10rpx;
 }
 page .content .wrap .todayWarnList_content_item_right {
   flex: 1;

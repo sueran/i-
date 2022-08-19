@@ -21,6 +21,13 @@
 			"style": {
 				"navigationBarTitleText": ""
 			}
+		},
+		{
+			"path": "pages/workingCondition/workingCondition",
+			"style": {
+				"navigationBarTitleText": "工况情况",
+				"navigationBarBackgroundColor": "#187759"
+			}
 		}
 	],
 	"globalStyle": {

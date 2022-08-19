@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "工况情况",
+  "navigationBarBackgroundColor": "#187759",
+  "usingComponents": {
+    "qiun-data-charts": "/uni_modules/qiun-data-charts/components/qiun-data-charts/qiun-data-charts",
+    "u-subsection": "/node-modules/uview-ui/components/u-subsection/u-subsection"
+  }
+}

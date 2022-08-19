@@ -2,7 +2,8 @@
     "pages": [
         "pages/index/index",
         "pages/monitor/monitor",
-        "pages/warn/warn"
+        "pages/warn/warn",
+        "pages/workingCondition/workingCondition"
     ],
     "subPackages": [],
     "window": {

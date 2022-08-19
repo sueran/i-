@@ -6,7 +6,7 @@
     },
     "setting": {
         "urlCheck": false,
-        "postcss": false,
+        "postcss": true,
         "coverView": true,
         "es6": false,
         "lazyloadPlaceholderEnable": false,
@@ -31,13 +31,31 @@
         },
         "useStaticServer": true,
         "showES6CompileOption": false,
-        "useCompilerPlugins": false
+        "useCompilerPlugins": false,
+        "minifyWXML": true
     },
     "compileType": "miniprogram",
     "libVersion": "2.25.2",
     "appid": "wxa967ce8444a1aa29",
     "projectname": "i国网",
-    "condition": {},
+    "condition": {
+        "search": {
+            "current": -1,
+            "list": []
+        },
+        "conversation": {
+            "current": -1,
+            "list": []
+        },
+        "game": {
+            "current": -1,
+            "list": []
+        },
+        "miniprogram": {
+            "current": -1,
+            "list": []
+        }
+    },
     "editorSetting": {
         "tabIndent": "insertSpaces",
         "tabSize": 4
