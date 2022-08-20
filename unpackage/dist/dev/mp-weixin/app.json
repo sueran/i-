@@ -2,10 +2,17 @@
     "pages": [
         "pages/index/index",
         "pages/monitor/monitor",
-        "pages/warn/warn",
-        "pages/workingCondition/workingCondition"
+        "pages/warn/warn"
     ],
-    "subPackages": [],
+    "subPackages": [
+        {
+            "root": "pagesB",
+            "pages": [
+                "workingCondition/workingCondition",
+                "heavyEquipment/heavyEquipment"
+            ]
+        }
+    ],
     "window": {
         "navigationBarTextStyle": "black",
         "navigationBarTitleText": "uni-app",

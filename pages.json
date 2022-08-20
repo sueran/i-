@@ -21,13 +21,28 @@
 			"style": {
 				"navigationBarTitleText": ""
 			}
-		},
+		}
+
+	],
+	"subPackages": [
 		{
-			"path": "pages/workingCondition/workingCondition",
-			"style": {
-				"navigationBarTitleText": "工况情况",
-				"navigationBarBackgroundColor": "#187759"
-			}
+			"root": "pagesB",
+			"pages": [
+				{
+					"path": "workingCondition/workingCondition",
+					"style": {
+						"navigationBarTitleText": "工况情况",
+						"navigationBarBackgroundColor": "#187759"
+					}
+				},
+				{
+					"path": "heavyEquipment/heavyEquipment",
+					"style": {
+						"navigationBarTitleText": "超重载设备",
+						"navigationBarBackgroundColor": "#187759"
+					}
+				}
+			]
 		}
 	],
 	"globalStyle": {

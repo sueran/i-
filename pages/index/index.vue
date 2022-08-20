@@ -233,11 +233,17 @@ export default {
 	},
 	methods: {
 		handleClick(e) {
+			console.log(e);
 			switch(e) {
 				case 0:
 					uni.navigateTo({
-						url: '../workingCondition/workingCondition'
+						url: '../../pagesB/workingCondition/workingCondition'
 					});
+				break;
+				case 1:
+					uni.navigateTo({
+						url: '../../pagesB/heavyEquipment/heavyEquipment'
+					})
 				break;
 			}
 		},
@@ -280,7 +286,6 @@ page {
 
 	.content {
 		position: relative;
-
 		.header {
 			width: 100%;
 			height: 200rpx;

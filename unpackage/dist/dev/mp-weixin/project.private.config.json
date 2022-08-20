@@ -13,6 +13,13 @@
                     "query": "",
                     "launchMode": "default",
                     "scene": null
+                },
+                {
+                    "name": "超重载设备",
+                    "pathName": "pagesB/heavyEquipment/heavyEquipment",
+                    "query": "",
+                    "launchMode": "default",
+                    "scene": null
                 }
             ]
         }
