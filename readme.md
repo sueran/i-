@@ -7,7 +7,14 @@
         tabber: tabber图片文件夹
         
 
-## tabber页面:
-            index: 首页
-            monitor: 厂站监视
-            warn文件夹: 告警
+## tabber页面
+        index: 首页
+        monitor: 厂站监视
+        warn文件夹: 告警
+
+## pagesB:分包文件夹
+        heavyEquipment:超重载设备
+        workingCondition:工况情况
+
+## common文件夹
+        u-charts.js: u-charts图表库
