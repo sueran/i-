@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "缺陷设计",
+  "navigationBarBackgroundColor": "#187759",
+  "usingComponents": {
+    "qiun-data-charts": "/uni_modules/qiun-data-charts/components/qiun-data-charts/qiun-data-charts",
+    "u-cell-group": "/node-modules/uview-ui/components/u-cell-group/u-cell-group",
+    "u-cell": "/node-modules/uview-ui/components/u-cell/u-cell"
+  }
+}

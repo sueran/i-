@@ -20,6 +20,34 @@
                     "query": "",
                     "launchMode": "default",
                     "scene": null
+                },
+                {
+                    "name": "负荷曲线",
+                    "pathName": "pagesB/loadCurve/loadCurve",
+                    "query": "",
+                    "launchMode": "default",
+                    "scene": null
+                },
+                {
+                    "name": "负荷曲线详情",
+                    "pathName": "pagesB/loadCurve_detail/loadCurve_detail",
+                    "query": "",
+                    "launchMode": "default",
+                    "scene": null
+                },
+                {
+                    "name": "缺陷设计",
+                    "pathName": "pagesB/flawDesign/flawDesign",
+                    "query": "",
+                    "launchMode": "default",
+                    "scene": null
+                },
+                {
+                    "name": "缺陷设计详情",
+                    "pathName": "pagesB/flawDesign_detail/flawDesign_detail",
+                    "query": "",
+                    "launchMode": "default",
+                    "scene": null
                 }
             ]
         }

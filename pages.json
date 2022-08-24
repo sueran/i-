@@ -41,6 +41,34 @@
 						"navigationBarTitleText": "超重载设备",
 						"navigationBarBackgroundColor": "#187759"
 					}
+				},
+				{
+					"path": "loadCurve/loadCurve",
+					"style": {
+						"navigationBarTitleText": "负荷曲线",
+						"navigationBarBackgroundColor": "#187759"
+					}
+				},
+				{
+					"path": "loadCurve_detail/loadCurve_detail",
+					"style": {
+						"navigationBarTitleText": "负荷曲线详情",
+						"navigationBarBackgroundColor": "#187759"
+					}
+				},
+				{
+					"path": "flawDesign/flawDesign",
+					"style": {
+						"navigationBarTitleText": "缺陷设计",
+						"navigationBarBackgroundColor": "#187759"
+					}
+				},
+				{
+					"path": "flawDesign_detail/flawDesign_detail",
+					"style": {
+						"navigationBarTitleText": "缺陷设计详情",
+						"navigationBarBackgroundColor": "#187759"
+					}
 				}
 			]
 		}

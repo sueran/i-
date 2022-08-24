@@ -245,6 +245,11 @@ export default {
 						url: '../../pagesB/heavyEquipment/heavyEquipment'
 					})
 				break;
+				case 2:
+					uni.navigateTo({
+						url: '../../pagesB/loadCurve/loadCurve'
+					})
+				break;
 			}
 		},
 		getServerData() {

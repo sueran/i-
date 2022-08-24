@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "负荷曲线",
+  "navigationBarBackgroundColor": "#187759",
+  "usingComponents": {
+    "u-tabs": "/node-modules/uview-ui/components/u-tabs/u-tabs",
+    "qiun-data-charts": "/uni_modules/qiun-data-charts/components/qiun-data-charts/qiun-data-charts",
+    "u-calendar": "/node-modules/uview-ui/components/u-calendar/u-calendar"
+  }
+}
