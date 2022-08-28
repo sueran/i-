@@ -48,6 +48,20 @@
                     "query": "",
                     "launchMode": "default",
                     "scene": null
+                },
+                {
+                    "name": "主页",
+                    "pathName": "pages/index/index",
+                    "query": "",
+                    "launchMode": "default",
+                    "scene": null
+                },
+                {
+                    "name": "变电站列表",
+                    "pathName": "pagesB/substationNumber/substationNumber",
+                    "query": "",
+                    "launchMode": "default",
+                    "scene": null
                 }
             ]
         }

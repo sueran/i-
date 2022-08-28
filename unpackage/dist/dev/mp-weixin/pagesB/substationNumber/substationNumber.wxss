@@ -24,13 +24,44 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-view.data-v-e7ce28f2, scroll-view.data-v-e7ce28f2, swiper-item.data-v-e7ce28f2 {
+page {
+  background-color: #eee;
+}
+page .content .wrap {
+  box-sizing: border-box;
+  padding: 0 20rpx;
+  background-color: white;
+  padding: 20rpx 0;
+}
+page .content .wrap .item {
   display: flex;
-  flex-direction: column;
-  flex-shrink: 0;
-  flex-grow: 0;
-  flex-basis: auto;
-  align-items: stretch;
-  align-content: flex-start;
+  box-sizing: border-box;
+  margin: 0 20rpx;
+  border-bottom: #ccc 2rpx solid;
+}
+page .content .wrap .item_left {
+  flex: 4;
+}
+page .content .wrap .item_left_total {
+  font-size: 25rpx;
+  color: #aaa;
+  margin: 10rpx 0;
+}
+page .content .wrap .item_left_name {
+  font-size: 35rpx;
+  color: black;
+}
+page .content .wrap .item_left_tel text {
+  color: #187759;
+}
+page .content .wrap .item_right {
+  flex: 1;
+}
+page .content .wrap .item_right image {
+  width: 60%;
+  height: auto;
+}
+page .content .wrap .item_right_status {
+  font-size: 25rpx;
 }
 

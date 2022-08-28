@@ -2,6 +2,7 @@
         images:
                 NumberOfSubstations: 变电站数量区域图片文件夹
                 operation: 运行监测区域图片文件夹
+                TodayWarning: 今日设备警告图片文件夹 
                 index-img: 首页图片
         fonts: 字体文件夹
         tabber: tabber图片文件夹

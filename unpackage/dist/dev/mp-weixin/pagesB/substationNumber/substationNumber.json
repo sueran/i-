@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "变电站列表",
+  "navigationBarBackgroundColor": "#187759",
+  "usingComponents": {
+    "u-subsection": "/node-modules/uview-ui/components/u-subsection/u-subsection"
+  }
+}

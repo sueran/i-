@@ -6,7 +6,7 @@
 		{
 			"path": "pages/index/index",
 			"style": {
-				"navigationBarTitleText": "国家电网",
+				"navigationBarTitleText": "国网鹤壁市供电公司集控站设备监控系统",
 				"navigationBarBackgroundColor": "#187759"
 			}
 		},
@@ -20,6 +20,54 @@
 			"path": "pages/warn/warn",
 			"style": {
 				"navigationBarTitleText": ""
+			}
+		},
+		{
+			"path": "pages/infos/replaceInfo",
+			"style": {
+				"navigationBarTitleText": "替代信息统计监视",
+				"navigationBarBackgroundColor": "#187759",
+				"navigationBarTextStyle": "white"
+			}
+		},
+		{
+			"path": "pages/infos/lockInfo",
+			"style": {
+				"navigationBarTitleText": "封锁信息统计监视",
+				"navigationBarBackgroundColor": "#187759",
+				"navigationBarTextStyle": "white"
+			}
+		},
+		{
+			"path": "pages/infos/dataTrans",
+			"style": {
+				"navigationBarTitleText": "数据传输",
+				"navigationBarBackgroundColor": "#187759",
+				"navigationBarTextStyle": "white"
+			}
+		},
+		{
+			"path": "pages/infos/out-of-limit",
+			"style": {
+				"navigationBarTitleText": "设备越限",
+				"navigationBarBackgroundColor": "#187759",
+				"navigationBarTextStyle": "white"
+			}
+		},
+		{
+			"path": "pages/infos/cardsList",
+			"style": {
+				"navigationBarTitleText": "置牌一览",
+				"navigationBarBackgroundColor": "#187759",
+				"navigationBarTextStyle": "white"
+			}
+		},
+		{
+			"path": "pages/infos/alertList",
+			"style": {
+				"navigationBarTitleText": "告警抑制",
+				"navigationBarBackgroundColor": "#187759",
+				"navigationBarTextStyle": "white"
 			}
 		}
 
@@ -69,12 +117,19 @@
 						"navigationBarTitleText": "缺陷设计详情",
 						"navigationBarBackgroundColor": "#187759"
 					}
+				},
+				{
+					"path": "substationNumber/substationNumber",
+					"style": {
+						"navigationBarTitleText": "变电站列表",
+						"navigationBarBackgroundColor": "#187759"
+					}
 				}
 			]
 		}
 	],
 	"globalStyle": {
-		"navigationBarTextStyle": "black",
+		"navigationBarTextStyle": "white",
 		"navigationBarTitleText": "uni-app",
 		"navigationBarBackgroundColor": "#F8F8F8",
 		"backgroundColor": "#F8F8F8"

@@ -26,11 +26,11 @@
 			<view class="number">
 				<view class="numberTitle">
 					<text class="numberTitle_title">变电站数量</text>
-					<u-icon name="arrow-right" bold></u-icon>
+					<u-icon name="arrow-right" bold @click="handlenNavigate1(0)"></u-icon>
 				</view>
 				<view class="numberItem">
 
-					<view class="numberItem_item">
+					<view class="numberItem_item" @click="handlenNavigate1(1)">
 						<img src="../../static/images/NumberOfSubstations/220.png" mode="widthFix"/>
 						<view class="numberItem_item_name">220kv变电站</view>
 						<view class="numberItem_item_number">
@@ -49,8 +49,8 @@
 						</view>
 					</view>
 
-					<view class="numberItem_item">
-						<img src="../../static/images/NumberOfSubstations/220.png" mode="widthFix"/>
+					<view class="numberItem_item" @click="handlenNavigate1(2)">
+						<img src="../../static/images/NumberOfSubstations/110.png" mode="widthFix"/>
 						<view class="numberItem_item_name">110kv变电站</view>
 						<view class="numberItem_item_number">
 							<view class="numberItem_item_number_total">
@@ -68,8 +68,8 @@
 						</view>
 					</view>
 
-					<view class="numberItem_item">
-						<img src="../../static/images/NumberOfSubstations/220.png" mode="widthFix"/>
+					<view class="numberItem_item" @click="handlenNavigate1(3)">
+						<img src="../../static/images/NumberOfSubstations/35.png" mode="widthFix"/>
 						<view class="numberItem_item_name">35kv变电站</view>
 						<view class="numberItem_item_number">
 							<view class="numberItem_item_number_total">
@@ -134,7 +134,7 @@
 			<view class="deviceData">
 				<view class="deviceDataTop">
 					<text class="deviceDataTop_title">设备运行数据</text>
-					<u-icon name="arrow-right" bold></u-icon>
+					<u-icon name="arrow-right" bold @click="handlenNavigate2"></u-icon>
 				</view>
 				<view class="charts-box">
 					<qiun-data-charts 
@@ -170,38 +170,38 @@ export default {
 					price: "缺陷统计",
 					thumb: "../../static/images/operation/imperfection.png",
 				},
-				{
-					price: "置牌一览",
-					thumb: "../../static/images/operation/generalSurvey.png",
-				},
-				{
-					price: "告警抑制",
-					thumb: "../../static/images/operation/warningMessage.png",
-				},
-				{
-					price: "数据传输",
-					thumb: "../../static/images/operation/dataTransmission.png",
-				},
-				{
-					price: "封锁信息",
-					thumb: "../../static/images/operation/blockingInformation.png",
-				},
-				{
-					price: "替代信息",
-					thumb: "../../static/images/operation/alternativeInformation.png",
-				},
+				// {
+				// 	price: "置牌一览",
+				// 	thumb: "../../static/images/operation/generalSurvey.png",
+				// },
+				// {
+				// 	price: "告警抑制",
+				// 	thumb: "../../static/images/operation/warningMessage.png",
+				// },
+				// {
+				// 	price: "数据传输",
+				// 	thumb: "../../static/images/operation/dataTransmission.png",
+				// },
+				// {
+				// 	price: "封锁信息",
+				// 	thumb: "../../static/images/operation/blockingInformation.png",
+				// },
+				// {
+				// 	price: "替代信息",
+				// 	thumb: "../../static/images/operation/alternativeInformation.png",
+				// },
 				{
 					price: "设备越限",
 					thumb: "../../static/images/operation/out-of-limit.png",
 				},
-				{
-					price: "可疑量测",
-					thumb: "../../static/images/operation/suspicious.png",
-				},
-				{
-					price: "不刷新量测",
-					thumb: "../../static/images/operation/notUpdate.png",
-				},
+				// {
+				// 	price: "可疑量测",
+				// 	thumb: "../../static/images/operation/suspicious.png",
+				// },
+				// {
+				// 	price: "不刷新量测",
+				// 	thumb: "../../static/images/operation/notUpdate.png",
+				// },
 			],
 
 			chartData: {},
@@ -250,8 +250,28 @@ export default {
 						url: '../../pagesB/loadCurve/loadCurve'
 					})
 				break;
+				case 3:
+					uni.navigateTo({
+						url: '../../pagesB/flawDesign/flawDesign'
+					})
+				break;
 			}
 		},
+
+		// 跳转到变电站列表
+		handlenNavigate1(e) {
+			// 根据不同的id跳转到变电站列表不同的tab页面
+			uni.navigateTo({
+				url: `../../pagesB/substationNumber/substationNumber?id=${e}`
+			});
+		},
+
+		handlenNavigate2() {
+			uni.navigateTo({
+				url: '../../pagesB/loadCurve/loadCurve'
+			});
+		},
+
 		getServerData() {
 			//模拟从服务器获取数据时的延时
 			setTimeout(() => {
@@ -379,8 +399,8 @@ page {
 						background-color: #e6f0ed;
 						text-align: center;
 						img {
-							width: 50%;
-							margin-top: 10rpx;
+							width: 30%;
+							margin: 20rpx;
 						}
 						&_name {
 							font-size: 30rpx;

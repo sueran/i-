@@ -27,17 +27,16 @@
 page {
   background-color: #eee;
 }
-page .content .wrap .u-collapse {
-  margin: 20rpx;
-  background-color: #eee;
+page .content .item {
+  display: flex;
 }
-page .content .wrap .u-collapse .u-collapse-item {
-  margin-bottom: 10rpx;
-  background-color: white;
+page .content .item_left {
+  flex: 2;
 }
-page .content .wrap .u-collapse .u-collapse-item .item {
-  width: 100%;
-  height: 200rpx;
-  background-color: aqua;
+page .content .item_left .u-tag {
+  width: 50rpx;
+}
+page .content .item_right {
+  flex: 1;
 }
 

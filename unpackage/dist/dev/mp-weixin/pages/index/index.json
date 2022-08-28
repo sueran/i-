@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "国家电网",
+  "navigationBarTitleText": "国网鹤壁市供电公司集控站设备监控系统",
   "navigationBarBackgroundColor": "#187759",
   "usingComponents": {
     "u-scroll-list": "/node-modules/uview-ui/components/u-scroll-list/u-scroll-list",

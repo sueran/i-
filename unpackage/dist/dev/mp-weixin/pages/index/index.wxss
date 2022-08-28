@@ -113,8 +113,8 @@ page .content .wrap .number .numberItem_item {
   text-align: center;
 }
 page .content .wrap .number .numberItem_item ._img {
-  width: 50%;
-  margin-top: 10rpx;
+  width: 30%;
+  margin: 20rpx;
 }
 page .content .wrap .number .numberItem_item_name {
   font-size: 30rpx;
