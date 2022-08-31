@@ -11,7 +11,7 @@
                         历史时间线选择
                     </view>
                     <view class="nowNumber_date">
-                        <u-calendar :show="showCalendar" mode="single" color="#187759" showMark="true" @close="handleCloseCalendar" @confirm="handleConfirmCalendar"></u-calendar>
+                        <u-calendar :show="showCalendar" mode="single" color="#187759" showMark @close="handleCloseCalendar" @confirm="handleConfirmCalendar"></u-calendar>
                         <view @click="handleShowCalendar">2022-08-24<text class="iconfont icon-riqi"></text></view>
                     </view>
                 </view>

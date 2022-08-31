@@ -1,5 +1,6 @@
 <template>
 	<view>
+	<!-- 	@touchmove.stop.prevent="stopRoll" -->
 		<view class="top-wrap">
 			<view class="input-wrap" slot="default">
 				<u-icon name="search" color="#9A9A9A" size="28"></u-icon>
@@ -21,10 +22,11 @@
 					<view class="overlay" :class="{closed: !item.popShow}"></view>
 				</view>
 				<view class="btn-right">
-					<u-icon name="grid" color="#4f4f4f" size="28" @click="isList=!isList"></u-icon>
+					<u-icon name="grid" color="#4f4f4f" size="22" @click="isList=!isList" v-if="!isList"></u-icon>
+					<u-icon name="list-dot" color="#4f4f4f" size="22" @click="isList=!isList" v-if="isList"></u-icon>
 					<u-line direction="col" length="40rpx" color="#bbbbbb"></u-line>
-					<u-icon name="/static/images/icons/filter.svg" label="筛选"></u-icon>
-					 <!-- @click="filterShow = true" -->
+					<u-icon name="/static/images/icons/filter.svg" label="筛选" size="18" @click="filterShow = true">
+					</u-icon>
 				</view>
 			</view>
 
@@ -44,29 +46,34 @@
 					<view slot="title" class="item-title">[挂牌对象类型] {{item.device}}</view>
 					<view slot="label" class="u-slot-value">
 						<view class="item-content">间隔名称：{{item.jiange}}</view>
-						<u-icon name="map" color="#333" size="14" :label="item.content+item.title" labelSize="24rpx" labelColor="#333"></u-icon>
+						<u-icon name="map" color="#333" size="14" :label="item.content+item.title" labelSize="24rpx"
+							labelColor="#333"></u-icon>
 						<view class="item-date">{{item.founder}} {{item.date}}</view>
 					</view>
 					<view slot="value">
-						<u-icon v-if="item.name=='警告牌'" name="warning-fill" color="#FFB800" size="40" :label="item.name" labelPos="bottom" labelSize="20rpx" labelColor="#6c6c6c"></u-icon>
-						<u-icon v-if="item.name=='维修牌'" name="/static/images/icons/repair.png" color="#2979ff" size="40" :label="item.name" labelPos="bottom" labelSize="20rpx" labelColor="#6c6c6c"></u-icon>
+						<u-icon v-if="item.name=='警告牌'" name="warning-fill" color="#FFB800" size="40" :label="item.name"
+							labelPos="bottom" labelSize="20rpx" labelColor="#6c6c6c"></u-icon>
+						<u-icon v-if="item.name=='维修牌'" name="/static/images/icons/repair.png" color="#2979ff" size="40"
+							:label="item.name" labelPos="bottom" labelSize="20rpx" labelColor="#6c6c6c"></u-icon>
 					</view>
 				</u-cell>
 			</u-list-item>
 		</u-list>
-		<u-popup :show="filterShow" :round="15" class="bottomPop" customStyle="padding:30rpx">
+		<u-popup :show="filterShow" :round="15" class="bottomPop" customStyle="padding:30rpx;" @close="filterShow=false">
 			<view>
 				<view class="title">全部筛选条件</view>
 				<view class="item-title">挂牌对象类型</view>
-				    <checkbox-group>
-						
-						<label v-for="item in checkboxList" :key="item.value">
-							<view>
-								<checkbox :value="item.value" :checked="item.checked" />
-							</view>
-							<view>{{item.name}}</view>
-						</label>
-					</checkbox-group>
+				<checkbox-group class="checkbox-list" @change="checkboxChange">
+					<label class="checkbox-item" v-for="item in checkboxList" :key="item.value"
+						:class="item.checked?'active':''">
+						<checkbox :value="item.value" :checked="item.checked" />
+						{{item.name}}
+					</label>
+				</checkbox-group>
+				<view class="confirm-btn-wrap">
+					<button type="default" @click="">重置</button>
+					<button type="default" @click="">确认</button>
+				</view>
 			</view>
 		</u-popup>
 	</view>
@@ -76,7 +83,7 @@
 	export default {
 		data() {
 			return {
-				isList: true,
+				isList: false,
 				filterShow: false,
 				filterBtns: [{
 						name: '厂站名称',
@@ -233,27 +240,32 @@
 					}
 				],
 				checkboxList: [{
-                    name: '全部',
-                    value: ''
-                },{
-                    name: '事件类型1',
-                    value: ''
-                },{
-                    name: '事件类型2',
-                    value: ''
-				},{
-				    name: '事件类型3',
-				    value: ''
-				},{
-				    name: '事件类型4',
-				    value: ''
+					name: '全部',
+					value: '0',
+					checked: true
+				}, {
+					name: '事件类型1',
+					value: '1',
+					checked: false
+				}, {
+					name: '事件类型2',
+					value: '2',
+					checked: false
+				}, {
+					name: '事件类型3',
+					value: '3',
+					checked: false
+				}, {
+					name: '事件类型4',
+					value: '4',
+					checked: false
 				}],
 				checkboxValue: []
 			}
 		},
 		computed: {
 			numSrc() {
-				return '/static/images/numbers/'+this.info+'.svg'
+				return '/static/images/numbers/' + this.info + '.svg'
 			}
 		},
 		onLoad() {
@@ -278,7 +290,20 @@
 					this.$set(this.filterBtns[btni], "selected", true);
 				}
 				this.$set(this.filterBtns[btni], "popShow", !this.filterBtns[btni].popShow);
-			}
+			},
+			checkboxChange: function(e) {
+				let items = this.checkboxList,
+					values = e.detail.value;
+				for (let i = 0, lenI = items.length; i < lenI; ++i) {
+					const item = items[i]
+					if (values.includes(item.value)) {
+						this.$set(item, 'checked', true)
+					} else {
+						this.$set(item, 'checked', false)
+					}
+				}
+			},
+			stopRoll() {}
 		},
 	}
 </script>
@@ -419,46 +444,118 @@
 		}
 
 	}
-	
 	.list-item {
 		margin: 20rpx;
 		background-color: #FFFFFF;
 		border-radius: 20rpx;
 		box-shadow: -2rpx -2rpx 6rpx 2rpx rgba(79, 79, 79, 0.1);
 		padding-right: 30rpx;
-	
+
 		.item-title {
 			padding-bottom: 6rpx;
 			font-size: 32rpx;
 			color: #101010;
 		}
-	
+
 		.item-content {
 			padding: 6rpx 0;
 			font-size: 28rpx;
 			color: #333333;
 			margin-bottom: 30rpx;
 		}
-	
-	
+
+
 		.item-date {
 			padding: 6rpx 0;
 			font-size: 24rpx;
 			color: #9a9a9a;
 		}
-	
+
 	}
-	.bottomPop{
-		
-		.title{
+
+	.bottomPop {
+
+		.title {
 			font-size: 32rpx;
 			line-height: 46rpx;
 		}
-		
-		.item-title{
+
+		.item-title {
 			margin-top: 20rpx;
 			font-size: 28rpx;
 			color: #4f4f4f;
+		}
+	}
+
+	/deep/ uni-checkbox .uni-checkbox-input {
+		display: none !important;
+	}
+
+	.checkbox-list {
+		display: flex;
+		flex-wrap: wrap;
+		margin-top: 20rpx;
+		font-size: 28rpx;
+		margin-bottom: 80rpx;
+
+		.checkbox-item {
+			margin-right: 20rpx;
+			margin-bottom: 14rpx;
+			padding: 10rpx 20rpx;
+			position: relative;
+			background-color: #EFEFEF;
+			border-radius: 8rpx;
+			border: 1rpx solid #EFEFEF;
+		}
+	}
+
+	/deep/ .checkbox-item.active {
+		border: 1rpx solid #187759;
+		color: #101010;
+		background: rgba(24, 119, 89, 0.15);
+
+		&::before {
+			content: '';
+			position: absolute;
+			right: -1rpx;
+			bottom: -1rpx;
+			border-bottom-right-radius: 8rpx;
+			border: 16rpx solid #187759;
+			border-top-color: transparent;
+			border-left-color: transparent;
+		}
+
+		&::after {
+			content: '';
+			width: 5px;
+			height: 10px;
+			position: absolute;
+			right: 6rpx;
+			bottom: 6rpx;
+			border: 1px solid #fff;
+			border-top-color: transparent;
+			border-left-color: transparent;
+			transform: rotate(45deg);
+		}
+	}
+
+	.confirm-btn-wrap {
+		display: flex;
+
+		button {
+			width: 320rpx;
+			height: 60rpx;
+			line-height: 60rpx;
+			border-radius: 30rpx;
+			font-size: 28rpx;
+			color: #187759;
+			background: rgba(24, 119, 89, 0.15);
+
+			&:last-child {
+				color: #fff;
+				background: #187759;
+				box-shadow: 0rpx 1rpx 6rpx 0rpx rgba(0, 0, 0, 0.15);
+			}
 		}
 	}
 </style>

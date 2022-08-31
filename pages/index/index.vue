@@ -3,18 +3,14 @@
 		<view class="header"></view>
 		<view class="wrap">
 			<view class="index-img">
-				<img src="../../static/images/index-img.png" mode="widthFix"/>
+				<img src="../../static/images/index-img.png" mode="widthFix" />
 			</view>
 			<view class="monitor">
 				<u-scroll-list indicatorColor="#fff0f0" indicatorActiveColor="#187759">
 					<view class="scroll-list" style="flex-direction: row">
-						<view 
-							class="scroll-list__goods-item" 
-							v-for="(item, index) in list" 
-							:key="index" 
+						<view class="scroll-list__goods-item" v-for="(item, index) in list" :key="index"
 							:class="[index === 9 && 'scroll-list__goods-item--no-margin-right',]"
-							@click="handleClick(index)"
-						>
+							@click="handleClick(index)">
 							<img class="scroll-list__goods-item__image" :src="item.thumb" mode="widthFix" />
 							<text class="scroll-list__goods-item__text">{{
 									item.price
@@ -31,7 +27,7 @@
 				<view class="numberItem">
 
 					<view class="numberItem_item" @click="handlenNavigate1(1)">
-						<img src="../../static/images/NumberOfSubstations/220.png" mode="widthFix"/>
+						<img src="../../static/images/NumberOfSubstations/220.png" mode="widthFix" />
 						<view class="numberItem_item_name">220kv变电站</view>
 						<view class="numberItem_item_number">
 							<view class="numberItem_item_number_total">
@@ -50,7 +46,7 @@
 					</view>
 
 					<view class="numberItem_item" @click="handlenNavigate1(2)">
-						<img src="../../static/images/NumberOfSubstations/110.png" mode="widthFix"/>
+						<img src="../../static/images/NumberOfSubstations/110.png" mode="widthFix" />
 						<view class="numberItem_item_name">110kv变电站</view>
 						<view class="numberItem_item_number">
 							<view class="numberItem_item_number_total">
@@ -69,7 +65,7 @@
 					</view>
 
 					<view class="numberItem_item" @click="handlenNavigate1(3)">
-						<img src="../../static/images/NumberOfSubstations/35.png" mode="widthFix"/>
+						<img src="../../static/images/NumberOfSubstations/35.png" mode="widthFix" />
 						<view class="numberItem_item_name">35kv变电站</view>
 						<view class="numberItem_item_number">
 							<view class="numberItem_item_number_total">
@@ -91,40 +87,40 @@
 			<view class="todayWarnList">
 				<view class="todayWarnList_top">
 					<text class="todayWarnList_top_title">今日设备警告</text>
-					<u-icon name="arrow-right" bold></u-icon>
+					<u-icon name="arrow-right" bold @click="handleTodayAlarm(0)"></u-icon>
 				</view>
 				<view class="todayWarnList_content">
-					<view class="todayWarnList_content_item">
+					<view class="todayWarnList_content_item" @click="handleTodayAlarm(1)">
 						<view class="todayWarnList_content_item_img">
-							<img src="../../static/images/TodayWarning/malfunction.png" mode="widthFix"/>
+							<img src="../../static/images/TodayWarning/malfunction.png" mode="widthFix" />
 						</view>
 						<view class="todayWarnList_content_item_left">故障跳闸</view>
 						<view class="todayWarnList_content_item_right">20</view>
 					</view>
-					<view class="todayWarnList_content_item">
+					<view class="todayWarnList_content_item" @click="handleTodayAlarm(2)">
 						<view class="todayWarnList_content_item_img">
-							<img src="../../static/images/TodayWarning/InsuranceActivities.png" mode="widthFix"/>
+							<img src="../../static/images/TodayWarning/InsuranceActivities.png" mode="widthFix" />
 						</view>
 						<view class="todayWarnList_content_item_left">保护动作</view>
 						<view class="todayWarnList_content_item_right">20</view>
 					</view>
-					<view class="todayWarnList_content_item">
+					<view class="todayWarnList_content_item" @click="handleTodayAlarm(3)">
 						<view class="todayWarnList_content_item_img">
-							<img src="../../static/images/TodayWarning/abnormal.png" mode="widthFix"/>
+							<img src="../../static/images/TodayWarning/abnormal.png" mode="widthFix" />
 						</view>
 						<view class="todayWarnList_content_item_left">装置异常</view>
 						<view class="todayWarnList_content_item_right">20</view>
 					</view>
-					<view class="todayWarnList_content_item">
+					<view class="todayWarnList_content_item" @click="handleTodayAlarm(4)">
 						<view class="todayWarnList_content_item_img">
-							<img src="../../static/images/TodayWarning/abnormalDevice.png" mode="widthFix"/>
+							<img src="../../static/images/TodayWarning/abnormalDevice.png" mode="widthFix" />
 						</view>
 						<view class="todayWarnList_content_item_left">装置故障</view>
 						<view class="todayWarnList_content_item_right">20</view>
 					</view>
-					<view class="todayWarnList_content_item">
+					<view class="todayWarnList_content_item" @click="handleTodayAlarm(5)">
 						<view class="todayWarnList_content_item_img">
-							<img src="../../static/images/TodayWarning/remoteSensingSurvey.png" mode="widthFix"/>
+							<img src="../../static/images/TodayWarning/remoteSensingSurvey.png" mode="widthFix" />
 						</view>
 						<view class="todayWarnList_content_item_left">遥测越限</view>
 						<view class="todayWarnList_content_item_right">20</view>
@@ -133,15 +129,11 @@
 			</view>
 			<view class="deviceData">
 				<view class="deviceDataTop">
-					<text class="deviceDataTop_title">设备运行数据</text>
+					<text class="deviceDataTop_title">负荷曲线</text>
 					<u-icon name="arrow-right" bold @click="handlenNavigate2"></u-icon>
 				</view>
 				<view class="charts-box">
-					<qiun-data-charts 
-					type="area"
-					:opts="opts"
-					:chartData="chartData"
-					/>
+					<qiun-data-charts type="area" :opts="opts" :chartData="chartData" />
 				</view>
 			</view>
 		</view>
@@ -170,52 +162,52 @@ export default {
 					price: "缺陷统计",
 					thumb: "../../static/images/operation/imperfection.png",
 				},
-				// {
-				// 	price: "置牌一览",
-				// 	thumb: "../../static/images/operation/generalSurvey.png",
-				// },
-				// {
-				// 	price: "告警抑制",
-				// 	thumb: "../../static/images/operation/warningMessage.png",
-				// },
-				// {
-				// 	price: "数据传输",
-				// 	thumb: "../../static/images/operation/dataTransmission.png",
-				// },
-				// {
-				// 	price: "封锁信息",
-				// 	thumb: "../../static/images/operation/blockingInformation.png",
-				// },
-				// {
-				// 	price: "替代信息",
-				// 	thumb: "../../static/images/operation/alternativeInformation.png",
-				// },
+				{
+					price: "置牌一览",
+					thumb: "../../static/images/operation/generalSurvey.png",
+				},
+				{
+					price: "告警抑制",
+					thumb: "../../static/images/operation/warningMessage.png",
+				},
+				{
+					price: "数据传输",
+					thumb: "../../static/images/operation/dataTransmission.png",
+				},
+				{
+					price: "封锁信息",
+					thumb: "../../static/images/operation/blockingInformation.png",
+				},
 				{
 					price: "设备越限",
 					thumb: "../../static/images/operation/out-of-limit.png",
 				},
-				// {
-				// 	price: "可疑量测",
-				// 	thumb: "../../static/images/operation/suspicious.png",
-				// },
-				// {
-				// 	price: "不刷新量测",
-				// 	thumb: "../../static/images/operation/notUpdate.png",
-				// },
+				{
+					price: "替代信息",
+					thumb: "../../static/images/operation/alternativeInformation.png",
+				},
+				{
+					price: "可疑量测",
+					thumb: "../../static/images/operation/suspicious.png",
+				},
+				{
+					price: "不刷新量测",
+					thumb: "../../static/images/operation/notUpdate.png",
+				},
 			],
 
 			chartData: {},
 
 			opts: {
-				color: ["#1890FF","#91CB74","#FAC858","#EE6666","#73C0DE","#3CA272","#FC8452","#9A60B4","#ea7ccc"],
-				padding: [15,15,0,15],
+				color: ["#1890FF", "#91CB74", "#FAC858", "#EE6666", "#73C0DE", "#3CA272", "#FC8452", "#9A60B4", "#ea7ccc"],
+				padding: [15, 15, 0, 15],
 				legend: {},
 				xAxis: {
-				disableGrid: true
+					disableGrid: true
 				},
 				yAxis: {
-				gridType: "dash",
-				dashLength: 2
+					gridType: "dash",
+					dashLength: 2
 				},
 				extra: {
 					area: {
@@ -227,34 +219,91 @@ export default {
 					}
 				}
 			}
-      
-      
 		};
 	},
 	methods: {
+
+		getInfo() {
+			uni.request({
+				url: "http://124.220.156.201:8800/loadStatistics/getALlLoad",
+				method: "post",
+				success: (res) => {
+					console.log(res);
+				}
+			})
+		},
 		handleClick(e) {
-			console.log(e);
-			switch(e) {
+			switch (e) {
 				case 0:
 					uni.navigateTo({
+						// 工况情况
 						url: '../../pagesB/workingCondition/workingCondition'
 					});
-				break;
+					break;
 				case 1:
 					uni.navigateTo({
+						// 超重载
 						url: '../../pagesB/heavyEquipment/heavyEquipment'
 					})
-				break;
+					break;
 				case 2:
 					uni.navigateTo({
+						//负荷曲线
 						url: '../../pagesB/loadCurve/loadCurve'
 					})
-				break;
+					break;
 				case 3:
 					uni.navigateTo({
+						// 缺陷统计
 						url: '../../pagesB/flawDesign/flawDesign'
 					})
-				break;
+					break;
+				case 4:
+					uni.navigateTo({
+						// 置牌一览
+						url: '../infos/cardsList'
+					})
+					break;
+				case 5:
+					uni.navigateTo({
+						// 告警抑制
+						url: '../infos/alertList'
+					})
+					break;
+				case 6:
+					uni.navigateTo({
+						// 数据传输
+						url: '../infos/dataTrans'
+					})
+					break;
+				case 7:
+					uni.navigateTo({
+						// 封锁信息
+						url: '../infos/lockInfo'
+					})
+					break;
+				case 8:
+					uni.navigateTo({
+						// 设备越限
+						url: '../infos/out-of-limit'
+					})
+					break;
+				case 9:
+					uni.navigateTo({
+						// 替代信息
+						url: '../infos/replaceInfo'
+					})
+					break;
+				case 10:
+					uni.navigateTo({
+						url: '../suspMeasurement/suspMeasurement'
+					})
+					break;
+				case 11:
+					uni.navigateTo({
+						url: '../noRefresh/noRefresh'
+					})
+					break;
 			}
 		},
 
@@ -266,9 +315,16 @@ export default {
 			});
 		},
 
+		// 跳转到负荷曲线页面
 		handlenNavigate2() {
 			uni.navigateTo({
 				url: '../../pagesB/loadCurve/loadCurve'
+			});
+		},
+
+		handleTodayAlarm(e) {
+			uni.navigateTo({
+				url: `../todayAlarm/todayAlarm?id=${e}`
 			});
 		},
 
@@ -277,20 +333,20 @@ export default {
 			setTimeout(() => {
 				//模拟服务器返回数据，如果数据格式和标准格式不同，需自行按下面的格式拼接
 				let res = {
-					categories: ["2016","2017","2018","2019","2020","2021"],
+					categories: ["2016", "2017", "2018", "2019", "2020", "2021"],
 					series: [
-					{
-						name: "成交量A",
-						data: [35,8,25,37,4,20]
-					},
-					{
-						name: "成交量B",
-						data: [70,40,65,100,44,68]
-					},
-					{
-						name: "成交量C",
-						data: [100,80,95,150,112,132]
-					}
+						{
+							name: "成交量A",
+							data: [35, 8, 25, 37, 4, 20]
+						},
+						{
+							name: "成交量B",
+							data: [70, 40, 65, 100, 44, 68]
+						},
+						{
+							name: "成交量C",
+							data: [100, 80, 95, 150, 112, 132]
+						}
 					]
 				};
 				this.chartData = JSON.parse(JSON.stringify(res));
@@ -300,6 +356,9 @@ export default {
 
 	onReady() {
 		this.getServerData();
+
+		console.log("请求");
+		this.getInfo()
 	},
 };
 </script>
@@ -307,10 +366,11 @@ export default {
 <style lang="scss">
 page {
 	background-color: #eee;
-	margin-bottom: 100rpx;
 
 	.content {
 		position: relative;
+		margin-bottom: 100rpx;
+
 		.header {
 			width: 100%;
 			height: 200rpx;
@@ -319,13 +379,14 @@ page {
 			color: white;
 			font-size: 30rpx;
 			font-weight: 700;
+			top: 0;
 			position: fixed;
 		}
 
 		.wrap {
 			position: absolute;
 			width: 100vw;
-			top: 10rpx;
+			top: -100rpx;
 			left: 50%;
 			transform: translateX(-50vw);
 
@@ -352,9 +413,10 @@ page {
 					&__goods-item {
 						margin-right: 20px;
 						height: 160rpx;
+
 						&__image {
 							width: 100rpx;
-							height: 80rpx;
+							height: 100rpx;
 							border-radius: 4px;
 						}
 
@@ -398,27 +460,34 @@ page {
 						border-radius: 10rpx;
 						background-color: #e6f0ed;
 						text-align: center;
+
 						img {
 							width: 30%;
 							margin: 20rpx;
 						}
+
 						&_name {
 							font-size: 30rpx;
 							font-weight: 600;
 						}
+
 						&_number {
 							display: flex;
 							justify-content: space-between;
 							margin-top: 30rpx;
+
 							&_total {
 								margin-left: 10rpx;
+
 								.total_title {
-									float:left;
+									float: left;
 								}
+
 								.total_number {
 									color: #aaa;
 									margin-top: 5rpx;
 									font-size: 25rpx;
+
 									text {
 										color: $uni-bg-color-global;
 										font-size: 40rpx;
@@ -426,15 +495,19 @@ page {
 									}
 								}
 							}
+
 							&_wrong {
 								margin-right: 10rpx;
+
 								.wrong_title {
-									float:left;
+									float: left;
 								}
+
 								.wrong_number {
 									color: #aaa;
 									margin-top: 5rpx;
 									font-size: 25rpx;
+
 									text {
 										color: red;
 										font-size: 40rpx;
@@ -471,6 +544,7 @@ page {
 
 				&_content {
 					width: 100%;
+
 					&_item {
 						margin-top: 20rpx;
 						box-sizing: border-box;
@@ -478,19 +552,23 @@ page {
 						align-items: center;
 						border-bottom: 2rpx solid #ccc;
 						padding-bottom: 10rpx;
+
 						&_img {
 							flex: 1;
 							box-sizing: border-box;
+
 							img {
 								width: 70%;
 							}
 						}
+
 						&_left {
 							flex: 4;
 							margin-left: 10rpx;
 						}
+
 						&_right {
-							flex:1;
+							flex: 1;
 							text-align: right;
 							margin-right: 30rpx;
 						}
@@ -502,7 +580,8 @@ page {
 				width: 100%;
 				margin-top: 30rpx;
 				background-color: white;
-				box-sizing: border-box;
+				margin-bottom: 100rpx;
+
 				.deviceDataTop {
 					display: flex;
 					justify-content: space-between;

@@ -11,15 +11,36 @@
 			}
 		},
 		{
-			"path": "pages/monitor/monitor",
+			"path": "pages/stationIndexes/stationIndexes",
 			"style": {
-				"navigationBarTitleText": ""
+				"navigationBarTitleText": "厂站监测",
+				"navigationBarTextStyle": "white",
+				"navigationBarBackgroundColor": "#187759"
+				
 			}
 		},
 		{
-			"path": "pages/warn/warn",
+			"path": "pages/stationIndexes/stationIndexesImage",
 			"style": {
-				"navigationBarTitleText": ""
+				"navigationBarTitleText": "图",
+				"navigationBarTextStyle": "white",
+				"navigationBarBackgroundColor": "#187759"
+				
+			}
+		},
+		{
+			"path": "pages/warn/warnList",
+			"style": {
+				"navigationBarTitleText": "告警列表",
+				"navigationBarBackgroundColor": "#187759",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/warn/warnDetail",
+			"style": {
+				"navigationBarTitleText": "告警详细信息",
+				"navigationBarBackgroundColor": "#187759"
 			}
 		},
 		{
@@ -69,8 +90,43 @@
 				"navigationBarBackgroundColor": "#187759",
 				"navigationBarTextStyle": "white"
 			}
+		},
+		{
+			"path": "pages/noRefresh/noRefresh",
+			"style": {
+				"navigationBarTitleText": "不刷新量测统计监视",
+				"navigationBarTextStyle": "white",
+				"navigationBarBackgroundColor": "#187759"
+				
+			}
+		},
+		{
+			"path": "pages/suspMeasurement/suspMeasurement",
+			"style": {
+				"navigationBarTitleText": "可疑量测统计监视",
+				"navigationBarTextStyle": "white",
+				"navigationBarBackgroundColor": "#187759"
+				
+			}
+		},
+		{
+			"path": "pages/stationList/stationList",
+			"style": {
+				"navigationBarTitleText": "变电站列表",
+				"navigationBarTextStyle": "white",
+				"navigationBarBackgroundColor": "#187759"
+				
+			}
+		},
+		{
+			"path": "pages/todayAlarm/todayAlarm",
+			"style": {
+				"navigationBarTitleText": "今日设备告警",
+				"navigationBarTextStyle": "white",
+				"navigationBarBackgroundColor": "#187759"
+				
+			}
 		}
-
 	],
 	"subPackages": [
 		{
@@ -112,6 +168,13 @@
 					}
 				},
 				{
+					"path": "flawDesign_list/flawDesign_list",
+					"style": {
+						"navigationBarTitleText": "缺陷设计列表",
+						"navigationBarBackgroundColor": "#187759"
+					}
+				},
+				{
 					"path": "flawDesign_detail/flawDesign_detail",
 					"style": {
 						"navigationBarTitleText": "缺陷设计详情",
@@ -132,7 +195,8 @@
 		"navigationBarTextStyle": "white",
 		"navigationBarTitleText": "uni-app",
 		"navigationBarBackgroundColor": "#F8F8F8",
-		"backgroundColor": "#F8F8F8"
+		"backgroundColor": "#F8F8F8",
+		"pageOrientation": "auto"
 	},
 	"tabBar": {
 		"selectedColor": "#187759",
@@ -144,13 +208,13 @@
 				"text": "首页"
 			},
 			{
-				"pagePath": "pages/monitor/monitor",
+				"pagePath": "pages/stationIndexes/stationIndexes",
 				"iconPath": "./static/tabbar/monitor.png",
 				"selectedIconPath": "./static/tabbar/monitor-active.png",
 				"text": "厂站监测"
 			},
 			{
-				"pagePath": "pages/warn/warn",
+				"pagePath": "pages/warn/warnList",
 				"iconPath": "./static/tabbar/warn.png",
 				"selectedIconPath": "./static/tabbar/warn-active.png",
 				"text": "告警"

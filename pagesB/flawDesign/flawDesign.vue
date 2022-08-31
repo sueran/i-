@@ -6,7 +6,7 @@
                 <qiun-data-charts type="ring" :opts="opts" :chartData="chartData" />
             </view>
             <u-cell-group>
-		        <u-cell title="未消缺" value="2"></u-cell>
+		        <u-cell title="未消缺" value="2" @click="handleJump"></u-cell>
 	        </u-cell-group>
             <u-cell-group>
 		        <u-cell title="本周新增" value="2"></u-cell>
@@ -70,6 +70,11 @@ export default {
     },
 
     methods: {
+        handleJump() {
+            uni.navigateTo({
+                url: '../flawDesign_list/flawDesign_list'
+            });
+        },
         getServerData() {
             //模拟从服务器获取数据时的延时
             setTimeout(() => {
@@ -114,6 +119,9 @@ page {
             height: 500rpx;
             background-color: white;
             border-radius: 20rpx;
+            .charts-box {
+                margin-bottom: 50rpx;
+            }
             .u-cell-group {
                 background-color: white;
                 margin: 20rpx 0;
