@@ -4,7 +4,7 @@
         <view v-for="(item, index) in list" :key="index">
             <template v-if="item.name == nowItem">
                 <view class="charts-box">
-                    <qiun-data-charts type="line" :opts="opts" :chartData="chartData" />
+                    <qiun-data-charts type="area" :opts="opts" :chartData="chartData" />
                 </view>
                 <view class="nowNumber">
                     <view class="nowNumber_title">
@@ -15,7 +15,7 @@
                         <view @click="handleShowCalendar">2022-08-24<text class="iconfont icon-riqi"></text></view>
                     </view>
                 </view>
-                <view class="nowData">
+                <view class="nowData" @click="handleNavigate">
                     <view class="nowData_title">当前值</view>
                     <view class="nowData_number">666MW</view>
                 </view>
@@ -74,32 +74,32 @@ export default {
             chartData: {},
 
             opts: {
-                color: [
-                    "#1890FF",
-                    "#91CB74",
-                    "#FAC858",
-                    "#EE6666",
-                    "#73C0DE",
-                    "#3CA272",
-                    "#FC8452",
-                    "#9A60B4",
-                    "#ea7ccc",
-                ],
-                padding: [15, 10, 0, 15],
-                legend: {},
-                xAxis: {
-                    disableGrid: true,
-                },
-                yAxis: {
-                    gridType: "dash",
-                    dashLength: 2,
-                },
-                extra: {
-                    line: {
-                        type: "straight",
-                        width: 2,
-                    },
-                },
+                color: ["#1890FF", "#91CB74", "#FAC858", "#EE6666", "#73C0DE", "#3CA272", "#FC8452", "#9A60B4", "#ea7ccc"],
+				padding: [15, 15, 0, 15],
+				legend: {},
+				xAxis: {
+					disableGrid: true
+				},
+				yAxis: {
+					gridType: "dash",
+					dashLength: 2,
+                    showTitle: true,
+                    data: [
+                        {
+                            title: "负荷(MW)",
+                            titleOffsetY: -5
+                        }
+                    ]  
+				},
+				extra: {
+					area: {
+						type: "curve",
+						opacity: 0.2,
+						addLine: true,
+						width: 2,
+						gradient: false
+					}
+				}
             },
         };
     },
@@ -127,26 +127,29 @@ export default {
             this.nowItem = e.name;
         },
 
+        // 跳转到详情页面
+        handleNavigate() {
+            uni.navigateTo({
+                url: '../loadCurve_detail/loadCurve_detail'
+            })
+        },
+
         getServerData() {
             //模拟从服务器获取数据时的延时
             setTimeout(() => {
                 //模拟服务器返回数据，如果数据格式和标准格式不同，需自行按下面的格式拼接
                 let res = {
-                    categories: ["2016", "2017", "2018", "2019", "2020", "2021"],
-                    series: [
-                        {
-                            name: "成交量A",
-                            data: [35, 8, 25, 37, 4, 20],
-                        },
-                        {
-                            name: "成交量B",
-                            data: [70, 40, 65, 100, 44, 68],
-                        },
-                        {
-                            name: "成交量C",
-                            data: [100, 80, 95, 150, 112, 132],
-                        },
-                    ],
+					categories: ["0", "4", "8", "12", "16", "20","24"],
+					series: [
+						{
+							name: "今日",
+							data: [35, 8, 25, 37, 4, 20,67]
+						},
+						{
+							name: "历史",
+							data: [70, 40, 65, 100, 44, 68,46]
+						}
+					]
                 };
                 this.chartData = JSON.parse(JSON.stringify(res));
             }, 500);

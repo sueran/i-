@@ -207,11 +207,18 @@ export default {
 				},
 				yAxis: {
 					gridType: "dash",
-					dashLength: 2
+					dashLength: 2,
+					showTitle: true,
+					data: [
+						{
+                            title: "负荷(MW)",
+                            titleOffsetY: -5
+                        }
+					]
 				},
 				extra: {
 					area: {
-						type: "straight",
+						type: "curve",
 						opacity: 0.2,
 						addLine: true,
 						width: 2,
@@ -237,25 +244,26 @@ export default {
 				case 0:
 					uni.navigateTo({
 						// 工况情况
-						url: '../../pagesB/workingCondition/workingCondition'
+						// url: '..//workingCondition/workingCondition'
+						url: '../workingCondition/workingCondition'
 					});
 					break;
 				case 1:
 					uni.navigateTo({
 						// 超重载
-						url: '../../pagesB/heavyEquipment/heavyEquipment'
+						url: '../heavyEquipment/heavyEquipment'
 					})
 					break;
 				case 2:
 					uni.navigateTo({
 						//负荷曲线
-						url: '../../pagesB/loadCurve/loadCurve'
+						url: '../loadCurve/loadCurve'
 					})
 					break;
 				case 3:
 					uni.navigateTo({
 						// 缺陷统计
-						url: '../../pagesB/flawDesign/flawDesign'
+						url: '../flawDesign/flawDesign'
 					})
 					break;
 				case 4:
@@ -311,14 +319,14 @@ export default {
 		handlenNavigate1(e) {
 			// 根据不同的id跳转到变电站列表不同的tab页面
 			uni.navigateTo({
-				url: `../../pagesB/substationNumber/substationNumber?id=${e}`
+				url: `../substationNumber/substationNumber?id=${e}`
 			});
 		},
 
 		// 跳转到负荷曲线页面
 		handlenNavigate2() {
 			uni.navigateTo({
-				url: '../../pagesB/loadCurve/loadCurve'
+				url: '../loadCurve/loadCurve'
 			});
 		},
 
@@ -333,19 +341,15 @@ export default {
 			setTimeout(() => {
 				//模拟服务器返回数据，如果数据格式和标准格式不同，需自行按下面的格式拼接
 				let res = {
-					categories: ["2016", "2017", "2018", "2019", "2020", "2021"],
+					categories: ["0", "4", "8", "12", "16", "20","24"],
 					series: [
 						{
-							name: "成交量A",
-							data: [35, 8, 25, 37, 4, 20]
+							name: "今日",
+							data: [35, 8, 25, 37, 4, 20,67]
 						},
 						{
-							name: "成交量B",
-							data: [70, 40, 65, 100, 44, 68]
-						},
-						{
-							name: "成交量C",
-							data: [100, 80, 95, 150, 112, 132]
+							name: "历史",
+							data: [70, 40, 65, 100, 44, 68,46]
 						}
 					]
 				};

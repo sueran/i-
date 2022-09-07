@@ -25,7 +25,7 @@
 		</view>
 		<u-list class="list-wrap">
 			<u-list-item v-for="(item, index) in indexList" :key="index" class="list-item">
-				<u-cell value="详情" center :isLink="true" rightIconStyle="color: #4B9E6A" :border="false">
+				<u-cell value="详情" center :isLink="true" rightIconStyle="color: #4B9E6A" :border="false" @click="handleNavigateDetail">
 					<view slot="title" class="item-title">{{item.title}}</view>
 					<view slot="label" class="u-slot-value">
 						<view class="item-content">{{item.content}}</view>
@@ -142,6 +142,12 @@
 
 		},
 		methods: {
+			// 查看详细信息
+			handleNavigateDetail() {
+				uni.navigateTo({
+					url: './lockInfoDetail'
+				})
+			},
 			open(i){
 				this.filterBtns.forEach((item, index)=>{
 					if(index !=i)

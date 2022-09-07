@@ -18,8 +18,9 @@
                 <qiun-data-charts type="area" :opts="opts1" :chartData="chartData1" :canvas2d='true' canvasId='canvans1'/>
             </view>
             <view class="fuzailv">主变负载率</view>
+            <view class="fuzailv_totalNumber" @click="handleNavigateDetail(0)">主变总数 <text>159</text> 台</view>
             <view class="fuzaiList">
-                <view class="fuzaiList_item fuzaiList_item1">
+                <view class="fuzaiList_item fuzaiList_item1" @click="handleNavigateDetail(1)">
                     <view class="fuzaiList_item_number">
                         <view class="fuzaiList_item_number_title">超载</view>
                         <view class="fuzaiList_item_number_number"><text>15</text>台</view>
@@ -28,31 +29,40 @@
                         <qiun-data-charts type="arcbar" :opts="opts2" :chartData="chartData2" :canvas2d='true' canvasId='canvans2'/>
                     </view>
                 </view>
-                <view class="fuzaiList_item fuzaiList_item2">
+                <view class="fuzaiList_item fuzaiList_item2" @click="handleNavigateDetail(2)">
                     <view class="fuzaiList_item_number">
                         <view class="fuzaiList_item_number_title">重载</view>
                         <view class="fuzaiList_item_number_number"><text>15</text>台</view>
                     </view>
                     <view class="fuzaiList_item_arcbar">
-                        <qiun-data-charts type="arcbar" :opts="opts3" :chartData="chartData2" :canvas2d='true' canvasId='canvans3'/>
+                        <qiun-data-charts type="arcbar" :opts="opts3" :chartData="chartData3" :canvas2d='true' canvasId='canvans3'/>
                     </view>
                 </view>
-                <view class="fuzaiList_item fuzaiList_item3">
+                <view class="fuzaiList_item fuzaiList_item3" @click="handleNavigateDetail(3)">
                     <view class="fuzaiList_item_number">
                         <view class="fuzaiList_item_number_title">正常</view>
                         <view class="fuzaiList_item_number_number"><text>15</text>台</view>
                     </view>
                     <view class="fuzaiList_item_arcbar">
-                        <qiun-data-charts type="arcbar" :opts="opts4" :chartData="chartData2" :canvas2d='true' canvasId='canvans4'/>
+                        <qiun-data-charts type="arcbar" :opts="opts4" :chartData="chartData4" :canvas2d='true' canvasId='canvans4'/>
                     </view>
                 </view>
-                <view class="fuzaiList_item fuzaiList_item4">
+                <view class="fuzaiList_item fuzaiList_item4" @click="handleNavigateDetail(4)">
                     <view class="fuzaiList_item_number">
                         <view class="fuzaiList_item_number_title">轻载</view>
                         <view class="fuzaiList_item_number_number"><text>15</text>台</view>
                     </view>
                     <view class="fuzaiList_item_arcbar">
-                        <qiun-data-charts type="arcbar" :opts="opts5" :chartData="chartData2" :canvas2d='true' canvasId='canvans5'/>
+                        <qiun-data-charts type="arcbar" :opts="opts5" :chartData="chartData5" :canvas2d='true' canvasId='canvans5'/>
+                    </view>
+                </view>
+                <view class="fuzaiList_item fuzaiList_item5" @click="handleNavigateDetail(5)">
+                    <view class="fuzaiList_item_number">
+                        <view class="fuzaiList_item_number_title">轻载</view>
+                        <view class="fuzaiList_item_number_number"><text>15</text>台</view>
+                    </view>
+                    <view class="fuzaiList_item_arcbar">
+                        <qiun-data-charts type="arcbar" :opts="opts6" :chartData="chartData6" :canvas2d='true' canvasId='canvans6'/>
                     </view>
                 </view>
             </view>
@@ -74,6 +84,7 @@ export default {
             chartData3: {}, //重载数据
             chartData4: {}, //正常数据
             chartData5: {}, //轻载数据
+            chartData6: {}, //空载数据
             opts1: {
                 color: [
                     "#1890FF",
@@ -257,6 +268,44 @@ export default {
                     },
                 },
             },
+
+            opts6: {
+                color: [
+                    "#ffffff",
+                    "#1890FF",
+                    "#91CB74",
+                    "#FAC858",
+                    "#EE6666",
+                    "#73C0DE",
+                    "#3CA272",
+                    "#FC8452",
+                    "#9A60B4",
+                    "#ea7ccc",
+                ],
+
+                padding: undefined,
+                title: {
+                    name: "80%",
+                    fontSize: 15,
+                    color: "#fff",
+                },
+                subtitle: {
+                    name: "",
+                    fontSize: 10,
+                    color: "#666666",
+                },
+                extra: {
+                    arcbar: {
+                        type: "default",
+                        width: 10,
+                        backgroundColor: "#339933",
+                        startAngle: 0.75,
+                        endAngle: 0.25,
+                        gap: 2,
+                        linearType: "none",
+                    },
+                },
+            },
         };
     },
 
@@ -281,26 +330,28 @@ export default {
             console.log("=======",date);
         },
 
+        handleNavigateDetail(e) {
+            uni.navigateTo({
+                url: `./heavyEquipmentList?id=${e}`
+            })
+        },
+
         //折线图数据
         getServerData1() {
             //模拟从服务器获取数据时的延时
             setTimeout(() => {
                 //模拟服务器返回数据，如果数据格式和标准格式不同，需自行按下面的格式拼接
                 let res = {
-                    categories: ["2016", "2017", "2018", "2019", "2020", "2021"],
+                    categories: ["0", "4", "8", "12", "16", "20", "24", "28", "30"],
                     series: [
                         {
                             name: "成交量A",
-                            data: [35, 8, 25, 37, 4, 20],
+                            data: [35, 8, 25, 37, 4, 20, 25, 21, 23],
                         },
                         {
                             name: "成交量B",
-                            data: [70, 40, 65, 100, 44, 68],
-                        },
-                        {
-                            name: "成交量C",
-                            data: [100, 80, 95, 150, 112, 132],
-                        },
+                            data: [70, 40, 65, 100, 44, 68, 56, 78, 90],
+                        }
                     ],
                 };
                 this.chartData1 = JSON.parse(JSON.stringify(res));
@@ -338,7 +389,7 @@ export default {
                         },
                     ],
                 };
-                this.chartData2 = JSON.parse(JSON.stringify(res));
+                this.chartData3 = JSON.parse(JSON.stringify(res));
             }, 500);
         },
 
@@ -355,7 +406,7 @@ export default {
                         },
                     ],
                 };
-                this.chartData2 = JSON.parse(JSON.stringify(res));
+                this.chartData4 = JSON.parse(JSON.stringify(res));
             }, 500);
         },
 
@@ -372,7 +423,24 @@ export default {
                         },
                     ],
                 };
-                this.chartData2 = JSON.parse(JSON.stringify(res));
+                this.chartData5 = JSON.parse(JSON.stringify(res));
+            }, 500);
+        },
+
+        getServerData6() {
+            //模拟从服务器获取数据时的延时
+            setTimeout(() => {
+                //模拟服务器返回数据，如果数据格式和标准格式不同，需自行按下面的格式拼接
+                let res = {
+                    series: [
+                        {
+                            name: "正确率",
+                            color: "#fff",
+                            data: 0.8,
+                        },
+                    ],
+                };
+                this.chartData6 = JSON.parse(JSON.stringify(res));
             }, 500);
         },
     },
@@ -387,6 +455,8 @@ export default {
         this.getServerData4();
 
         this.getServerData5();
+
+        this.getServerData6();
     },
 };
 </script>
@@ -418,6 +488,13 @@ page {
 
         .fuzailv {
             margin-top: 20rpx;
+            font-size: 35rpx;
+        }
+        .fuzailv_totalNumber {
+            color: #aaa;
+            text {
+                color: #187759;
+            }
         }
 
         .fuzaiList {
@@ -469,6 +546,10 @@ page {
 
             &_item4 {
                 background-color: #0fc3fe;
+            }
+
+            &_item5 {
+                background-color: #99CC00;
             }
         }
 

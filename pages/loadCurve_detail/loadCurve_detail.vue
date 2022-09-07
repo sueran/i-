@@ -8,29 +8,9 @@
                     <view class="wrap_total_name">东坡区负荷</view>
                 </view>
                 <view class="wrap_list">
-                    <view class="wrap_list_item">
-                        <view class="wrap_list_item_number">631.00</view>
-                        <view class="wrap_list_item_name">镇江祖镇一线</view>
-                    </view>
-                    <view class="wrap_list_item">
-                        <view class="wrap_list_item_number">631.00</view>
-                        <view class="wrap_list_item_name">镇江祖镇一线</view>
-                    </view>
-                    <view class="wrap_list_item">
-                        <view class="wrap_list_item_number">631.00</view>
-                        <view class="wrap_list_item_name">镇江祖镇一线</view>
-                    </view>
-                    <view class="wrap_list_item">
-                        <view class="wrap_list_item_number">631.00</view>
-                        <view class="wrap_list_item_name">镇江祖镇一线</view>
-                    </view>
-                    <view class="wrap_list_item">
-                        <view class="wrap_list_item_number">631.00</view>
-                        <view class="wrap_list_item_name">镇江祖镇一线</view>
-                    </view>
-                    <view class="wrap_list_item">
-                        <view class="wrap_list_item_number">631.00</view>
-                        <view class="wrap_list_item_name">镇江祖镇一线</view>
+                    <view class="wrap_list_item" v-for="(item,index) in listData" :key="index">
+                        <view class="wrap_list_item_number" :style="{color: item.number > 0 ? '#e99d42' : '#4095e5'}">{{item.number}}</view>
+                        <view class="wrap_list_item_name">{{item.name}}</view>
                     </view>
                 </view>
             </view>
@@ -40,7 +20,40 @@
 
 <script>
 export default {
-
+    data() {
+        return {
+            listData:[
+                {
+                    name: '镇江祖镇一线',
+                    number: 631.00
+                },
+                {
+                    name: '镇江祖镇二线',
+                    number: 631.00
+                },
+                {
+                    name: '镇江祖镇三线',
+                    number: 631.00
+                },
+                {
+                    name: '镇江祖镇四线',
+                    number: 631.01
+                },
+                {
+                    name: '镇江祖镇五线',
+                    number: 631.00
+                },
+                {
+                    name: '镇江祖镇六线',
+                    number: -631.00
+                },
+                {
+                    name: '镇江祖镇七线',
+                    number: -631.00
+                },
+            ],
+        }
+    },
 }
 </script>
 
@@ -83,12 +96,18 @@ export default {
                     display: flex;
                     flex-wrap: wrap;
                     justify-content: space-around;
+                    &:after{
+                        content: '';
+                        width: 45%;
+                        border:1px solid transparent;
+                    }
                     &_item {
                         width: 45%;
                         height: 120rpx;
                         background-color: #eee;
                         margin-bottom: 20rpx;
                         text-align: center;
+                        
                         &_number {
                             line-height: 60rpx;
                             color: #e9a756;

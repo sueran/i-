@@ -17,13 +17,6 @@
                 <u-cell title="本月消缺" value="2"></u-cell>
 	        </u-cell-group>
         </view>
-        <!-- <view class="unvanish"></view>
-        <view class="thisWeek">
-            <view class="thisWeek_item"></view>
-            <view class=""></view>
-        </view>
-        <view class="thisMonth"></view> -->
-
     </view>
 </template>
 
@@ -44,8 +37,8 @@ export default {
                     lineHeight: 25
                 },
                 title: {
-                    name: "收益率",
-                    fontSize: 15,
+                    name: "",
+                    fontSize: 0,
                     color: "#666666"
                 },
                 subtitle: {
@@ -72,7 +65,7 @@ export default {
     methods: {
         handleJump() {
             uni.navigateTo({
-                url: '../flawDesign_list/flawDesign_list'
+                url: '../flawDesign/flawDesign_list'
             });
         },
         getServerData() {
@@ -82,7 +75,7 @@ export default {
                 let res = {
                     series: [
                         {
-                            data: [{ "name": "一班", "value": 50 }, { "name": "二班", "value": 30 }, { "name": "三班", "value": 20 }]
+                            data: [{ "name": "一般", "value": 50 }, { "name": "危急", "value": 30 }, { "name": "严重", "value": 20 }]
                         }
                     ]
                 };

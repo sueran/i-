@@ -93,13 +93,13 @@ export default {
                     lineHeight: 25,
                 },
                 title: {
-                    name: "收益率",
-                    fontSize: 15,
+                    name: "",
+                    fontSize: 0,
                     color: "#666666",
                 },
                 subtitle: {
-                    name: "70%",
-                    fontSize: 25,
+                    name: "",
+                    fontSize: 0,
                     color: "#7cb5ec",
                 },
                 extra: {
@@ -131,8 +131,8 @@ export default {
                     series: [
                         {
                             data: [
-                                { name: "一班", value: 50, labelText: "四班:18人" },
-                                { name: "四班", value: 18, labelText: "四班:18人" }
+                                { name: "在线", value: 50, labelText: "在线:50座" },
+                                { name: "离线", value: 18, labelText: "离线:18座" }
                             ],
                         },
                     ],

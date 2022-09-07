@@ -74,7 +74,7 @@ export default {
     methods: {
         handleJump() {
             uni.navigateTo({
-                url: '../flawDesign_detail/flawDesign_detail'
+                url: '../flawDesign/flawDesign_detail'
             });
         }
     }
@@ -110,13 +110,14 @@ page {
 
         .item {
             display: flex;
+            align-items: center;
             background-color: white;
-            padding: 20rpx;
+            padding: 0 20rpx;
             margin-bottom: 20rpx;
             border-radius: 10rpx;
 
             &_left {
-                flex: 2;
+                flex: 3;
 
                 &_name {
                     display: flex;

@@ -1,9 +1,7 @@
 <template>
     <view class="content">
-        <!-- <u-navbar title="告警列表" bgColor="#187759" safeAreaInsetTop placeholder rightIcon="list" rightText="筛选" @rightClick="rightClick" leftIconSize="0" titleStyle="color: white"></u-navbar> -->
-
-        <u-navbar title="告警列表" bgColor="#187759" safeAreaInsetTop placeholder rightIcon="list" rightText="筛选"
-            @rightClick="rightClick" titleStyle="color: white" leftIconColor="white" leftIconSize="0">
+        <u-navbar title="超重载设备详情" bgColor="#187759" safeAreaInsetTop placeholder rightIcon="list" rightText="筛选"
+            @rightClick="rightClick" @leftClick="leftClick" titleStyle="color: white" leftIconColor="white">
             <view class="u-nav-slot" slot="right">
                 <text class="iconfont icon-shaixuan"></text>
             </view>
@@ -72,39 +70,40 @@
             </view>
         </u-popup>
 
-
-
-
-
+        <view class="tabs"><u-tabs :list="list1" :current="current"></u-tabs></view>
         <view class="wrap">
             <view class="item" @click="handlejumpDetail">
                 <view class="item_left">
-                    <view class="item_left_name item_left_total">呼和乌素110kv变电站2当前状态为联通。</view>
-                    <view class="item_left_time item_left_total">告警分类: 前置情况</view>
-                    <view class="item_left_tel item_left_total">发布时间: <text>2022-06-19 06:24:27</text></view>
+                    <view class="item_left_name">
+                        <view class="item_left_name_tag">
+                            <u-tag text="危急" type="warning"></u-tag>
+                        </view>
+                        <view>1#主变间隔双绕组变电器</view>
+                    </view>
+                    <view class="item_left_title item_left_total">
+                        <view class="item_left_title_item border">
+                            <view>0</view>
+                            <view>A相电流</view>
+                        </view>
+                        <view class="item_left_title_item border">
+                            <view>677</view>
+                            <view>有功功率</view>
+                        </view>
+                        <view class="item_left_title_item">
+                            <view>0</view>
+                            <view>无功功率</view>
+                        </view>
+                    </view>
+                    <view class="item_left_address item_left_total">
+                        <text class="iconfont icon-shouhuodizhi"></text> 220kV福盛站
+                    </view>
+                    <view class="item_left_message item_left_total">
+                        <text>当日最大电流时间: 2022-06--19 11:06:59</text>
+                    </view>
                 </view>
                 <view class="item_right">
-                    <view class="item_right_status" style="color: #187759;">一般</view>
-                </view>
-            </view>
-            <view class="item">
-                <view class="item_left">
-                    <view class="item_left_name item_left_total">呼和乌素110kv变电站2当前状态为联通。</view>
-                    <view class="item_left_time item_left_total">告警分类: 前置情况</view>
-                    <view class="item_left_tel item_left_total">发布时间: <text>2022-06-19 06:24:27</text></view>
-                </view>
-                <view class="item_right">
-                    <view class="item_right_status" style="color: #187759;">运行正常</view>
-                </view>
-            </view>
-            <view class="item">
-                <view class="item_left">
-                    <view class="item_left_name item_left_total">呼和乌素110kv变电站2当前状态为联通。</view>
-                    <view class="item_left_time item_left_total">告警分类: 前置情况</view>
-                    <view class="item_left_tel item_left_total">发布时间: <text>2022-06-19 06:24:27</text></view>
-                </view>
-                <view class="item_right">
-                    <view class="item_right_status" style="color: #187759;">运行正常</view>
+                    <view class="item_right_number">55</view>
+                    <view class="item_right_title">负载率</view>
                 </view>
             </view>
         </view>
@@ -137,17 +136,37 @@ export default {
                 { name: '2022-08-23' },
                 { name: '2022-08-24' },
                 { name: '2022-08-25' },
-            ]
+            ],
 
+            list1: [{
+                name: '全部',
+            }, {
+                name: '超载',
+            }, {
+                name: '重载'
+            }, {
+                name: '正常'
+            }, {
+                name: '轻载'
+            }, {
+                name: '空载'
+            }],
+
+            current: 0  //导航栏索引
         }
     },
     methods: {
-        handlejumpDetail() {
-            uni.navigateTo({
-                // 置牌一览
-                url: './warnDetail'
-			})
+        // handlejumpDetail(e) {
+        //     console.log(e);
+        // },
+
+        // 返回上一界面
+        leftClick() {
+            uni.redirectTo({
+                url: './heavyEquipment'
+            })
         },
+
         rightClick() {
             this.showPopup = true
         },
@@ -155,6 +174,12 @@ export default {
         close() {
             this.showPopup = false
         }
+    },
+
+    onLoad(option) {
+        console.log(option);
+        console.log(typeof option.id);
+        this.current = option.id
     }
 }
 </script>
@@ -162,10 +187,9 @@ export default {
 <style lang="scss">
 @font-face {
     font-family: "iconfont";
-    /* Project id 3619181 */
-    src: url('//at.alicdn.com/t/c/font_3619181_ycj57snl8h.woff2?t=1661845411052') format('woff2'),
-        url('//at.alicdn.com/t/c/font_3619181_ycj57snl8h.woff?t=1661845411052') format('woff'),
-        url('//at.alicdn.com/t/c/font_3619181_ycj57snl8h.ttf?t=1661845411052') format('truetype');
+    src: url('//at.alicdn.com/t/c/font_3628217_bqsx935p7sc.woff2?t=1662218924250') format('woff2'),
+        url('//at.alicdn.com/t/c/font_3628217_bqsx935p7sc.woff?t=1662218924250') format('woff'),
+        url('//at.alicdn.com/t/c/font_3628217_bqsx935p7sc.ttf?t=1662218924250') format('truetype');
 }
 
 .iconfont {
@@ -176,26 +200,39 @@ export default {
     -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-jiantouyou:before {
-    content: "\e62d";
+.icon-shaixuan:before {
+    color: white;
+    content: "\e628";
 }
+
+@font-face {
+    font-family: "iconfont";
+    /* Project id 3616241 */
+    src: url('//at.alicdn.com/t/c/font_3616241_sj91axkiny9.woff2?t=1661752061262') format('woff2'),
+        url('//at.alicdn.com/t/c/font_3616241_sj91axkiny9.woff?t=1661752061262') format('woff'),
+        url('//at.alicdn.com/t/c/font_3616241_sj91axkiny9.ttf?t=1661752061262') format('truetype');
+}
+
+.iconfont {
+    font-family: "iconfont" !important;
+    font-size: 16px;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-shouhuodizhi:before {
+    content: "\e64e";
+}
+
 
 page {
     background-color: #eee;
 
     .content {
-        .headerWrap {
-            width: 100vw;
-            height: 150rpx;
-            background-color:#187759;
-        }
-        .u-popup {
-            // padding: 20rpx;
-            box-sizing: border-box;
 
-            active: {
-                background-color: #aaa;
-            }
+        .u-popup {
+            box-sizing: border-box;
 
             text {
                 font-size: 35rpx;
@@ -261,10 +298,11 @@ page {
 
                 &_list {
                     margin-top: 20rpx;
+
                     &_message {
                         display: flex;
                         justify-content: space-between;
-                        border:2rpx solid #ccc;
+                        border: 2rpx solid #ccc;
                         border-radius: 10rpx;
                         padding: 10rpx;
                     }
@@ -308,6 +346,18 @@ page {
             }
         }
 
+
+
+        .tabs {
+            width: 100vw;
+            .u-tabs {
+                width: 600rpx;
+                margin: 0;
+                padding: 0;
+                margin: 0 auto;
+            }
+        }
+
         .wrap {
             box-sizing: border-box;
             margin: 0 20rpx;
@@ -315,41 +365,60 @@ page {
 
             .item {
                 display: flex;
-                justify-content: space-between;
-                box-sizing: border-box;
+                align-items: center;
+                background-color: white;
                 padding: 20rpx;
                 margin-bottom: 20rpx;
-                border-radius: 20rpx;
-                background-color: white;
+                border-radius: 10rpx;
 
                 &_left {
                     flex: 4;
 
+                    &_name {
+                        display: flex;
+                        align-items: center;
+
+                        &_tag {
+                            width: 100rpx;
+                            margin-right: 30rpx;
+                        }
+
+                    }
+
                     &_total {
                         font-size: 25rpx;
-                        color: #aaa;
-                        margin: 10rpx 0;
+                        margin: 5rpx;
+                        color: #888;
+                        display: flex;
                     }
 
-                    &_name {
-                        font-size: 35rpx;
-                        color: black;
+                    &_title {
+                        &_item {
+                            // width: 30%;
+                            text-align: center;
+                            padding: 0 10rpx;
+                        }
+
+                        .border {
+                            border-right: 2rpx solid #ccc;
+
+                        }
                     }
 
-                    &_tel {
+                    &_address {
                         text {
-                            color: #187759;
+                            color: black;
                         }
                     }
                 }
 
                 &_right {
-                    flex: 1.5;
+                    flex: 1;
+                    height: 100%;
                     text-align: center;
-                    padding: 50rpx 0;
-
-                    &_status {
-                        font-size: 25rpx;
+                    
+                    &_number {
+                        font-size: 40rpx;
                         font-weight: 700;
                     }
                 }

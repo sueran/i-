@@ -25,7 +25,6 @@
 				"navigationBarTitleText": "图",
 				"navigationBarTextStyle": "white",
 				"navigationBarBackgroundColor": "#187759"
-				
 			}
 		},
 		{
@@ -52,9 +51,25 @@
 			}
 		},
 		{
+			"path": "pages/infos/replaceInfoDetail",
+			"style": {
+				"navigationBarTitleText": "替代信息统计监视详情",
+				"navigationBarBackgroundColor": "#187759",
+				"navigationBarTextStyle": "white"
+			}
+		},
+		{
 			"path": "pages/infos/lockInfo",
 			"style": {
 				"navigationBarTitleText": "封锁信息统计监视",
+				"navigationBarBackgroundColor": "#187759",
+				"navigationBarTextStyle": "white"
+			}
+		},
+		{
+			"path": "pages/infos/lockInfoDetail",
+			"style": {
+				"navigationBarTitleText": "封锁信息详情",
 				"navigationBarBackgroundColor": "#187759",
 				"navigationBarTextStyle": "white"
 			}
@@ -71,6 +86,14 @@
 			"path": "pages/infos/out-of-limit",
 			"style": {
 				"navigationBarTitleText": "设备越限",
+				"navigationBarBackgroundColor": "#187759",
+				"navigationBarTextStyle": "white"
+			}
+		},
+		{
+			"path": "pages/infos/out-of-limit-detail",
+			"style": {
+				"navigationBarTitleText": "设备越限详情",
 				"navigationBarBackgroundColor": "#187759",
 				"navigationBarTextStyle": "white"
 			}
@@ -101,9 +124,27 @@
 			}
 		},
 		{
+			"path": "pages/noRefresh/noRefreshDetail",
+			"style": {
+				"navigationBarTitleText": "不刷新量测统计监视详情",
+				"navigationBarTextStyle": "white",
+				"navigationBarBackgroundColor": "#187759"
+				
+			}
+		},
+		{
 			"path": "pages/suspMeasurement/suspMeasurement",
 			"style": {
 				"navigationBarTitleText": "可疑量测统计监视",
+				"navigationBarTextStyle": "white",
+				"navigationBarBackgroundColor": "#187759"
+				
+			}
+		},
+		{
+			"path": "pages/suspMeasurement/suspMeasurementDetail",
+			"style": {
+				"navigationBarTitleText": "可疑量测统计监视详情",
 				"navigationBarTextStyle": "white",
 				"navigationBarBackgroundColor": "#187759"
 				
@@ -126,69 +167,70 @@
 				"navigationBarBackgroundColor": "#187759"
 				
 			}
-		}
-	],
-	"subPackages": [
+		},
 		{
-			"root": "pagesB",
-			"pages": [
-				{
-					"path": "workingCondition/workingCondition",
-					"style": {
-						"navigationBarTitleText": "工况情况",
-						"navigationBarBackgroundColor": "#187759"
-					}
-				},
-				{
-					"path": "heavyEquipment/heavyEquipment",
-					"style": {
-						"navigationBarTitleText": "超重载设备",
-						"navigationBarBackgroundColor": "#187759"
-					}
-				},
-				{
-					"path": "loadCurve/loadCurve",
-					"style": {
-						"navigationBarTitleText": "负荷曲线",
-						"navigationBarBackgroundColor": "#187759"
-					}
-				},
-				{
-					"path": "loadCurve_detail/loadCurve_detail",
-					"style": {
-						"navigationBarTitleText": "负荷曲线详情",
-						"navigationBarBackgroundColor": "#187759"
-					}
-				},
-				{
-					"path": "flawDesign/flawDesign",
-					"style": {
-						"navigationBarTitleText": "缺陷设计",
-						"navigationBarBackgroundColor": "#187759"
-					}
-				},
-				{
-					"path": "flawDesign_list/flawDesign_list",
-					"style": {
-						"navigationBarTitleText": "缺陷设计列表",
-						"navigationBarBackgroundColor": "#187759"
-					}
-				},
-				{
-					"path": "flawDesign_detail/flawDesign_detail",
-					"style": {
-						"navigationBarTitleText": "缺陷设计详情",
-						"navigationBarBackgroundColor": "#187759"
-					}
-				},
-				{
-					"path": "substationNumber/substationNumber",
-					"style": {
-						"navigationBarTitleText": "变电站列表",
-						"navigationBarBackgroundColor": "#187759"
-					}
-				}
-			]
+			"path": "pages/workingCondition/workingCondition",
+			"style": {
+				"navigationBarTitleText": "工况情况",
+				"navigationBarBackgroundColor": "#187759"
+			}
+		},
+		{
+			"path": "pages/heavyEquipment/heavyEquipment",
+			"style": {
+				"navigationBarTitleText": "超重载设备",
+				"navigationBarBackgroundColor": "#187759"
+			}
+		},
+		{
+			"path": "pages/heavyEquipment/heavyEquipmentList",
+			"style": {
+				"navigationBarTitleText": "超重载设备列表",
+				"navigationBarBackgroundColor": "#187759",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/loadCurve/loadCurve",
+			"style": {
+				"navigationBarTitleText": "负荷曲线",
+				"navigationBarBackgroundColor": "#187759"
+			}
+		},
+		{
+			"path": "pages/loadCurve_detail/loadCurve_detail",
+			"style": {
+				"navigationBarTitleText": "负荷曲线详情",
+				"navigationBarBackgroundColor": "#187759"
+			}
+		},
+		{
+			"path": "pages/flawDesign/flawDesign",
+			"style": {
+				"navigationBarTitleText": "缺陷设计",
+				"navigationBarBackgroundColor": "#187759"
+			}
+		},
+		{
+			"path": "pages/flawDesign/flawDesign_list",
+			"style": {
+				"navigationBarTitleText": "缺陷设计列表",
+				"navigationBarBackgroundColor": "#187759"
+			}
+		},
+		{
+			"path": "pages/flawDesign/flawDesign_detail",
+			"style": {
+				"navigationBarTitleText": "缺陷设计详情",
+				"navigationBarBackgroundColor": "#187759"
+			}
+		},
+		{
+			"path": "pages/substationNumber/substationNumber",
+			"style": {
+				"navigationBarTitleText": "变电站列表",
+				"navigationBarBackgroundColor": "#187759"
+			}
 		}
 	],
 	"globalStyle": {

@@ -504,7 +504,7 @@
 			padding: 10rpx 20rpx;
 			position: relative;
 			background-color: #EFEFEF;
-			border-radius: 8rpx;
+			-border-radius: 8rpx;
 			border: 1rpx solid #EFEFEF;
 		}
 	}
