@@ -7,20 +7,13 @@
                 <qiun-data-charts type="ring" :opts="opts" :chartData="chartData" />
             </view>
             <view class="wrap_access">
-                <u-subsection 
-                    :list="list" 
-                    :current="curNow" 
-                    @change="sectionChange" 
-                    activeColor="#187759" 
-                    inactiveColor="white" 
-                    mode="button" 
-                    bgColor="#187759"
-                ></u-subsection>
+                <u-subsection :list="list" :current="curNow" @change="sectionChange" activeColor="#187759"
+                    inactiveColor="white" mode="button" bgColor="#187759"></u-subsection>
                 <template v-if="curNow === 0">
                     <view class="line">
                         <view class="line_title">220kv视高变电站</view>
                         <view class="line_access">
-                            <view class="accessOne">通道一状态: <text class="iconfont icon-dot"></text></view>
+                            <view class="accessOne">通道一状态: <text class="iconfont icon-yuandianzhong"></text></view>
                             <view class="accessTwo">通道一状态: <text> -</text></view>
                         </view>
                     </view>
@@ -28,8 +21,8 @@
                     <view class="line">
                         <view class="line_title">220kv视高变电站</view>
                         <view class="line_access">
-                            <view class="accessOne">通道一状态: <text class="iconfont icon-dot"></text></view>
-                            <view class="accessTwo">通道一状态: <text class="iconfont icon-dot"></text></view>
+                            <view class="accessOne">通道一状态: <text class="iconfont icon-yuandianzhong"></text></view>
+                            <view class="accessTwo">通道一状态: <text class="iconfont icon-yuandianzhong"></text></view>
                         </view>
                     </view>
 
@@ -37,7 +30,7 @@
                         <view class="line_title">220kv视高变电站</view>
                         <view class="line_access">
                             <view class="accessOne">通道一状态: <text> -</text></view>
-                            <view class="accessTwo">通道一状态: <text class="iconfont icon-dot"></text></view>
+                            <view class="accessTwo">通道一状态: <text class="iconfont icon-yuandianzhong"></text></view>
                         </view>
                     </view>
                 </template>
@@ -45,7 +38,7 @@
                     <view class="line">
                         <view class="line_title">220kv视高变电站</view>
                         <view class="line_access">
-                            <view class="accessOne">通道一状态: <text class="iconfont icon-dot"></text></view>
+                            <view class="accessOne">通道一状态: <text class="iconfont icon-yuandianzhong"></text></view>
                             <view class="accessTwo">通道一状态: <text> -</text></view>
                         </view>
                     </view>
@@ -53,8 +46,8 @@
                     <view class="line">
                         <view class="line_title">220kv视高变电站</view>
                         <view class="line_access">
-                            <view class="accessOne">通道一状态: <text class="iconfont icon-dot"></text></view>
-                            <view class="accessTwo">通道一状态: <text class="iconfont icon-dot"></text></view>
+                            <view class="accessOne">通道一状态: <text class="iconfont icon-yuandianzhong"></text></view>
+                            <view class="accessTwo">通道一状态: <text class="iconfont icon-yuandianzhong"></text></view>
                         </view>
                     </view>
 
@@ -62,7 +55,7 @@
                         <view class="line_title">220kv视高变电站</view>
                         <view class="line_access">
                             <view class="accessOne">通道一状态: <text> -</text></view>
-                            <view class="accessTwo">通道一状态: <text class="iconfont icon-dot"></text></view>
+                            <view class="accessTwo">通道一状态: <text class="iconfont icon-yuandianzhong"></text></view>
                         </view>
                     </view>
                 </template>
@@ -149,87 +142,78 @@ export default {
 </script>
 
 <style lang="scss">
-    @font-face {
-                font-family: "iconfont";
-                src: url('//at.alicdn.com/t/c/font_3598928_4yfg7q8xhfa.woff2?t=1660886224014') format('woff2'),
-                    url('//at.alicdn.com/t/c/font_3598928_4yfg7q8xhfa.woff?t=1660886224014') format('woff'),
-                    url('//at.alicdn.com/t/c/font_3598928_4yfg7q8xhfa.ttf?t=1660886224014') format('truetype');
+page {
+    background-color: #eee;
+
+    .content {
+        position: relative;
+
+        .header {
+            width: 100%;
+            height: 200rpx;
+            background-color: $uni-bg-color-global;
+            text-align: center;
+            color: white;
+            font-size: 30rpx;
+            font-weight: 700;
+            position: fixed;
+        }
+
+        .wrap {
+            position: absolute;
+            top: 30rpx;
+            left: 50%;
+            transform: translateX(-45vw);
+            width: 90vw;
+            margin: 0 auto;
+            margin-bottom: 20rpx;
+
+            &_chart {
+                border-radius: 10rpx;
+                background-color: white;
+                padding: 30rpx;
+                position: relative;
             }
 
-            .iconfont {
-                font-family: "iconfont" !important;
-                font-size: 16px;
-                font-style: normal;
-                -webkit-font-smoothing: antialiased;
-                -moz-osx-font-smoothing: grayscale;
-            }
-
-            .icon-dot:before {
-                content: "\e711";
-            }
-    page {
-
-        background-color: #eee;
-
-        .content {
-            position: relative;
-            .header {
+            &_access {
+                box-sizing: border-box;
+                border-radius: 10rpx;
+                padding: 20rpx;
                 width: 100%;
-                height: 200rpx;
-                background-color: $uni-bg-color-global;
-                text-align: center;
-                color: white;
-                font-size: 30rpx;
-                font-weight: 700;
-                position: fixed;
-            }
-            .wrap {
-                position: absolute;
-                top: 30rpx;
-                left: 50%;
-                transform: translateX(-45vw);
-                width: 90vw;
-                margin: 0 auto;
-                margin-bottom: 20rpx;
-                &_chart {
-                    border-radius: 10rpx;
-                    background-color: white;
-                    padding: 30rpx;
-                    position: relative;
-                }
-                &_access {
-                    box-sizing: border-box;
-                    border-radius: 10rpx;
-                    padding: 20rpx;
-                    width: 100%;
-                    background-color: white;
-                    margin-top: 20rpx;
-                    .line {
-                        border-bottom: 2rpx solid #eee;
-                        padding: 20rpx 0;
-                        &_title {
-                            font-size: 35rpx;
-                            font-weight: 600;
-                            padding-bottom: 20rpx;
-                        }
-                        &_access {
-                            display: flex;
-                            justify-content: center;
-                            .accessOne {
-                                flex: 1;
-                                text {
-                                    color: red;
-                                    margin-left: 20rpx;
-                                }
+                background-color: white;
+                margin-top: 20rpx;
+
+                .line {
+                    border-bottom: 2rpx solid #eee;
+                    padding: 20rpx 0;
+
+                    &_title {
+                        font-size: 35rpx;
+                        font-weight: 600;
+                        padding-bottom: 20rpx;
+                    }
+
+                    &_access {
+                        display: flex;
+                        justify-content: center;
+
+                        .accessOne {
+                            flex: 1;
+
+                            text {
+                                color: red;
+                                margin-left: 20rpx;
                             }
-                            .accessTwo {
-                                flex: 1;
-                                border-left: 2rpx #ccc solid;
-                                padding-left: 20rpx;
-                                text {
-                                    color: red;
-                                    margin-left: 20rpx;
-                                }
+                        }
+
+                        .accessTwo {
+                            flex: 1;
+                            border-left: 2rpx #ccc solid;
+                            padding-left: 20rpx;
+
+                            text {
+                                color: red;
+                                margin-left: 20rpx;
                             }
                         }
                     }
@@ -237,4 +221,5 @@ export default {
             }
         }
     }
+}
 </style>

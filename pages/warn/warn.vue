@@ -1,7 +1,7 @@
 <template>
 	<view class="content">
 		<view class="headerWrap">
-			<u-search placeholder="日照香炉生紫烟" v-model="keyword"></u-search>
+			<u-search placeholder="日照香炉生紫烟"></u-search>
 		</view>
 		<view class="wrap">
 			<view class="wrap_top">
@@ -24,13 +24,61 @@
 			<view class="wrap_body">
 				<view class="wrap_body_top">
 					<view class="wrap_body_top_title">最新警告</view>
-					<view class="wrap_body_top_arrow">全部 <text class="iconfont icon-jiantouyou"></text> </view>
+					<view class="wrap_body_top_arrow" @click="handleNavigateTotal">全部 <text class="iconfont icon-jiantouyou"></text> </view>
 				</view>
 				<view class="wrap_body_message">
-					<view class="message_item"></view>
-					<view class="message_item"></view>
-					<view class="message_item"></view>
-					<view class="message_item"></view>
+					<view class="message_item">
+						<view class="message_item_header"> <text class="iconfont icon-yuandianzhong"></text>2022年08年07日
+							12:45:00 </view>
+						<view class="message_item_body">
+							<view class="message_item_body_wrap" @click="handleNavigateDetail">
+								<view class="wrap_title">
+									<view>xxx当前一二次设备对应</view>
+									<view>xxx当前状态备用状态,第二套保护功能软压板在投入状态</view>
+								</view>
+								<view> <text class="iconfont icon-jiantouyou"></text> </view>
+							</view>
+						</view>
+					</view>
+					<view class="message_item">
+						<view class="message_item_header"> <text class="iconfont icon-yuandianzhong"></text>2022年08年07日
+							12:45:00 </view>
+						<view class="message_item_body">
+							<view class="message_item_body_wrap">
+								<view class="wrap_title">
+									<view>xxx当前一二次设备对应</view>
+									<view>xxx当前状态备用状态,第二套保护功能软压板在投入状态</view>
+								</view>
+								<view> <text class="iconfont icon-jiantouyou"></text> </view>
+							</view>
+						</view>
+					</view>
+					<view class="message_item">
+						<view class="message_item_header"> <text class="iconfont icon-yuandianzhong"></text>2022年08年07日
+							12:45:00 </view>
+						<view class="message_item_body">
+							<view class="message_item_body_wrap">
+								<view class="wrap_title">
+									<view>xxx当前一二次设备对应</view>
+									<view>xxx当前状态备用状态,第二套保护功能软压板在投入状态</view>
+								</view>
+								<view> <text class="iconfont icon-jiantouyou"></text> </view>
+							</view>
+						</view>
+					</view>
+					<view class="message_item">
+						<view class="message_item_header"> <text class="iconfont icon-yuandianzhong"></text>2022年08年07日
+							12:45:00 </view>
+						<view class="message_item_body">
+							<view class="message_item_body_wrap">
+								<view class="wrap_title">
+									<view>xxx当前一二次设备对应</view>
+									<view>xxx当前状态备用状态,第二套保护功能软压板在投入状态</view>
+								</view>
+								<view> <text class="iconfont icon-jiantouyou"></text> </view>
+							</view>
+						</view>
+					</view>
 				</view>
 			</view>
 		</view>
@@ -38,29 +86,25 @@
 </template>
 
 <script>
+export default {
+	methods: {
+		// 跳转到详情页面
+		handleNavigateDetail() {
+			uni.navigateTo({
+				url: './warnDetail'
+			})
+		},
+		// 跳转到列表页面
+		handleNavigateTotal() {
+			uni.navigateTo({
+				url: './warnList'
+			})
+		},
+	}
+}
 </script>
 
 <style lang="scss">
-@font-face {
-	font-family: "iconfont";
-	/* Project id 3617762 */
-	src: url('//at.alicdn.com/t/c/font_3617762_y2pmd20jpa.woff2?t=1661785037848') format('woff2'),
-		url('//at.alicdn.com/t/c/font_3617762_y2pmd20jpa.woff?t=1661785037848') format('woff'),
-		url('//at.alicdn.com/t/c/font_3617762_y2pmd20jpa.ttf?t=1661785037848') format('truetype');
-}
-
-.iconfont {
-	font-family: "iconfont" !important;
-	font-size: 16px;
-	font-style: normal;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
-}
-
-.icon-jiantouyou:before {
-	content: "\e62d";
-}
-
 page {
 	background-color: #eee;
 
@@ -109,20 +153,65 @@ page {
 				&_top {
 					display: flex;
 					justify-content: space-between;
-
-					&_title {}
-
-					&_arrow {}
+					margin-bottom: 30rpx;
 				}
+
 				.message {
 					width: 90%;
-					height: 300rpx;
 					background-color: #187759;
 					position: relative;
-					margin:auto;
+					margin: auto;
+
+					&_item {
+						
+						&_header {
+							text {
+								color: #187759;
+							}
+							color: #666;
+						}
+
+						&_body {
+							border-left: 2rpx solid black;
+							box-sizing: border-box;
+							padding: 20rpx 0;
+							padding-left: 20rpx;
+							margin-left: 14rpx;
+							&_wrap {
+								display: flex;
+								align-items: center;
+								background-color: #eee;
+								padding: 10rpx;
+
+								.wrap_title {
+									width: 90%;
+								}
+
+								.wrap_title > view:nth-child(2) {
+									color: #777;
+									font-size: 25rpx;
+								}
+							}
+						}
+						&:first-child {
+							.message_item_header {
+							text {
+								color: red;
+							}
+						}
+						}
+						&:last-child {
+							.message_item_body {
+								border: 0;
+							}
+						}
+					}
+					
 				}
+
 				.u-steps-item {
 					height: 300rpx;
+
 				}
 			}
 		}

@@ -28,6 +28,13 @@
 			}
 		},
 		{
+			"path": "pages/warn/warn",
+			"style": {
+				"navigationBarTitleText": "告警",
+				"navigationBarBackgroundColor": "#187759"
+			}
+		},
+		{
 			"path": "pages/warn/warnList",
 			"style": {
 				"navigationBarTitleText": "告警列表",
@@ -256,7 +263,7 @@
 				"text": "厂站监测"
 			},
 			{
-				"pagePath": "pages/warn/warnList",
+				"pagePath": "pages/warn/warn",
 				"iconPath": "./static/tabbar/warn.png",
 				"selectedIconPath": "./static/tabbar/warn-active.png",
 				"text": "告警"

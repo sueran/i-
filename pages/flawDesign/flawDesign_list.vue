@@ -10,7 +10,7 @@
                     某线某处侧Xm处存在隐患, 风偏不足,严重缺陷。
                 </view>
                 <view class="item_left_address item_left_total">
-                    <text class="iconfont icon-shouhuodizhi"></text> 220kV福盛站
+                    <text class="iconfont icon-dizhi"></text> 220kV福盛站
                 </view>
                 <view class="item_left_message item_left_total">
                     <text>张三&nbsp;发现时间: 2022-06--19 11:06:59</text>
@@ -30,7 +30,7 @@
                     某线某处侧Xm处存在隐患, 风偏不足,严重缺陷。
                 </view>
                 <view class="item_left_address item_left_total">
-                    <text class="iconfont icon-shouhuodizhi"></text> 220kV福盛站
+                    <text class="iconfont icon-dizhi"></text> 220kV福盛站
                 </view>
                 <view class="item_left_message item_left_total">
                     <text>张三&nbsp;发现时间: 2022-06--19 11:06:59</text>
@@ -50,7 +50,7 @@
                     某线某处侧Xm处存在隐患, 风偏不足,严重缺陷。
                 </view>
                 <view class="item_left_address item_left_total">
-                    <text class="iconfont icon-shouhuodizhi"></text> 220kV福盛站
+                    <text class="iconfont icon-dizhi"></text> 220kV福盛站
                 </view>
                 <view class="item_left_message item_left_total">
                     <text>张三&nbsp;发现时间: 2022-06--19 11:06:59</text>
@@ -82,26 +82,6 @@ export default {
 </script>
 
 <style lang="scss">
-@font-face {
-    font-family: "iconfont";
-    /* Project id 3616241 */
-    src: url('//at.alicdn.com/t/c/font_3616241_sj91axkiny9.woff2?t=1661752061262') format('woff2'),
-        url('//at.alicdn.com/t/c/font_3616241_sj91axkiny9.woff?t=1661752061262') format('woff'),
-        url('//at.alicdn.com/t/c/font_3616241_sj91axkiny9.ttf?t=1661752061262') format('truetype');
-}
-
-.iconfont {
-    font-family: "iconfont" !important;
-    font-size: 16px;
-    font-style: normal;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-}
-
-.icon-shouhuodizhi:before {
-    content: "\e64e";
-}
-
 page {
     background-color: #eee;
 

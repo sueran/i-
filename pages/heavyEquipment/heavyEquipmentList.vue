@@ -95,7 +95,7 @@
                         </view>
                     </view>
                     <view class="item_left_address item_left_total">
-                        <text class="iconfont icon-shouhuodizhi"></text> 220kV福盛站
+                        <text class="iconfont icon-dizhi"></text> 220kV福盛站
                     </view>
                     <view class="item_left_message item_left_total">
                         <text>当日最大电流时间: 2022-06--19 11:06:59</text>
@@ -185,47 +185,6 @@ export default {
 </script>
 
 <style lang="scss">
-@font-face {
-    font-family: "iconfont";
-    src: url('//at.alicdn.com/t/c/font_3628217_bqsx935p7sc.woff2?t=1662218924250') format('woff2'),
-        url('//at.alicdn.com/t/c/font_3628217_bqsx935p7sc.woff?t=1662218924250') format('woff'),
-        url('//at.alicdn.com/t/c/font_3628217_bqsx935p7sc.ttf?t=1662218924250') format('truetype');
-}
-
-.iconfont {
-    font-family: "iconfont" !important;
-    font-size: 16px;
-    font-style: normal;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-}
-
-.icon-shaixuan:before {
-    color: white;
-    content: "\e628";
-}
-
-@font-face {
-    font-family: "iconfont";
-    /* Project id 3616241 */
-    src: url('//at.alicdn.com/t/c/font_3616241_sj91axkiny9.woff2?t=1661752061262') format('woff2'),
-        url('//at.alicdn.com/t/c/font_3616241_sj91axkiny9.woff?t=1661752061262') format('woff'),
-        url('//at.alicdn.com/t/c/font_3616241_sj91axkiny9.ttf?t=1661752061262') format('truetype');
-}
-
-.iconfont {
-    font-family: "iconfont" !important;
-    font-size: 16px;
-    font-style: normal;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-}
-
-.icon-shouhuodizhi:before {
-    content: "\e64e";
-}
-
-
 page {
     background-color: #eee;
 

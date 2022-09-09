@@ -11,8 +11,8 @@
 				<u-cell value="详情" center :isLink="true" rightIconStyle="color: #4B9E6A" :border="false" @click="handleNavigateDetail">
 					<view slot="title" class="item-title">{{ item.title }}</view>
 					<view slot="label" class="u-slot-value">
-						<view class="item-content">{{ item.content }}</view>
-						<view class="item-date">{{ item.date }}</view>
+						<view class="item-content">{{ item.equipment }} | {{item.station}}</view>
+						<view class="item-date">{{item.content}} | {{ item.date }}</view>
 					</view>
 				</u-cell>
 			</u-list-item>
@@ -100,24 +100,34 @@ export default {
 			],
 			indexList: [{
 				title: '110kV仁寿变电站',
-				content: '越限状态：越上限',
-				date: '越限率：85.853%'
+				content: '越上限',
+				date: '越限率：85.853%',
+				equipment: '设备:220kv线路1',
+				station: "测点: Ua"
 			}, {
 				title: '110kV仁寿变电站',
-				content: '越限状态：越上限',
-				date: '越限率：85.853%'
+				content: '越上限',
+				date: '越限率：85.853%',
+				equipment: '设备:220kv线路1',
+				station: "测点: Ua"
 			}, {
 				title: '110kV仁寿变电站',
-				content: '越限状态：越上限',
-				date: '越限率：85.853%'
+				content: '越上限',
+				date: '越限率：85.853%',
+				equipment: '设备:220kv线路1',
+				station: "测点: Ua"
 			}, {
 				title: '110kV仁寿变电站',
-				content: '越限状态：越上限',
-				date: '越限率：85.853%'
+				content: '越上限',
+				date: '越限率：85.853%',
+				equipment: '设备:220kv线路1',
+				station: "测点: Ua"
 			}, {
 				title: '110kV仁寿变电站',
-				content: '越限状态：越上限',
-				date: '越限率：85.853%'
+				content: '越上限',
+				date: '越限率：85.853%',
+				equipment: '设备:220kv线路1',
+				station: "测点: Ua"
 			},
 			],
 

@@ -2,38 +2,18 @@
     <view class="content">
         <!-- <u-navbar title="告警列表" bgColor="#187759" safeAreaInsetTop placeholder rightIcon="list" rightText="筛选" @rightClick="rightClick" leftIconSize="0" titleStyle="color: white"></u-navbar> -->
 
-        <u-navbar title="告警列表" bgColor="#187759" safeAreaInsetTop placeholder rightIcon="list" rightText="筛选"
-            @rightClick="rightClick" titleStyle="color: white" leftIconColor="white" leftIconSize="0">
+        <u-navbar title="告警" bgColor="#187759" safeAreaInsetTop placeholder rightIcon="list" rightText="筛选"
+            @rightClick="rightClick" titleStyle="color: white" leftIconColor="white" @leftClick="leftClick">
             <view class="u-nav-slot" slot="right">
                 <text class="iconfont icon-shaixuan"></text>
             </view>
         </u-navbar>
         <u-popup :show="showPopup" @close="close">
             <text>筛选条件</text>
-            <view class="popup_type">
-                <view class="popup_type_title">告警类型</view>
+            <view class="popup_type" v-for="(item,index) in selectCondition" :key="index">
+                <view class="popup_type_title">{{item.title}}</view>
                 <view class="popup_type_list">
-                    <view class="popup_type_item">全部</view>
-                    <view class="popup_type_item">事件类型1</view>
-                    <view class="popup_type_item">事件类型2</view>
-                    <view class="popup_type_item">事件类型3</view>
-                    <view class="popup_type_item">事件类型4</view>
-                </view>
-            </view>
-            <view class="popup_rank">
-                <view class="popup_rank_title">告警级别</view>
-                <view class="popup_rank_list">
-                    <view class="popup_rank_item">全部</view>
-                    <view class="popup_rank_item">危急</view>
-                    <view class="popup_rank_item">严重</view>
-                    <view class="popup_rank_item">一般</view>
-                </view>
-            </view>
-            <view class="popup_state">
-                <view class="popup_state_title">告警状态</view>
-                <view class="popup_state_list">
-                    <view class="popup_state_item">已确认</view>
-                    <view class="popup_state_item">未确认</view>
+                    <view class="popup_type_item" v-for="(item1,index1) in item.list" :key="index1" :class="{active: item1.showBack}" @click="handleClick(index,index1)">{{item1.name}}</view>
                 </view>
             </view>
             <view class="popup_interval">
@@ -137,6 +117,69 @@ export default {
                 { name: '2022-08-23' },
                 { name: '2022-08-24' },
                 { name: '2022-08-25' },
+            ],
+
+            selectCondition: [
+                {
+                    title: '告警类型',
+                    list: [
+                        {
+                            name: "全部",
+                            showBack: false
+                        },
+                        {
+                            name: "事件类型1",
+                            showBack: false
+                        },
+                        {
+                            name: "事件类型2",
+                            showBack: false
+                        },
+                        {
+                            name: "事件类型3",
+                            showBack: false
+                        },
+                        {
+                            name: "事件类型4",
+                            showBack: false
+                        }
+                        // "全部","事件类型1","事件类型2","事件类型3","事件类型4"
+                    ]
+                },
+                {
+                    title: '告警级别',
+                    list: [
+                        {
+                            name: "全部",
+                            showBack: false
+                        },
+                        {
+                            name: "危急",
+                            showBack: false
+                        },
+                        {
+                            name: "严重",
+                            showBack: false
+                        },
+                        {
+                            name: "一般",
+                            showBack: false
+                        }
+                    ]
+                },
+                {
+                    title: '告警状态',
+                    list: [
+                        {
+                            name: "已确认",
+                            showBack: false
+                        },
+                        {
+                            name: "未确认",
+                            showBack: false
+                        }
+                    ]
+                }
             ]
 
         }
@@ -152,34 +195,25 @@ export default {
             this.showPopup = true
         },
 
+        leftClick() {
+            uni.navigateBack({
+                delta: 1
+            });
+        },
+
         close() {
             this.showPopup = false
+        },
+
+        // 筛选的条件
+        handleClick(index,index1) {
+            this.selectCondition[index].list[index1].showBack =  this.selectCondition[index].list[index1].showBack ? false : true
         }
     }
 }
 </script>
 
 <style lang="scss">
-@font-face {
-    font-family: "iconfont";
-    /* Project id 3619181 */
-    src: url('//at.alicdn.com/t/c/font_3619181_ycj57snl8h.woff2?t=1661845411052') format('woff2'),
-        url('//at.alicdn.com/t/c/font_3619181_ycj57snl8h.woff?t=1661845411052') format('woff'),
-        url('//at.alicdn.com/t/c/font_3619181_ycj57snl8h.ttf?t=1661845411052') format('truetype');
-}
-
-.iconfont {
-    font-family: "iconfont" !important;
-    font-size: 16px;
-    font-style: normal;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-}
-
-.icon-jiantouyou:before {
-    content: "\e62d";
-}
-
 page {
     background-color: #eee;
 
@@ -193,9 +227,9 @@ page {
             // padding: 20rpx;
             box-sizing: border-box;
 
-            active: {
-                background-color: #aaa;
-            }
+            // active: {
+            //     background-color: #aaa;
+            // }
 
             text {
                 font-size: 35rpx;
@@ -215,7 +249,12 @@ page {
                         margin-bottom: 10rpx;
                         margin-right: 30rpx;
                         border-radius: 5rpx;
+                        box-sizing: border-box;
                         background-color: #eee;
+                        
+                    }
+                    .active {
+                        border: 2rpx solid #187759;
                     }
                 }
             }

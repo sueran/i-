@@ -16,8 +16,8 @@
                     </view>
                 </view>
                 <view class="nowData" @click="handleNavigate">
-                    <view class="nowData_title">当前值</view>
-                    <view class="nowData_number">666MW</view>
+                    <view class="nowData_title">当前值:      666 MW</view>
+                    <view class="nowData_number"> <text class="iconfont icon-jiantouyou"></text> </view>
                 </view>
                 <view class="toDayData">
                     <view class="toDayData_title">今日</view>
@@ -165,25 +165,6 @@ export default {
 </script>
 
 <style lang="scss">
-@font-face {
-    font-family: "iconfont";
-    src: url('//at.alicdn.com/t/c/font_3601379_wlpcc78abv.woff2?t=1661000861221') format('woff2'),
-        url('//at.alicdn.com/t/c/font_3601379_wlpcc78abv.woff?t=1661000861221') format('woff'),
-        url('//at.alicdn.com/t/c/font_3601379_wlpcc78abv.ttf?t=1661000861221') format('truetype');
-}
-
-.iconfont {
-    font-family: "iconfont" !important;
-    font-size: 16px;
-    font-style: normal;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-}
-
-.icon-riqi:before {
-    content: "\e621";
-}
-
 page {
     background-color: #eee;
     box-sizing: border-box;

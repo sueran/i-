@@ -3,7 +3,7 @@
 		<view class="header"></view>
 		<view class="wrap">
 			<view class="index-img">
-				<img src="../../static/images/index-img.png" mode="widthFix" />
+				<image src="../../static/images/index-img.png" mode="widthFix" />
 			</view>
 			<view class="monitor">
 				<u-scroll-list indicatorColor="#fff0f0" indicatorActiveColor="#187759">
@@ -11,7 +11,7 @@
 						<view class="scroll-list__goods-item" v-for="(item, index) in list" :key="index"
 							:class="[index === 9 && 'scroll-list__goods-item--no-margin-right',]"
 							@click="handleClick(index)">
-							<img class="scroll-list__goods-item__image" :src="item.thumb" mode="widthFix" />
+							<image class="scroll-list__goods-item__image" :src="item.thumb" mode="widthFix" />
 							<text class="scroll-list__goods-item__text">{{
 									item.price
 							}}</text>
@@ -27,7 +27,7 @@
 				<view class="numberItem">
 
 					<view class="numberItem_item" @click="handlenNavigate1(1)">
-						<img src="../../static/images/NumberOfSubstations/220.png" mode="widthFix" />
+						<image src="../../static/images/NumberOfSubstations/220.png" mode="widthFix" />
 						<view class="numberItem_item_name">220kv变电站</view>
 						<view class="numberItem_item_number">
 							<view class="numberItem_item_number_total">
@@ -46,7 +46,7 @@
 					</view>
 
 					<view class="numberItem_item" @click="handlenNavigate1(2)">
-						<img src="../../static/images/NumberOfSubstations/110.png" mode="widthFix" />
+						<image src="../../static/images/NumberOfSubstations/110.png" mode="widthFix" />
 						<view class="numberItem_item_name">110kv变电站</view>
 						<view class="numberItem_item_number">
 							<view class="numberItem_item_number_total">
@@ -65,7 +65,7 @@
 					</view>
 
 					<view class="numberItem_item" @click="handlenNavigate1(3)">
-						<img src="../../static/images/NumberOfSubstations/35.png" mode="widthFix" />
+						<image src="../../static/images/NumberOfSubstations/35.png" mode="widthFix" />
 						<view class="numberItem_item_name">35kv变电站</view>
 						<view class="numberItem_item_number">
 							<view class="numberItem_item_number_total">
@@ -92,35 +92,35 @@
 				<view class="todayWarnList_content">
 					<view class="todayWarnList_content_item" @click="handleTodayAlarm(1)">
 						<view class="todayWarnList_content_item_img">
-							<img src="../../static/images/TodayWarning/malfunction.png" mode="widthFix" />
+							<image src="../../static/images/TodayWarning/malfunction.png" mode="widthFix" />
 						</view>
 						<view class="todayWarnList_content_item_left">故障跳闸</view>
 						<view class="todayWarnList_content_item_right">20</view>
 					</view>
 					<view class="todayWarnList_content_item" @click="handleTodayAlarm(2)">
 						<view class="todayWarnList_content_item_img">
-							<img src="../../static/images/TodayWarning/InsuranceActivities.png" mode="widthFix" />
+							<image src="../../static/images/TodayWarning/InsuranceActivities.png" mode="widthFix" />
 						</view>
 						<view class="todayWarnList_content_item_left">保护动作</view>
 						<view class="todayWarnList_content_item_right">20</view>
 					</view>
 					<view class="todayWarnList_content_item" @click="handleTodayAlarm(3)">
 						<view class="todayWarnList_content_item_img">
-							<img src="../../static/images/TodayWarning/abnormal.png" mode="widthFix" />
+							<image src="../../static/images/TodayWarning/abnormal.png" mode="widthFix" />
 						</view>
 						<view class="todayWarnList_content_item_left">装置异常</view>
 						<view class="todayWarnList_content_item_right">20</view>
 					</view>
 					<view class="todayWarnList_content_item" @click="handleTodayAlarm(4)">
 						<view class="todayWarnList_content_item_img">
-							<img src="../../static/images/TodayWarning/abnormalDevice.png" mode="widthFix" />
+							<image src="../../static/images/TodayWarning/abnormalDevice.png" mode="widthFix" />
 						</view>
 						<view class="todayWarnList_content_item_left">装置故障</view>
 						<view class="todayWarnList_content_item_right">20</view>
 					</view>
 					<view class="todayWarnList_content_item" @click="handleTodayAlarm(5)">
 						<view class="todayWarnList_content_item_img">
-							<img src="../../static/images/TodayWarning/remoteSensingSurvey.png" mode="widthFix" />
+							<image src="../../static/images/TodayWarning/remoteSensingSurvey.png" mode="widthFix" />
 						</view>
 						<view class="todayWarnList_content_item_left">遥测越限</view>
 						<view class="todayWarnList_content_item_right">20</view>
@@ -398,7 +398,7 @@ page {
 				width: 90%;
 				margin: 0 auto;
 
-				img {
+				image {
 					width: 100%;
 					border-radius: 20rpx;
 				}
@@ -465,7 +465,7 @@ page {
 						background-color: #e6f0ed;
 						text-align: center;
 
-						img {
+						image {
 							width: 30%;
 							margin: 20rpx;
 						}
@@ -561,7 +561,7 @@ page {
 							flex: 1;
 							box-sizing: border-box;
 
-							img {
+							image {
 								width: 70%;
 							}
 						}

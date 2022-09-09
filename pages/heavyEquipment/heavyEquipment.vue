@@ -10,7 +10,7 @@
                 <view class="topTitle_tab">
                     <u-datetime-picker :show="showDatetime" mode="year-month"
                      @cancel="handleCancel" @confirm="handleConfirm"></u-datetime-picker>
-                    <view @click="handleShowDatetime">切换月份<text class="iconfont icon--xialajiantou"></text></view>
+                    <view @click="handleShowDatetime">切换月份<text class="iconfont icon-04xialajiantou"></text></view>
                 </view>
             </view>
             <view class="inform">该分析截止至8月8号的数据</view>
