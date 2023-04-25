@@ -1,41 +1,67 @@
 <template>
 	<view>
-		<view class="searchContainer">
-			<u-search></u-search>
-			<view class="btn-wrap">
-				<view class="filter-btn" @click="open(index)" v-for="(item, index) in filterBtns">
-					<text :class="{active: item.selected || item.popShow}">{{item.name}}</text>
-					<u-icon name="arrow-down-fill" size="10" v-if="!item.popShow && !item.selected"></u-icon>
-					<u-icon name="arrow-up-fill" size="10" v-if="item.popShow" color="#187759"></u-icon>
-					<u-icon name="arrow-down-fill" size="10" v-if="!item.popShow && item.selected" color="#187759">
+		<view class="top-wrap">
+				<view class="input-wrap" slot="default">
+						<u-icon name="search" color="#9A9A9A" size="28"></u-icon>
+						<input class="uni-input" placeholder-style="color:#999;" placeholder="请输入搜索关键词" />
+					</view>
+					<view class="btn-right">
+						<u-line direction="col" length="40rpx" color="#bbbbbb"></u-line>
+						<u-icon name="/static/images/icons/filter.svg" label="筛选" size="22" @click="open()">
 					</u-icon>
-					<view class="popup" :class="{closed: !item.popShow}">
-						<view v-for="(iitem, i) in item.list">
-							<view class="pop-item" :class="{active: iitem.name==item.name || iitem.value==item.name}"
-								@click.stop="select(index, i)">{{iitem.name}}</view>
-						</view>
-					</view>
-					<view class="overlay" :class="{closed: !item.popShow}"></view>
-
 				</view>
 			</view>
-
-			<view class="contentContainer">
-				<view class="listContainer">
-					<view class="itemContainer" v-for="item in listData" @click="headerNavigate">
-						<view class="leftContainer">
-							<text> 变电站： {{item.stationname}}</text>
-							<text> 原因： {{item.reason==="null" ?'未知':item.reason}}</text>
-							<text> 发生时间：{{item.time}}</text>
-						</view>
-						<view class="rightContainer">
-							<text> 详情 </text>
-							<u-icon name="arrow-right"></u-icon>
-						</view>
+					
+						<view class="contentContainer">
+								<view class="listContainer">
+									<view class="itemContainer" v-for="item in noFreshList" @click="headerNavigate(item)">
+										<view class="leftContainer">
+											<text> 变电站： {{item.stationname}}</text>
+											<text> 原因： {{item.reason==="null" ?'未知':item.reason}}</text>
+											<text> 发生时间：{{item.time}}</text>
+										</view>
+										<view class="rightContainer">
+											<text> 详情 </text>
+											<u-icon name="arrow-right"></u-icon>
+										</view>
+									</view>
+								</view>
+							</view>
+		<view @touchmove.prevent>
+			<u-popup :show="filterShow" :round="15" class="bottomPop"  :safeAreaInsetTop="true"  customStyle="padding:30rpx;" @close="filterShow=false">
+			<view class="popup-wrap">
+			<view>
+				<view class="title">全部筛选条件</view>
+				<view>
+					<view class="item-title">变电站</view>
+					<radio-group class="radio-list" @change="radioChange" :data-type="'station'">
+						<label class="radio-item" v-for="item in stationList" :key="item.id"
+							:class="item.checked?'active':''">
+							<radio :value="item.name" :checked="item.checked" />
+							{{item.name}}
+						</label>
+					</radio-group>
+				</view> 
+				<view>
+					<view class="item-title">间隔</view>
+					<radio-group class="radio-list" @change="radioChange" :data-type="'bay'">
+						<label class="radio-item" v-for="item in bayList" :key="item.id"
+							:class="item.checked?'active':''">
+							<radio :value="item.name" :checked="item.checked" />
+							{{item.name}}
+						</label>
+					</radio-group>
 					</view>
+				<view class="confirm-btn-wrap">
+					<button type="default" @click="reset()">重置</button>
+					<button type="default" @click="submit()">确认</button>
 				</view>
 			</view>
+			</view>
+		</u-popup>
 		</view>
+		
+		
 	</view>
 </template>
 
@@ -44,147 +70,152 @@
 		data() {
 			return {
 				show:false,
-				columns:[
-				   [ 'options1','options2','options3','options4'],
-				],
-				listData:[],
-				filterBtns: [
-					{
-						name: '变电站',
-						selected: false,
-						popShow: false,
-						list: [{
-							title: '全部',
-							value: '变电站'
-						}, {
-							title: '110kV仁寿变电站'
-						}, {
-							title: '110kV仁寿变电站1'
-						}, {
-							title: '110kV仁寿变电站2'
-						}, {
-							title: '110kV仁寿变电站3'
-						}]
-					},
-					{
-						name: '设备类型',
-						selected: false,
-						popShow: false,
-						list: []
-					},
-					{
-						name: '设备',
-						selected: false,
-						popShow: false,
-						list: [{
-							title: '全部',
-							value: '设备'
-						}, {
-							title: '设备1'
-						}, {
-							title: '设备2'
-						}, {
-							title: '设备3'
-						}, {
-							title: '设备4'
-						}]
-					},
-				],
+				filterShow:false,
+				stationList:[],
+				bayList:[],
+				bayFactor:'',
+				stationFactor:'',
+				noFreshList:[]	
 			}
 		},
 		onReady() {
-			this.getInitInfo();
-		   uni.request({
-		   	url:'http://124.220.156.201:8800/noRefresh/getAllConditions',
-			method:"POST",
-			success:(res)=>{
-				let {data}= res
-			
-				let stationList=[]
-				let firstStation={
-					name:'全部',
-					value:'变电站'
-				}
-				stationList.push(firstStation)
-				stationList.push(data.data.station[0])
-				stationList.push(data.data.station[1])
-				stationList.push(data.data.station[2])
-			
-				this.$set(this.filterBtns[0],"list",stationList)
-				
-				let deviceTypeList=[]
-				let firstDeviceType={
-					name:'全部',
-					value:'设备类型'
-				}
-				deviceTypeList.push(firstDeviceType)
-				deviceTypeList.push(data.data.deviceType[1])
-				deviceTypeList.push(data.data.deviceType[2])
-				deviceTypeList.push(data.data.deviceType[3])
-			   
-				 this.$set(this.filterBtns[1],"list",deviceTypeList)
-				 
-				 
-				 let deviceList=[]
-				 let firstDevice={
-				 	name:'全部',
-				 	value:'设备'
-				 }
-				 deviceList.push(firstDevice)
-				 deviceList.push(data.data.device[0])
-				 deviceList.push(data.data.device[1])
-				 deviceList.push(data.data.device[2])
-			
-				  this.$set(this.filterBtns[2],"list",deviceList)
-				
-				
-			}
-		   })	
+				this.getAllConditions()
+				this.getInfoByFactor()
 		},
 		methods: {
 			// 跳转到详情页面
-			headerNavigate() {
+			headerNavigate(item) {
 				uni.navigateTo({
-					url: './noRefreshDetail'
+					url: `./noRefreshDetail?item=${encodeURIComponent(JSON.stringify(item))}`
 				})
 			},
-			getInitInfo(){
+			initData(list){
+				for(let i=0;i<list.length;i++){
+					if(list[i].name==='全部'){
+						this.$set(list[i],'checked',true)
+						break;
+					}
+				}
+			},
+			getAllConditions(){
 				uni.request({
-					url:"http://124.220.156.201:8800/noRefresh/getNoRefreshInfo",
-					method:"POST",
+					url:this.base_url+'/idata/NoRefreshInfo/getAllConditions',
+					method:'POST',
 					success: (res) => {
-						let {data}=res
-						console.log(data)
-						this.listData=data.data.resData
+						this.stationList=res.data.data.station
+						this.bayList=res.data.data.bay || []
+						this.initData(this.stationList)
+						this.initData(this.bayList)
 					}
 				})
 			},
+			radioChange: function(e) {
+				let type = e.currentTarget.dataset.type
+				let items 
+				switch(type){
+				case 'station':
+					items=this.stationList
+					this.stationFactor=e.detail.value
+					break;
+				case 'bay':
+					items=this.bayList
+					this.bayFactor=e.detail.value
+					break;			  
+				}
+			let values = e.detail.value;
+			for (let i = 0, lenI = items.length; i < lenI; ++i) {
+					const item = items[i]
+					if (values===item.name) {
+					this.$set(item, 'checked', true)
+				} else {
+					this.$set(item, 'checked', false)
+				}
+			}
+		},	
+		getInfoByFactor(){
+				uni.request({
+					url:this.base_url+`/idata/NoRefreshInfo/getNoRefreshInfo?stationID=${this.stationFactor}&bayId=${this.bayFactor}&page=1&limit=1000`,
+					method:'POST',
+					success: (res) => {
+						this.noFreshList=res.data.data
+					}
+				})
+			},
+			reset(){
+				this.resetList(this.stationList)
+				this.resetList(this.bayList)
+				this.stationFactor='all'
+				this.bayFactor='all',
+				this.getInfoByFactor()
+			},
+			resetList(list){
+				list.forEach(item=>{
+					if(item.name==='全部'){
+						item.checked=true
+					}else{
+						item.checked=false
+					}
+				})
+			},
+			submit(){
+				this.getInfoByFactor()
+				this.filterShow=false
+			},
 			open(i){
-							this.filterBtns.forEach((item, index)=>{
-								if(index !=i)
-								{
-									this.$set(this.filterBtns[index], "popShow", false);
-								}
-							})
-							this.$set(this.filterBtns[i], "popShow", !this.filterBtns[i].popShow);
-							console.log(2)
-						},
-						select(btni, i){
-							if(i==0){
-								this.$set(this.filterBtns[btni], "name", this.filterBtns[btni].list[i].value);
-								this.$set(this.filterBtns[btni], "selected", false);
-							}else{
-								this.$set(this.filterBtns[btni], "name", this.filterBtns[btni].list[i].name);
-								this.$set(this.filterBtns[btni], "selected", true);
-							}
-							this.$set(this.filterBtns[btni], "popShow", !this.filterBtns[btni].popShow);
-						}
+					this.filterShow=true
+				},
 			}
 	
 	}
 </script>
 
 <style  lang="scss" scoped>
+	
+	.top-wrap {
+			padding: 20rpx;
+			background-color: #ffffff;
+			margin-bottom: 10rpx;
+			display: flex;
+			align-items: baseline;
+			flex: 1;
+			justify-content: flex-end;
+			overflow: hidden;
+		}
+		
+		.input-wrap {
+			width: 96%;
+			padding-left: 10rpx;
+			background: #f7f7f7;
+			display: flex;
+			align-items: center;
+			height: 80rpx;
+			border-radius: 100rpx;
+		}
+		
+		.btn-right {
+			display: flex;
+			width: 170rpx;
+			margin-left: 10rpx;
+			justify-content: space-around;
+		}
+		
+		.card-wrap {
+			display: flex;
+			flex-wrap: wrap;
+			margin: 10rpx;
+		}
+		
+	.oneItem {
+		display: flex;
+		font-size: 14rpx;
+		text-align: center;
+	}
+	
+	.iconStyle {
+		font-size: 12rpx;
+		color: #4F4F4F;
+	}
+	
 .searchContainer {
 	margin-top: 10rpx;
 	position: sticky;
@@ -320,4 +351,94 @@
 		display: none;
 	}
 }
+.bottomPop {
+          .popup-wrap{
+			  max-height: 90vh;
+			  overflow: scroll;
+			  padding: 30rpx;
+		  
+				.title {
+				font-size: 32rpx;
+				line-height: 46rpx;
+				}
+
+		.item-title {
+			margin-top: 20rpx;
+			font-size: 28rpx;
+			color: #4f4f4f;
+		}
+	}
+}
+
+	/deep/ uni-radio .uni-radio-input {
+		display: none !important;
+	}
+
+	.radio-list {
+		display: flex;
+		flex-wrap: wrap;
+		margin-top: 20rpx;
+		font-size: 28rpx;
+
+		.radio-item {
+			margin-right: 20rpx;
+			margin-bottom: 14rpx;
+			padding: 10rpx 20rpx;
+			position: relative;
+			background-color: #EFEFEF;
+			border-radius: 8rpx;
+			border: 1rpx solid #EFEFEF;
+		}
+	}
+
+	/deep/ .radio-item.active {
+		border: 1rpx solid #187759;
+		color: #101010;
+		background: rgba(24, 119, 89, 0.15);
+
+		&::before {
+			content: '';
+			position: absolute;
+			right: -1rpx;
+			bottom: -1rpx;
+			border-bottom-right-radius: 8rpx;
+			border: 16rpx solid #187759;
+			border-top-color: transparent;
+			border-left-color: transparent;
+		}
+
+		&::after {
+			content: '';
+			width: 5px;
+			height: 10px;
+			position: absolute;
+			right: 0;
+			bottom: 6rpx;
+			border: 1px solid #fff;
+			border-top-color: transparent;
+			border-left-color: transparent;
+			transform: rotate(45deg);
+		}
+	}
+
+	.confirm-btn-wrap {
+		margin-top: 10px;
+		display: flex;
+
+		button {
+			width: 320rpx;
+			height: 60rpx;
+			line-height: 60rpx;
+			border-radius: 30rpx;
+			font-size: 28rpx;
+			color: #187759;
+			background: rgba(24, 119, 89, 0.15);
+
+			&:last-child {
+				color: #fff;
+				background: #187759;
+				box-shadow: 0rpx 1rpx 6rpx 0rpx rgba(0, 0, 0, 0.15);
+			}
+		}
+	}
 </style>

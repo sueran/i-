@@ -1,5 +1,13 @@
 <template>
 	<view class="content">
+		<u-navbar
+			bgColor='#187759'
+			safeAreaInsetTop
+		>
+			<view class="u-nav-slot" slot="left">
+				<text style='color: white;'>国网鹤壁市供电公司集控站设备监控系统</text>
+			</view>
+		</u-navbar>
 		<view class="header"></view>
 		<view class="wrap">
 			<view class="index-img">
@@ -19,114 +27,79 @@
 					</view>
 				</u-scroll-list>
 			</view>
+			
 			<view class="number">
 				<view class="numberTitle">
 					<text class="numberTitle_title">变电站数量</text>
-					<u-icon name="arrow-right" bold @click="handlenNavigate1(0)"></u-icon>
+					<!-- <u-icon name="arrow-right" bold @click="handlenNavigate1(0)"></u-icon> -->
 				</view>
 				<view class="numberItem">
-
-					<view class="numberItem_item" @click="handlenNavigate1(1)">
-						<image src="../../static/images/NumberOfSubstations/220.png" mode="widthFix" />
-						<view class="numberItem_item_name">220kv变电站</view>
+					<view class="numberItem_item" v-for="(item,index) in dataSubstationNumber" :key="index">
+						<image :src="index == 0 ? '../../static/images/NumberOfSubstations/220.png' : index == 1 ? '../../static/images/NumberOfSubstations/110.png' : index == 2 ? '../../static/images/NumberOfSubstations/35.png' : ''" mode="widthFix" />
+						<view class="numberItem_item_name">{{item.level}}变电站</view>
 						<view class="numberItem_item_number">
-							<view class="numberItem_item_number_total">
+							<view class="numberItem_item_number_total" @click='handleGetTotalInfo(item.level, "总量")'>
 								<view class="total_title">总数</view>
 								<view class="total_number">
-									<text>12</text>座
+									<text>{{item.total < 10 ? '0' + item.total : item.total}}</text>座
 								</view>
 							</view>
-							<view class="numberItem_item_number_wrong">
+							<view class="numberItem_item_number_wrong" @click='handleGetAbnorInfo(item.level, "异常")'>
 								<view class="wrong_title">异常</view>
 								<view class="wrong_number">
-									<text>09</text>座
-								</view>
-							</view>
-						</view>
-					</view>
-
-					<view class="numberItem_item" @click="handlenNavigate1(2)">
-						<image src="../../static/images/NumberOfSubstations/110.png" mode="widthFix" />
-						<view class="numberItem_item_name">110kv变电站</view>
-						<view class="numberItem_item_number">
-							<view class="numberItem_item_number_total">
-								<view class="total_title">总数</view>
-								<view class="total_number">
-									<text>12</text>座
-								</view>
-							</view>
-							<view class="numberItem_item_number_wrong">
-								<view class="wrong_title">异常</view>
-								<view class="wrong_number">
-									<text>09</text>座
-								</view>
-							</view>
-						</view>
-					</view>
-
-					<view class="numberItem_item" @click="handlenNavigate1(3)">
-						<image src="../../static/images/NumberOfSubstations/35.png" mode="widthFix" />
-						<view class="numberItem_item_name">35kv变电站</view>
-						<view class="numberItem_item_number">
-							<view class="numberItem_item_number_total">
-								<view class="total_title">总数</view>
-								<view class="total_number">
-									<text>12</text>座
-								</view>
-							</view>
-							<view class="numberItem_item_number_wrong">
-								<view class="wrong_title">异常</view>
-								<view class="wrong_number">
-									<text>09</text>座
+									<text>{{item.abnor < 10 ? '0' + item.abnor : item.abnor}}</text>座
 								</view>
 							</view>
 						</view>
 					</view>
 				</view>
 			</view>
+			
 			<view class="todayWarnList">
 				<view class="todayWarnList_top">
 					<text class="todayWarnList_top_title">今日设备警告</text>
 					<u-icon name="arrow-right" bold @click="handleTodayAlarm(0)"></u-icon>
 				</view>
 				<view class="todayWarnList_content">
-					<view class="todayWarnList_content_item" @click="handleTodayAlarm(1)">
+					<view class="todayWarnList_content_item" @click="handleTodayAlarm(1)" v-for="item in ">
 						<view class="todayWarnList_content_item_img">
 							<image src="../../static/images/TodayWarning/malfunction.png" mode="widthFix" />
 						</view>
 						<view class="todayWarnList_content_item_left">故障跳闸</view>
-						<view class="todayWarnList_content_item_right">20</view>
+						<view class="todayWarnList_content_item_right">{{dataTodayWarnList.faultTripCounts}}</view>
 					</view>
 					<view class="todayWarnList_content_item" @click="handleTodayAlarm(2)">
 						<view class="todayWarnList_content_item_img">
 							<image src="../../static/images/TodayWarning/InsuranceActivities.png" mode="widthFix" />
 						</view>
 						<view class="todayWarnList_content_item_left">保护动作</view>
-						<view class="todayWarnList_content_item_right">20</view>
+						<view class="todayWarnList_content_item_right">{{dataTodayWarnList.protectActionCounts}}</view>
 					</view>
 					<view class="todayWarnList_content_item" @click="handleTodayAlarm(3)">
 						<view class="todayWarnList_content_item_img">
 							<image src="../../static/images/TodayWarning/abnormal.png" mode="widthFix" />
 						</view>
 						<view class="todayWarnList_content_item_left">装置异常</view>
-						<view class="todayWarnList_content_item_right">20</view>
+						<view class="todayWarnList_content_item_right">{{dataTodayWarnList.deviceAbnormalCounts}}</view>
 					</view>
 					<view class="todayWarnList_content_item" @click="handleTodayAlarm(4)">
 						<view class="todayWarnList_content_item_img">
 							<image src="../../static/images/TodayWarning/abnormalDevice.png" mode="widthFix" />
 						</view>
 						<view class="todayWarnList_content_item_left">装置故障</view>
-						<view class="todayWarnList_content_item_right">20</view>
+						<view class="todayWarnList_content_item_right">{{dataTodayWarnList.deviceFaultCounts}}</view>
 					</view>
 					<view class="todayWarnList_content_item" @click="handleTodayAlarm(5)">
 						<view class="todayWarnList_content_item_img">
 							<image src="../../static/images/TodayWarning/remoteSensingSurvey.png" mode="widthFix" />
 						</view>
 						<view class="todayWarnList_content_item_left">遥测越限</view>
-						<view class="todayWarnList_content_item_right">20</view>
+						<view class="todayWarnList_content_item_right">{{dataTodayWarnList.telemetryOutOfLimitCounts}}</view>
 					</view>
 				</view>
 			</view>
+
+
 			<view class="deviceData">
 				<view class="deviceDataTop">
 					<text class="deviceDataTop_title">负荷曲线</text>
@@ -144,10 +117,12 @@
 export default {
 	data() {
 		return {
+			dataSubstationNumber: [],
+			dataTodayWarnList: {},
 			InfoNumber: 10,
 			list: [
 				{
-					price: "工作情况",
+					price: "工况情况",
 					thumb: "../../static/images/operation/workingCondition.png",
 				},
 				{
@@ -230,15 +205,6 @@ export default {
 	},
 	methods: {
 
-		getInfo() {
-			uni.request({
-				url: "http://124.220.156.201:8800/loadStatistics/getALlLoad",
-				method: "post",
-				success: (res) => {
-					console.log(res);
-				}
-			})
-		},
 		handleClick(e) {
 			switch (e) {
 				case 0:
@@ -315,14 +281,6 @@ export default {
 			}
 		},
 
-		// 跳转到变电站列表
-		handlenNavigate1(e) {
-			// 根据不同的id跳转到变电站列表不同的tab页面
-			uni.navigateTo({
-				url: `../substationNumber/substationNumber?id=${e}`
-			});
-		},
-
 		// 跳转到负荷曲线页面
 		handlenNavigate2() {
 			uni.navigateTo({
@@ -330,9 +288,9 @@ export default {
 			});
 		},
 
-		handleTodayAlarm(e) {
+		handleTodayAlarm(current) {
 			uni.navigateTo({
-				url: `../todayAlarm/todayAlarm?id=${e}`
+				url: `../todayAlarm/todayAlarm?current=${current}`
 			});
 		},
 
@@ -341,7 +299,7 @@ export default {
 			setTimeout(() => {
 				//模拟服务器返回数据，如果数据格式和标准格式不同，需自行按下面的格式拼接
 				let res = {
-					categories: ["0", "4", "8", "12", "16", "20","24"],
+					categories: ["0:00", "04:00", "08:00", "12:00", "16:00", "20:00","24:00"],
 					series: [
 						{
 							name: "今日",
@@ -356,13 +314,69 @@ export default {
 				this.chartData = JSON.parse(JSON.stringify(res));
 			}, 500);
 		},
+
+		// 获取变电站数量
+		handleNumber() {
+			uni.request({
+				url: this.base_url + '/idata/homePage/getStationNum',
+				method: 'POST',
+				 success: (res) =>{
+					this.dataSubstationNumber = res.data.data
+				 }
+			})
+		},
+
+		//  今日设备告警统计
+		handleTodayWarnList() {
+			uni.request({
+				url: this.base_url + '/idata/homePage/getDeviceStatistics',
+				method: 'POST',
+				success: (res) => {
+					this.dataTodayWarnList = res.data.data
+				}
+			})
+		},
+		
+		
+		// 点击查看特定伏变电站列表信息（比如查看220v变电站列表所有信息）
+		handleGetTotalInfo(level, type) {
+			uni.navigateTo({
+				url: `../substationNumber/substationNumber?level=${level}&type=${type}`
+			});
+		},
+		
+		// 点击查看特定伏变电站异常列表信息（比如查看220v变电站列表异常信息）
+		handleGetAbnorInfo(level, type) {
+			uni.navigateTo({
+				url: `../substationNumber/substationNumber?level=${level}&type=${type}`
+			});
+		},
+
+
+		// 主页获取负荷曲线的数据
+		handleGetLoad() {
+			let date = new Date()
+			let year = date.getFullYear()
+			let month = date.getMonth() + 1
+			let day = date.getDate()
+			let nowDate = `${year}-${month < 10 ? '0' + month : month}-${day < 10 ? '0' + day : day}`
+			let url = this.base_url + `/idata/homePage/getYesTodayLoadInfo?areaId=all&currentTime=${nowDate}`
+			uni.request({
+				url,
+				method: 'POST',
+				success: res => {
+					this.chartData = res.data.data
+					console.log('chartData', this.chartData);
+				}
+			})
+		}
 	},
 
 	onReady() {
-		this.getServerData();
-
-		console.log("请求");
-		this.getInfo()
+		this.getServerData()
+		this.handleNumber()
+		this.handleTodayWarnList()
+		this.handleGetLoad()
 	},
 };
 </script>
@@ -374,6 +388,7 @@ page {
 	.content {
 		position: relative;
 		margin-bottom: 100rpx;
+		margin-top: 200rpx;
 
 		.header {
 			width: 100%;

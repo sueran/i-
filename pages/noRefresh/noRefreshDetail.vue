@@ -5,35 +5,35 @@
             <view class="wrap_top wrap_total">
                 <view class="wrap_top_item">
                     <view class="wrap_top_item_key">变电站</view>
-                    <view class="wrap_top_item_value">220kv新一代测试站</view>
+                    <view class="wrap_top_item_value">{{item.stationname}}</view>
                 </view>
                 <view class="wrap_top_item">
                     <view class="wrap_top_item_key">设备类型</view>
-                    <view class="wrap_top_item_value">交流线端</view>
+                    <view class="wrap_top_item_value">{{item.equiptype}}</view>
                 </view>
                 <view class="wrap_top_item">
                     <view class="wrap_top_item_key">设备</view>
-                    <view class="wrap_top_item_value">261交流线端</view>
+                    <view class="wrap_top_item_value">{{item.equip}}</view>
                 </view>
             </view>
             <view class="wrap_middle wrap_total">
                 <view class="wrap_top_item">
                     <view class="wrap_top_item_key">遥测点</view>
-                    <view class="wrap_top_item_value">安防监控终端CPU负载率</view>
+                    <view class="wrap_top_item_value">{{item.analog}}</view>
                 </view>
                 <view class="wrap_top_item">
                     <view class="wrap_top_item_key">遥测值</view>
-                    <view class="wrap_top_item_value">835</view>
+                    <view class="wrap_top_item_value">{{item.value}}</view>
                 </view>
                 <view class="wrap_top_item">
                     <view class="wrap_top_item_key">发生时间</view>
-                    <view class="wrap_top_item_value">未确认</view>
+                    <view class="wrap_top_item_value">{{item.time}}</view>
                 </view>
             </view>
             <view class="wrap_bottom wrap_total">
                 <view class="wrap_top_item">
                     <view class="wrap_top_item_key">不刷新原因</view>
-                    <view class="wrap_top_item_value">不刷新</view>
+                    <view class="wrap_top_item_value">{{item.reason===null ? "未知" :item.reason}}</view>
                 </view>
                 <!-- <view class="wrap_top_item">
                     <view class="wrap_top_item_key">告警间隔</view>
@@ -46,7 +46,15 @@
 
 <script>
 export default {
-
+	
+	data(){
+		return{
+			item:{}
+		}
+	},
+		onLoad(e) {
+		this.item=JSON.parse(e.item)
+	}
 }
 </script>
 

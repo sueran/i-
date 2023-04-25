@@ -1,20 +1,20 @@
 <template>
 	<view>
-		<view class="top-wrap">
-			<view class="input-wrap" slot="default">
-				<u-icon name="search" color="#9A9A9A" size="28"></u-icon>
-				<input class="uni-input" placeholder-style="color:#999;" placeholder="请输入搜索关键词" />
-			</view>
-		</view>
-		<view class="list-wrap">
-			<view v-for="(item, index) in indexList" :key="index" class="list-item">
+		<u-loading-page :loading="loading"></u-loading-page>
+		<view class="list-wrap" v-if="yzgjList.length>0">
+			<view v-for="(item, index) in yzgjListSort" :key="index" class="list-item" @click="handleNavigateDetail(item.stationId)">
 				<view class="item-left">
-					<view class="item-title">{{item.title}}</view>
-					<view class="item-content">{{item.content}}</view>
+					<view class="item-title">{{item.name}}电站</view>
+					<view class="item-content">{{item.kv}}</view>
 				</view>
-				<image :src="item.src"></image>
+				<image :src="iitem" v-for="(iitem, index) in item.src"></image>
 			</view>
 		</view>
+		<u-empty v-if="yzgjList.length<=0&&!loading"
+			mode="list"
+			icon="/static/images/icons/nodata.png"
+		>
+		</u-empty>
 	</view>
 </template>
 
@@ -22,136 +22,52 @@
 	export default {
 		data() {
 			return {
-				filterBtns: [{
-						name: '厂站名称',
-						selected: false,
-						popShow: false,
-						list: [{
-							title: '全部',
-							value: '厂站名称'
-						}, {
-							title: '110kV仁寿变电站'
-						}, {
-							title: '110kV仁寿变电站1'
-						}, {
-							title: '110kV仁寿变电站2'
-						}, {
-							title: '110kV仁寿变电站3'
-						}]
-					},
-					{
-						name: '间隔名称',
-						selected: false,
-						popShow: false,
-						list: [{
-							title: '全部',
-							value: '间隔名称'
-						}, {
-							title: '间隔1'
-						}, {
-							title: '间隔2'
-						}, {
-							title: '间隔3'
-						}, {
-							title: '间隔4'
-						}]
-
-					},
-					{
-						name: '操作员',
-						selected: false,
-						popShow: false,
-						list: [{
-							title: '全部',
-							value: '操作员'
-						}, {
-							title: '操作员'
-						}, {
-							title: '操作员1'
-						}, {
-							title: '操作员2'
-						}, {
-							title: '操作员3'
-						}]
-					}
-				],
-				indexList: [{
-						title: '仁寿变电站',
-						content: '110KV',
-						info: '5',
-						src: '/static/images/numbers/5.svg'
-					},
-					{
-						title: '仁寿变电站',
-						content: '110KV',
-						info: '5',
-						src: '/static/images/numbers/5.svg'
-					},
-					{
-						title: '仁寿变电站',
-						content: '110KV',
-						info: '0',
-						src: '/static/images/numbers/0.svg'
-					},
-					{
-						title: '仁寿变电站',
-						content: '220KV',
-						info: '0',
-						src: '/static/images/numbers/0.svg'
-					}, {
-						title: '仁寿变电站',
-						content: '110KV',
-						info: '0',
-						src: '/static/images/numbers/0.svg'
-					},
-					{
-						title: '仁寿变电站',
-						content: '220KV',
-						info: '0',
-						src: '/static/images/numbers/0.svg'
-					}, {
-						title: '仁寿变电站',
-						content: '110KV',
-						info: '0',
-						src: '/static/images/numbers/0.svg'
-					},
-					{
-						title: '仁寿变电站',
-						content: '220KV',
-						info: '0',
-						src: '/static/images/numbers/0.svg'
-					}, {
-						title: '仁寿变电站',
-						content: '110KV',
-						info: '0',
-						src: '/static/images/numbers/0.svg'
-					}
-				],
-
+				loading: true,
+				yzgjList: []
+			}
+		},
+		computed: {
+			yzgjListSort(){
+				let arr = this.yzgjList
+				arr.sort((item1,item2)=>{
+					return item2.count-item1.count
+				})
+				return arr
 			}
 		},
 		onLoad() {
-
+			let that = this
+			//获取告警抑制信息
+			uni.request({
+				url: `${this.base_url}/idata/yzgj/getYZGJInfo`,
+				method: 'POST'
+			}).then((res) => {
+				if(res[1].data.code == 0){
+					let arr = res[1].data.data.map(item =>({
+						...item,
+						name: item.NAME.split("kV")[1],
+						kv: item.NAME.split("kV")[0]+'kV',
+						stationId: item.staId,
+						src: String(item.count).split("").map(x=> {
+							if(item.count == 0){
+								return '/static/images/numbers/0-g.png'
+							}
+							else{
+								return '/static/images/numbers/'+x+'.png'
+							}
+						})
+					}))
+					that.yzgjList = arr
+				}
+				that.loading = false
+			})
 		},
 		methods: {
-			open(i) {
-				this.filterBtns.forEach((item, index) => {
-					if (index != i) {
-						this.$set(this.filterBtns[index], "popShow", false);
-					}
+			// 查看详细信息
+			handleNavigateDetail(e) {
+				uni.navigateTo({
+					url: './alertListDetail?stationId='+encodeURIComponent(JSON.stringify(e))
 				})
-				this.$set(this.filterBtns[i], "popShow", !this.filterBtns[i].popShow);
-				console.log(2)
-			},
-			select(btni, i) {
-				if (i == 0) {
-					this.$set(this.filterBtns[btni], "name", this.filterBtns[btni].list[i].value);
-					this.$set(this.filterBtns[btni], "selected", false);
-				} else {
-					this.$set(this.filterBtns[btni], "name", this.filterBtns[btni].list[i].title);
-					this.$set(this.filterBtns[btni], "selected", true);
-				}
-				this.$set(this.filterBtns[btni], "popShow", !this.filterBtns[btni].popShow);
 			}
 		},
 	}
@@ -164,21 +80,6 @@
 		// overflow-y: hidden;
 	}
 
-	.top-wrap {
-		padding: 20rpx;
-		height: 80rpx;
-		background-color: #ffffff;
-	}
-
-	.input-wrap {
-		width: 96%;
-		padding-left: 10rpx;
-		background: #f7f7f7;
-		display: flex;
-		align-items: center;
-		height: 80rpx;
-		border-radius: 100rpx;
-	}
 	.list-wrap {
 		display: flex;
 		flex-wrap: wrap;
@@ -196,7 +97,9 @@
 		justify-content: space-between;
 
 		.item-left {
-			padding: 32rpx 14rpx;
+			padding: 32rpx 0;
+			padding-left: 8rpx;
+			flex: 1;
 
 			.item-title {
 				font-size: 32rpx;
@@ -211,7 +114,7 @@
 		}
 
 		image {
-			width: 128rpx;
+			width: 90rpx;
 			height: 128rpx;
 		}
 

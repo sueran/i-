@@ -5,35 +5,35 @@
             <view class="wrap_top wrap_total">
                 <view class="wrap_top_item">
                     <view class="wrap_top_item_key">变电站</view>
-                    <view class="wrap_top_item_value">220kv新一代测试站</view>
+                    <view class="wrap_top_item_value">{{detail.NAME}}</view>
                 </view>
                 <view class="wrap_top_item">
                     <view class="wrap_top_item_key">设备类型</view>
-                    <view class="wrap_top_item_value">220kv线路1</view>
+                    <view class="wrap_top_item_value">{{detail.equipTypeName}}</view>
                 </view>
                 <view class="wrap_top_item">
                     <view class="wrap_top_item_key">置数类型</view>
-                    <view class="wrap_top_item_value">遥测</view>
+                    <view class="wrap_top_item_value">{{detail.TYPENAME}}</view>
                 </view>
             </view>
             <view class="wrap_middle wrap_total">
                 <view class="wrap_top_item">
                     <view class="wrap_top_item_key">设备</view>
-                    <view class="wrap_top_item_value">172交流线端</view>
+                    <view class="wrap_top_item_value">{{detail.EQUIPNAME}}</view>
                 </view>
                 <view class="wrap_top_item">
                     <view class="wrap_top_item_key">量测量</view>
-                    <view class="wrap_top_item_value">110kv备用线173保护(型号)定值区号</view>
+                    <view class="wrap_top_item_value">{{detail.FSNAME}}</view>
                 </view>
                 <view class="wrap_top_item">
                     <view class="wrap_top_item_key">量测值</view>
-                    <view class="wrap_top_item_value">23</view>
+                    <view class="wrap_top_item_value">{{detail.VALUE}}</view>
                 </view>
             </view>
             <view class="wrap_bottom wrap_total">
                 <view class="wrap_top_item">
                     <view class="wrap_top_item_key">发生时间</view>
-                    <view class="wrap_top_item_value">2022-09-01 09::00:00</view>
+                    <view class="wrap_top_item_value">{{detail.HAPPENTIME}}</view>
                 </view>
             </view>
         </view>
@@ -42,8 +42,23 @@
 
 <script>
 export default {
-
-}
+		data() {
+			return {
+				detail: {}
+			}
+		},
+		onLoad(options) {
+			this.detail = JSON.parse(options.item)
+		},
+		methods: {
+			onBackPress(event){
+				uni.redirectTo({
+					url:'../infos/lockInfo'
+				});
+			   return true
+			},
+		},
+	}
 </script>
 
 <style lang="scss">

@@ -6,6 +6,8 @@ Vue.config.productionTip = false
 App.mpType = 'app'
 import uView from "uview-ui";
 Vue.use(uView);
+////当时测试用的内网ip
+Vue.prototype.base_url = 'http://200.200.200.21:18089'
 const app = new Vue({
     ...App
 })

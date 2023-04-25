@@ -3,7 +3,7 @@
         <view class="item" @click="handleJump">
             <view class="item_left">
                 <view class="item_left_name">
-                    <view class="item_left_name_tag"><u-tag text="危急" type="error"></u-tag></view>
+                    <view class="item_left_name_tag"><u-tag text="严重" type="error"></u-tag></view>
                     <view>设备名称</view>
                 </view>
                 <view class="item_left_title item_left_total">
@@ -43,7 +43,7 @@
         <view class="item">
             <view class="item_left">
                 <view class="item_left_name">
-                    <view class="item_left_name_tag"><u-tag text="危急" bgColor="#187759" borderColor="#187759"></u-tag></view>
+                    <view class="item_left_name_tag"><u-tag text="一般" bgColor="#187759" borderColor="#187759"></u-tag></view>
                     <view>设备名称</view>
                 </view>
                 <view class="item_left_title item_left_total">
@@ -67,7 +67,7 @@
 export default {
     data() {
         return {
-
+			level: ''
         }
     },
 
@@ -76,8 +76,26 @@ export default {
             uni.navigateTo({
                 url: '../flawDesign/flawDesign_detail'
             });
-        }
-    }
+        },
+			
+		// 根据缺陷等级获取列表信息
+		getListByLevel(type) {
+			let url = this.base_url + `/idata/homePage/getDefectList?defectType&defectLevel=${type}&page=1&limit=6000`
+			uni.request({
+				url,
+				method: 'POST',
+				success: res => {
+					console.log('res', res)
+				}
+			})
+		}
+    },
+	
+	onLoad(option) {
+		this.level = option.level
+		
+		this.getListByLevel(this.level)
+	}
 }
 </script>
 
@@ -92,8 +110,8 @@ page {
             display: flex;
             align-items: center;
             background-color: white;
-            padding: 0 20rpx;
-            margin-bottom: 20rpx;
+            padding: 10rpx;
+            margin-bottom: 40rpx;
             border-radius: 10rpx;
 
             &_left {

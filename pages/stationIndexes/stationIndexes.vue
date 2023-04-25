@@ -1,71 +1,7 @@
 <template>
 	<view>
-		<view class="serachContainer">
-			<u-search></u-search>
-			<!-- 	<view class="searchOptions">
-				<u-row >
-					
-					
-				                    <u-col span="3">
-										<u-picker :show="show" :columns="columns" @close="handleClose" @confirm="hancleConfirm"></u-picker>
-				                        <view @click="show=!show">电压等级 <span class="iconfont icon-xiangxia1"></span></u-icon></view>
-				                    </u-col>
-				                    <u-col span="3">
-				                        <view>运维班 <span class="iconfont icon-xiangxia1"></span></u-icon></view>
-				                    </u-col>
-									<u-col span="3">
-									   <view>区域 <span class="iconfont icon-xiangxia1"></span></u-icon></view>
-									</u-col>
-									<u-col span="3" >
-									<view class="sort">电压等级 <span class="iconfont icon-paixu"></span></view>
-									</u-col>
-				                </u-row>
-				
-				
-				
-				
-			</view> -->
-
-			<view class="btn-wrap">
-				<view class="filter-btn" @click="open(index)" v-for="(item, index) in filterBtns">
-					<text :class="{ active: item.selected || item.popShow }">{{ item.name }}</text>
-					<u-icon name="arrow-down-fill" size="10" v-if="!item.popShow && !item.selected"></u-icon>
-					<u-icon name="arrow-up-fill" size="10" v-if="item.popShow" color="#187759"></u-icon>
-					<u-icon name="arrow-down-fill" size="10" v-if="!item.popShow && item.selected" color="#187759">
-					</u-icon>
-
-					<view class="popup" :class="{ closed: !item.popShow }">
-						<view v-for="(iitem, i) in item.list">
-							<view class="pop-item" :class="{ active: iitem.title == item.name || iitem.value == item.name }"
-								@click.stop="select(index, i)">{{ iitem.title }}</view>
-						</view>
-					</view>
-					<view class="overlay" :class="{ closed: !item.popShow }"></view>
-
-				</view>
-				<view class="sort">电压等级 <span class="iconfont icon-paixu"></span></view>
-			</view>
+			<web-view src="http://200.200.200.21:8989/CanvasTest/page/common_websocket.html?key=xml/pages/%E7%B3%BB%E7%BB%9F%E7%9B%91%E8%A7%86/%E5%8E%82%E7%AB%99%E7%B4%A2%E5%BC%95.xml"></web-view>
 		</view>
-
-		<view class="contentContainer">
-			<view class="listContainer">
-				<view class="itemContainer" v-for=" item  in 10">
-					<view class="headerContainer">
-						<span class="iconfont icon-baojing" style="color: #9A9A9A;font-size: 40rpx;"></span>
-						<text class="titleStyle">XXX变电站</text>
-						<text class="fontStyle">220KV</text>
-					</view>
-
-					<view class="footerContainer">
-						<text>XXXX区</text>
-						<text>XXXX运维班</text>
-						<u-button shape="circle" text="接线图" class="buttonsStyle" color="#FFAB0C" @click="handleImage"></u-button>
-						<u-button shape="circle" text="光字图" class="buttonsStyle" color="#187759"></u-button>
-					</view>
-				</view>
-			</view>
-		</view>
-	</view>
 </template>
 
 <script>
@@ -168,7 +104,14 @@ export default {
 				url: '../stationIndexes/stationIndexesImage'
 			})
 		}
-	}
+	},
+	mounted: function() {
+	    console.log('App Launch');
+		plus.screen.lockOrientation('landscape-primary'); //锁定
+	},
+	        
+	    
+	
 }
 </script>
 
@@ -290,7 +233,7 @@ export default {
 	left: 0;
 	right: 0;
 	height: 300rpx;
-	padding: 0 20rpx;
+	padding: 0 40rpx;
 	overflow-y: hidden;
 	background-color: #ffffff;
 

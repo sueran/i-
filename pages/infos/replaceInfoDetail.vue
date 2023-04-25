@@ -5,43 +5,44 @@
             <view class="wrap_top wrap_total">
                 <view class="wrap_top_item">
                     <view class="wrap_top_item_key">被替代变电站</view>
-                    <view class="wrap_top_item_value">110kv福宝变电站</view>
+                    <view class="wrap_top_item_value">{{detail.station2}}电站</view>
                 </view>
                 <view class="wrap_top_item">
                     <view class="wrap_top_item_key">被替代设备</view>
-                    <view class="wrap_top_item_value">173交流线端</view>
+                    <view class="wrap_top_item_value">{{detail.device2}}</view>
                 </view>
                 <view class="wrap_top_item">
                     <view class="wrap_top_item_key">被替代点</view>
-                    <view class="wrap_top_item_value">110kv备用线173无功值</view>
+                    <view class="wrap_top_item_value">{{detail.point2}}</view>
                 </view>
             </view>
             <view class="wrap_middle wrap_total">
                 <view class="wrap_top_item">
-                    <view class="wrap_top_item_key">替代类型</view>
-                    <view class="wrap_top_item_value">对端替代</view>
-                </view>
-                <view class="wrap_top_item">
                     <view class="wrap_top_item_key">替代变电站</view>
-                    <view class="wrap_top_item_value">110kv红星变电站</view>
+                    <view class="wrap_top_item_value">{{detail.stationname}}电站</view>
                 </view>
                 <view class="wrap_top_item">
                     <view class="wrap_top_item_key">替代设备</view>
-                    <view class="wrap_top_item_value">132交流线端</view>
+                    <view class="wrap_top_item_value">{{detail.device}}</view>
+                </view>
+                
+                <view class="wrap_top_item">
+                    <view class="wrap_top_item_key">替代点</view>
+                    <view class="wrap_top_item_value">{{detail.point}}</view>
                 </view>
             </view>
             <view class="wrap_bottom wrap_total">
                 <view class="wrap_top_item">
-                    <view class="wrap_top_item_key">替代点</view>
-                    <view class="wrap_top_item_value">110kv宝红线AB线电压</view>
+                    <view class="wrap_top_item_key">替代方式</view>
+                    <view class="wrap_top_item_value">{{detail.devtype}}</view>
                 </view>
                 <view class="wrap_top_item">
                     <view class="wrap_top_item_key">替代值</view>
-                    <view class="wrap_top_item_value">200</view>
+                    <view class="wrap_top_item_value">{{detail.value}}</view>
                 </view>
                 <view class="wrap_top_item">
                     <view class="wrap_top_item_key">记录时间</view>
-                    <view class="wrap_top_item_value">2022-09-02 12:00:00</view>
+                    <view class="wrap_top_item_value">{{detail.time}}</view>
                 </view>
             </view>
         </view>
@@ -50,7 +51,22 @@
 
 <script>
 export default {
-
+	data() {
+		return {
+			detail: []
+		}
+	},
+	onLoad(options) {
+		this.detail = JSON.parse(options.info)
+	},
+	methods:{
+		onBackPress(event){
+			uni.redirectTo({
+				url:'../infos/replaceInfo'
+			});
+		   return true
+		},
+	}
 }
 </script>
 

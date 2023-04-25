@@ -7,13 +7,15 @@
 			"path": "pages/index/index",
 			"style": {
 				"navigationBarTitleText": "国网鹤壁市供电公司集控站设备监控系统",
-				"navigationBarBackgroundColor": "#187759"
+				"navigationBarBackgroundColor": "#187759",
+				"navigationBarTextStyle": "white",
+				"navigationStyle": "custom"
 			}
 		},
 		{
 			"path": "pages/stationIndexes/stationIndexes",
 			"style": {
-				"navigationBarTitleText": "厂站监测",
+				"navigationBarTitleText": "厂站监视",
 				"navigationBarTextStyle": "white",
 				"navigationBarBackgroundColor": "#187759"
 				
@@ -113,10 +115,34 @@
 				"navigationBarTextStyle": "white"
 			}
 		},
+			{
+					"path": "pages/infos/cardsListDetail",
+					"style": {
+						"navigationBarTitleText": "置牌一览查询",
+						"navigationBarBackgroundColor": "#187759",
+						"navigationBarTextStyle": "white"
+					}
+				},
 		{
 			"path": "pages/infos/alertList",
 			"style": {
 				"navigationBarTitleText": "告警抑制",
+				"navigationBarBackgroundColor": "#187759",
+				"navigationBarTextStyle": "white"
+			}
+		},
+				{
+			"path": "pages/infos/alertListDetail",
+			"style": {
+				"navigationBarTitleText": "告警抑制查询",
+				"navigationBarBackgroundColor": "#187759",
+				"navigationBarTextStyle": "white"
+			}
+		},	
+			{
+			"path": "pages/infos/alertListDetail",
+			"style": {
+				"navigationBarTitleText": "告警抑制查询",
 				"navigationBarBackgroundColor": "#187759",
 				"navigationBarTextStyle": "white"
 			}
@@ -214,7 +240,7 @@
 		{
 			"path": "pages/flawDesign/flawDesign",
 			"style": {
-				"navigationBarTitleText": "缺陷设计",
+				"navigationBarTitleText": "缺陷统计",
 				"navigationBarBackgroundColor": "#187759"
 			}
 		},
@@ -228,7 +254,7 @@
 		{
 			"path": "pages/flawDesign/flawDesign_detail",
 			"style": {
-				"navigationBarTitleText": "缺陷设计详情",
+				"navigationBarTitleText": "缺陷详情",
 				"navigationBarBackgroundColor": "#187759"
 			}
 		},

@@ -52,8 +52,26 @@ export default {
                     number: -631.00
                 },
             ],
+
+            areaId: ''
         }
     },
+
+    getInfo(areaId) {
+        let url = this.base_url + `/idata/homePage/getAreaLineLoadInfo?areaId=${areaId}`
+        uni.request({
+            url,
+            method: 'POST',
+            success: res => {
+                console.log(res);
+            }
+        })
+    },
+
+    onLoad(option) {
+        console.log('option', option);
+        this.areaId = option.areaId
+    }
 }
 </script>
 

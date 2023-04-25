@@ -4,30 +4,30 @@
         <view class="wrap">
             <view class="wrap_top wrap_total">
                 <view class="wrap_top_item">
-                    <view class="wrap_top_item_key">缺陷描述</view>
-                    <view class="wrap_top_item_value">呼和乌素110kv变电站2当前状态为联通</view>
+                    <view class="wrap_top_item_key">所属变电站</view>
+                    <view class="wrap_top_item_value">{{item.stationName}}</view>
                 </view>
                 <view class="wrap_top_item">
-                    <view class="wrap_top_item_key">发生时间</view>
-                    <view class="wrap_top_item_value">2022-05-24 06:24:27</view>
+                    <view class="wrap_top_item_key">告警名称</view>
+                    <view class="wrap_top_item_value">{{item.alarmName}}</view>
                 </view>
                 <view class="wrap_top_item">
-                    <view class="wrap_top_item_key">确认时间</view>
-                    <view class="wrap_top_item_value">2022-05-24 06:24:27</view>
+                    <view class="wrap_top_item_key">设备分类</view>
+                    <view class="wrap_top_item_value">{{item.equipClass}}</view>
                 </view>
             </view>
             <view class="wrap_middle wrap_total">
                 <view class="wrap_top_item">
                     <view class="wrap_top_item_key">告警级别</view>
-                    <view class="wrap_top_item_value">一般</view>
+                    <view class="wrap_top_item_value">{{item.alarmLevel}}</view>
                 </view>
                 <view class="wrap_top_item">
-                    <view class="wrap_top_item_key">告警类型</view>
-                    <view class="wrap_top_item_value">前置工况</view>
+                    <view class="wrap_top_item_key">告警描述</view>
+                    <view class="wrap_top_item_value">{{item.alarmDesc}}</view>
                 </view>
                 <view class="wrap_top_item">
-                    <view class="wrap_top_item_key">告警状态</view>
-                    <view class="wrap_top_item_value">未确认</view>
+                    <view class="wrap_top_item_key">告警对象</view>
+                    <view class="wrap_top_item_value">{{item.objDesc}}</view>
                 </view>
             </view>
             <view class="wrap_bottom wrap_total">
@@ -36,9 +36,13 @@
                     <view class="wrap_top_item_value">42</view>
                 </view>
                 <view class="wrap_top_item">
-                    <view class="wrap_top_item_key">告警间隔</view>
-                    <view class="wrap_top_item_value">0</view>
+                    <view class="wrap_top_item_key">所属间隔</view>
+                    <view class="wrap_top_item_value">{{item.bayName}}</view>
                 </view>
+				<view class="wrap_top_item">
+				    <view class="wrap_top_item_key">告警时间</view>
+				    <view class="wrap_top_item_value">{{item.alarmTime}}</view>
+				</view>
             </view>
         </view>
 	</view>
@@ -46,7 +50,14 @@
 
 <script>
 export default {
-
+	data(){
+		return{
+			item:'',
+		}
+	},
+	onLoad(e) {
+		this.item=JSON.parse(e.item)
+	}
 }
 </script>
 

@@ -1,20 +1,26 @@
 <template>
 	<view>
-		<u-collapse :border="false">
-			<u-collapse-item v-for="(item, index) in indexList" :key="index" class="list-item">
-				<u-icon name="/static/images/icons/dataTransIcon.png" size="34" slot="icon"></u-icon>
-				<view slot="title" class="item-title">{{item.title}}</view>
-				<view class="u-collapse-content">
+		<u-loading-page :loading="loading"></u-loading-page>
+		<u-list @scrolltolower="scrolltolower" v-if="dataList.length>0">
+			<u-list-item
+				v-for="(item, index) in dataList"
+				:key="index"
+				class="list-item"
+			>
+				<view class="item-title">
+					<u-icon name="/static/images/icons/dataTransIcon.png" size="34"></u-icon>
+					{{item.name}}电站</view>
+				<view class="list-content">
 					<view class="content-wrap">
 						<text class="title">数据网关机</text>
 						<view class="aisle-wrap">
 							<view class="aisle-item">
 								<text>通道1</text>
-								<view style="color: #E99D42;">不存在</view>
+								<view :style="{color: color(item.td1)}">{{text(item.td1)}}</view>
 							</view>
 							<view class="aisle-item">
 								<text>通道2</text>
-								<view style="color: #BD3124;">异常</view>
+								<view :style="{color: color(item.td2)}">{{text(item.td2)}}</view>
 							</view>
 						</view>
 					</view>
@@ -23,18 +29,19 @@
 						<view class="aisle-wrap">
 							<view class="aisle-item">
 								<text>通道1</text>
-								<view style="color: #E99D42;">不存在</view>
+								<view :style="{color: color(item.td3)}">{{text(item.td3)}}</view>
 							</view>
 							<view class="aisle-item">
 								<text>通道2</text>
-								<view style="color: #BD3124;">异常</view>
+								<view :style="{color: color(item.td4)}">{{text(item.td4)}}</view>
 							</view>
 						</view>
 					</view>
 				</view>
-
-			</u-collapse-item>
-		</u-collapse>
+			</u-list-item>
+		</u-list>
+		<u-empty v-if="dataList.length<=0&&!loading" mode="list" icon="/static/images/icons/nodata.png">
+		</u-empty>
 	</view>
 </template>
 
@@ -42,35 +49,47 @@
 	export default {
 		data() {
 			return {
-				indexList: [{
-					title: '110KV福宝变电站',
-					content: '量测值：23',
-					date: '发生时间：2022-04-10 14:21:16'
-				}, {
-					title: '110KV福宝变电站',
-					content: '量测值：23',
-					date: '发生时间：2022-04-10 14:21:16'
-				}, {
-					title: '110KV福宝变电站',
-					content: '量测值：23',
-					date: '发生时间：2022-04-10 14:21:16'
-				}, {
-					title: '110KV福宝变电站',
-					content: '量测值：23',
-					date: '发生时间：2022-04-10 14:21:16'
-				}, {
-					title: '110KV福宝变电站',
-					content: '量测值：23',
-					date: '发生时间：2022-04-10 14:21:16'
-				}, ],
-
+				loading: true,
+				dataList: []
 			}
 		},
 		onLoad() {
-
+			let that = this
+			uni.request({
+				url: `${this.base_url}/idata/dataTransfer/getDataTransferInfo`,
+				method: 'POST',
+				data: {
+					page: 1,
+					limit: 6000
+				}
+			}).then((res) => {
+				if(res[1].data.code == 0){
+					that.dataList = res[1].data.data
+				}
+				that.loading = false
+			})
 		},
 		methods: {
-			
+			text(x){
+				if(x == 0){
+					return "正常"
+				}if(x == 1){
+					return "异常"
+				}
+				if(x == null){
+					return "不存在"
+				}
+			},
+			color(x){
+				if(x == 0){
+					return "#187759"
+				}if(x == 1){
+					return "#BD3124"
+				}
+				if(x == null){
+					return "gray"
+				}
+			}
 		},
 	}
 </script>
@@ -82,8 +101,8 @@
 		// overflow-y: hidden;
 	}
 
-	.u-collapse-content{
-		padding: 0 20rpx 20rpx 20rpx;
+	.list-content{
+		padding: 14rpx;
 		display: flex;
 		
 		.content-wrap{
@@ -117,11 +136,14 @@
 	}
 
 	.list-item {
-		margin: 20rpx;
+		margin: 14rpx 20rpx;
+		padding: 20rpx;
 		background-color: #FFFFFF;
 		border-radius: 20rpx;
 		// height: 100rpx;
 		.item-title{
+			display: flex;
+			align-items: center;
 			font-size: 34rpx;
 			padding: 10rpx 0;
 		}

@@ -19,3 +19,5 @@
 
 ## common文件夹
         u-charts.js: u-charts图表库
+		dataInfo.js: 一些参数
+		uap.js: iscp安全交互平台组件，根据公司安全规范要求，移动应⽤接⼊公司互联⽹⼤区，需要通过安全交互平台进⾏通讯防护.

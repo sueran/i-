@@ -1,39 +1,84 @@
 <template>
 	<view>
-		<view class="top-wrap">
-			<view class="input-wrap" slot="default">
-				<u-icon name="search" color="#9A9A9A" size="28"></u-icon>
-				<input class="uni-input" placeholder-style="color:#999;" placeholder="请输入搜索关键词" />
-			</view>
-			<view class="btn-wrap">
-				<view class="filter-btn" @click="open(index)" v-for="(item, index) in filterBtns">
-					<text :class="{active: item.selected || item.popShow}">{{item.name}}</text>
-					<u-icon name="arrow-down-fill" size="10" v-if="!item.popShow && !item.selected"></u-icon>
-					<u-icon name="arrow-up-fill" size="10" v-if="item.popShow" color="#187759"></u-icon>
-					<u-icon name="arrow-down-fill" size="10" v-if="!item.popShow && item.selected"
-						color="#187759"></u-icon>
-					<view class="popup" :class="{closed: !item.popShow}">
-						<view v-for="(iitem, i) in item.list">
-							<view class="pop-item" :class="{active: iitem.title==item.name || iitem.value==item.name}"
-								@click.stop="select(index, i)">{{iitem.title}}</view>
-						</view>
-					</view>
-					<view class="overlay" :class="{closed: !item.popShow}"></view>
-					
+		<u-loading-page :loading="loading"></u-loading-page>
+		<view v-if="fsList.length>0">
+			<view class="top-wrap">
+				<view class="input-wrap" slot="default">
+					<u-icon name="search" color="#9A9A9A" size="28"></u-icon>
+					<input class="uni-input" placeholder-style="color:#999;" placeholder="请输入搜索关键词" />
+				</view>
+				<view class="btn-right">
+					<u-icon name="/static/images/icons/filter.svg" label="筛选" size="22" @click="open()">
+					</u-icon>
 				</view>
 			</view>
-		</view>
-		<u-list class="list-wrap">
-			<u-list-item v-for="(item, index) in indexList" :key="index" class="list-item">
-				<u-cell value="详情" center :isLink="true" rightIconStyle="color: #4B9E6A" :border="false" @click="handleNavigateDetail">
-					<view slot="title" class="item-title">{{item.title}}</view>
-					<view slot="label" class="u-slot-value">
-						<view class="item-content">{{item.content}}</view>
-						<view class="item-date">{{item.date}}</view>
+			<u-list class="list-wrap">
+				<u-list-item v-for="(item, index) in fsList" :key="index" class="list-item">
+					<u-cell value="详情" center :isLink="true" rightIconStyle="color: #4B9E6A" :border="false"
+						@click="handleNavigateDetail(item)">
+						<view slot="title" class="item-title">{{item.NAME}}：{{item.EQUIPNAME}}</view>
+						<view slot="label" class="u-slot-value">
+							<view class="item-content">量测量：{{item.FSNAME}}</view>
+							<view class="item-info">量测值：{{item.VALUE}}</view>
+							<view class="item-date">{{item.HAPPENTIME}}</view>
+						</view>
+					</u-cell>
+				</u-list-item>
+			</u-list>
+			<view>
+				<u-popup :show="filterShow" :round="15" class="bottomPop" :safeAreaInsetTop="true"
+					@close="filterShow=false">
+					<view class="popup-wrap">
+						<view class="title">全部筛选条件</view>
+						<view>
+							<view class="item-title">变电站</view>
+							<u-read-more closeText="查看更多" color="#5d5d5d" :showHeight="162" textIndent="0"
+								:toggle="true">
+								<radio-group class="radio-list" @change="radioChange" :data-type="'station'">
+									<label class="radio-item" v-for="item in station" :key="item.id"
+										:class="item.checked?'active':''">
+										<radio :value="item.value" :checked="item.checked" />
+										{{item.name}}
+									</label>
+								</radio-group>
+							</u-read-more>
+						</view>
+						<view>
+							<view class="item-title">间隔</view>
+							<u-read-more closeText="查看更多" color="#5d5d5d" :showHeight="162" textIndent="0"
+								:toggle="true">
+								<radio-group class="radio-list" @change="radioChange" :data-type="'bay'">
+									<label class="radio-item" v-for="item in bay" :key="item.id"
+										:class="item.checked?'active':''">
+										<radio :value="item.value" :checked="item.checked" />
+										{{item.name}}
+									</label>
+								</radio-group>
+							</u-read-more>
+						</view>
+						<view>
+							<view class="item-title">测点类型</view>
+							<u-read-more closeText="查看更多" color="#5d5d5d" :showHeight="162" textIndent="0"
+								:toggle="true">
+								<radio-group class="radio-list" @change="radioChange" :data-type="'analogType'">
+									<label class="radio-item" v-for="item in analogType" :key="item.id"
+										:class="item.checked?'active':''">
+										<radio :value="item.value" :checked="item.checked" />
+										{{item.name}}
+									</label>
+								</radio-group>
+							</u-read-more>
+						</view>
+						<view class="confirm-btn-wrap">
+							<button type="default" @click="reset()">重置</button>
+							<button type="default" @click="submit()">确认</button>
+						</view>
 					</view>
-				</u-cell>
-			</u-list-item>
-		</u-list>
+				</u-popup>
+			</view>
+		</view>
+		<u-empty v-if="fsList.length<=0&&!loading" mode="list" icon="/static/images/icons/nodata.png">
+		</u-empty>
 	</view>
 </template>
 
@@ -41,132 +86,112 @@
 	export default {
 		data() {
 			return {
-				filterBtns: [{
-						name: '变电站',
-						selected: false,
-						popShow: false,
-						list: [{
-							title: '全部',
-							value: '变电站'
-						}, {
-							title: '110kV仁寿变电站'
-						}, {
-							title: '110kV仁寿变电站1'
-						}, {
-							title: '110kV仁寿变电站2'
-						}, {
-							title: '110kV仁寿变电站3'
-						}]
-					},
-					{
-						name: '设备类型',
-						selected: false,
-						popShow: false,
-						list: [{
-							title: '全部',
-							value: '设备类型'
-						}, {
-							title: '设备类型1'
-						}, {
-							title: '设备类型2'
-						}, {
-							title: '设备类型3'
-						}, {
-							title: '设备类型4'
-						}]
-
-					},
-					{
-						name: '设备',
-						selected: false,
-						popShow: false,
-						list: [{
-							title: '全部',
-							value: '设备'
-						}, {
-							title: '设备1'
-						}, {
-							title: '设备11'
-						}, {
-							title: '设备2'
-						}, {
-							title: '设备3'
-						}]
-
-					},
-					{
-						name: '测点类型',
-						selected: false,
-						popShow: false,
-						list: [{
-							title: '全部',
-							value: '测点类型'
-						}, {
-							title: '测点类型1'
-						}, {
-							title: '测点类型2'
-						}, {
-							title: '测点类型3'
-						}, {
-							title: '测点类型4'
-						}]
-
-					}
-				],
-				indexList: [{
-						title: '110KV福宝变电站',
-						content: '量测值：23',
-						date: '发生时间：2022-04-10 14:21:16'
-					},{
-						title: '110KV福宝变电站',
-						content: '量测值：23',
-						date: '发生时间：2022-04-10 14:21:16'
-					},{
-						title: '110KV福宝变电站',
-						content: '量测值：23',
-						date: '发生时间：2022-04-10 14:21:16'
-					},{
-						title: '110KV福宝变电站',
-						content: '量测值：23',
-						date: '发生时间：2022-04-10 14:21:16'
-					},{
-						title: '110KV福宝变电站',
-						content: '量测值：23',
-						date: '发生时间：2022-04-10 14:21:16'
-					},
-				],
-
+				loading: true,
+				filterShow: false,
+				fsList: [],
+				station: [],
+				bay: [],
+				analogType: []
 			}
 		},
 		onLoad() {
-
+			let that = this
+			uni.request({
+				url: `${this.base_url}/idata/fsInfoMonitor/getFsInfo`,
+				method: 'POST',
+				data: {
+					page: 1,
+					limit: 6000,
+					stationID: "all",
+					bayId: "all",
+					analogType: "all",
+				}
+			}).then((res) => {
+				if (res[1].data.code == 0) {
+					that.fsList = res[1].data.data
+				}
+				that.loading = false
+			})
 		},
 		methods: {
 			// 查看详细信息
-			handleNavigateDetail() {
+			handleNavigateDetail(e) {
 				uni.navigateTo({
-					url: './lockInfoDetail'
+					url: './lockInfoDetail?item=' + encodeURIComponent(JSON.stringify(e))
 				})
 			},
-			open(i){
-				this.filterBtns.forEach((item, index)=>{
-					if(index !=i)
-					{
-						this.$set(this.filterBtns[index], "popShow", false);
+			open: function(e) {
+				let that = this
+				uni.request({
+					url: `${this.base_url}/idata/fsInfoMonitor/getAllConditions`,
+					method: 'POST'
+				}).then((res) => {
+					if (res[1].data.code == 0) {
+						let obj = {}
+						for (let key in res[1].data.data) {
+							obj[key] = res[1].data.data[key].map(item => ({
+								...item,
+								checked: item.id == -1 || item.id == 'all' ? true : false,
+								value: String(item.id)
+							}))
+						}
+						that.station = obj.station
+						that.bay = obj.bay
+						that.analogType = obj.analogType
 					}
+					that.filterShow = true
 				})
-				this.$set(this.filterBtns[i], "popShow", !this.filterBtns[i].popShow);
-				console.log(2)
 			},
-			select(btni, i){
-				if(i==0){
-					this.$set(this.filterBtns[btni], "name", this.filterBtns[btni].list[i].value);
-					this.$set(this.filterBtns[btni], "selected", false);
-				}else{
-					this.$set(this.filterBtns[btni], "name", this.filterBtns[btni].list[i].title);
-					this.$set(this.filterBtns[btni], "selected", true);
+			radioChange: function(e) {
+				let type = e.currentTarget.dataset.type
+				let items = this[type],
+					values = e.detail.value;
+				for (let i = 0, lenI = items.length; i < lenI; ++i) {
+					const item = items[i]
+					if (values.includes(item.value)) {
+						this.$set(item, 'checked', true)
+					} else {
+						this.$set(item, 'checked', false)
+					}
 				}
-				this.$set(this.filterBtns[btni], "popShow", !this.filterBtns[btni].popShow);
+			},
+			reset() {
+				this.station = this.station.map(item => ({
+					...item,
+					checked: item.id == -1 || item.id == 'all' ? true : false
+				}))
+				this.bay = this.bay.map(item => ({
+					...item,
+					checked: item.id == -1 || item.id == 'all' ? true : false
+				}))
+				this.analogType = this.analogType.map(item => ({
+					...item,
+					checked: item.id == -1 || item.id == 'all' ? true : false
+				}))
+			},
+			submit() {
+				let that = this
+				let bay = that.bay.filter(item => item.checked == true)[0],
+					station = that.station.filter(item => item.checked == true)[0],
+					analog = that.analogType.filter(item => item.checked == true)[0]
+				that.filterShow = false
+				that.loading = true
+				uni.request({
+					url: `${this.base_url}/idata/fsInfoMonitor/getFsInfo`,
+					method: 'POST',
+					data: {
+						page: 1,
+						limit: 6000,
+						stationID: station.id,
+						bayId: bay.id,
+						analogType: analog.id,
+					}
+				}).then((res) => {
+					if (res[1].data.code == 0) {
+						that.fsList = res[1].data.data
+					}
+					that.loading = false
+				})
 			}
 		},
 	}
@@ -181,8 +206,12 @@
 
 	.top-wrap {
 		padding: 20rpx;
-		height: 140rpx;
 		background-color: #ffffff;
+		display: flex;
+		align-items: baseline;
+		flex: 1;
+		justify-content: flex-end;
+		overflow: hidden;
 	}
 
 	.input-wrap {
@@ -195,75 +224,102 @@
 		border-radius: 100rpx;
 	}
 
-	.btn-wrap {
-		margin: 20rpx 0;
+	.btn-right {
+		display: flex;
+		width: 170rpx;
+		margin-left: 10rpx;
+		justify-content: space-around;
+	}
+
+	.popup-wrap {
+		max-height: 90vh;
+		overflow-y: auto;
+		padding: 30rpx;
+
+		.title {
+			font-size: 32rpx;
+			line-height: 46rpx;
+		}
+
+		.item-title {
+			margin-top: 20rpx;
+			font-size: 28rpx;
+			color: #4f4f4f;
+		}
+	}
+
+	/deep/ uni-radio .uni-radio-input {
+		display: none !important;
+	}
+
+	.radio-list {
+		display: flex;
+		flex-wrap: wrap;
+		margin-top: 20rpx;
+		font-size: 28rpx;
+
+		.radio-item {
+			margin-right: 20rpx;
+			margin-bottom: 14rpx;
+			padding: 10rpx 20rpx;
+			position: relative;
+			background-color: #EFEFEF;
+			border-radius: 8rpx;
+			border: 1rpx solid #EFEFEF;
+			white-space: nowrap;
+		}
+	}
+
+	/deep/ .radio-item.active {
+		border: 1rpx solid #187759;
+		color: #101010;
+		background: rgba(24, 119, 89, 0.15);
+
+		&::before {
+			content: '';
+			position: absolute;
+			right: -1rpx;
+			bottom: -1rpx;
+			border-bottom-right-radius: 8rpx;
+			border: 16rpx solid #187759;
+			border-top-color: transparent;
+			border-left-color: transparent;
+		}
+
+		&::after {
+			content: '';
+			width: 5px;
+			height: 10px;
+			position: absolute;
+			right: 0;
+			bottom: 6rpx;
+			border: 1px solid #fff;
+			border-top-color: transparent;
+			border-left-color: transparent;
+			transform: rotate(45deg);
+		}
+	}
+
+	.confirm-btn-wrap {
+		margin-top: 10px;
 		display: flex;
 
-		.filter-btn {
-			display: flex;
-			font-size: 26rpx;
-			flex: 1;
-			justify-content: flex-end;
-			overflow: hidden;
+		button {
+			width: 320rpx;
+			height: 60rpx;
+			line-height: 60rpx;
+			border-radius: 30rpx;
+			font-size: 28rpx;
+			color: #187759;
+			background: rgba(24, 119, 89, 0.15);
 
-			text.active {
-				color: #187759;
-				overflow: hidden;
-				white-space: nowrap;
-				text-overflow: ellipsis;
-			}
-
-			&:first-child {
-				justify-content: flex-start;
+			&:last-child {
+				color: #fff;
+				background: #187759;
+				box-shadow: 0rpx 1rpx 6rpx 0rpx rgba(0, 0, 0, 0.15);
 			}
 		}
 	}
-
-	.popup {
-		position: absolute;
-		top: 180rpx;
-		left: 0;
-		right: 0;
-		height: 300rpx;
-		padding: 0 20rpx;
-		overflow-y: hidden;
-		background-color: #ffffff;
-		z-index: 100006;
-		transition: all .2s;
-
-		&.closed {
-			height: 0;
-		}
-
-		.pop-item {
-			padding: 10rpx 0;
-			font-size: 26rpx;
-
-			&.active {
-				color: #187759;
-			}
-		}
-	}
-
-	.overlay {
-		display: block;
-		position: absolute;
-		top: 180rpx;
-		bottom: 0;
-		left: 0;
-		right: 0;
-		background-color: rgba(16, 16, 16, .4);
-		z-index: 10000;
-		transition: all .2s;
-
-		&.closed {
-			display: none;
-		}
-	}
-
-	// .list-wrap{
-	// 	height: calc(100% - 180rpx);
-	// }
 
 	.list-item {
 		margin: 20rpx;
@@ -295,5 +351,11 @@
 			color: #101010;
 		}
 
+	}
+
+	/deep/ .u-read-more__content {
+		overflow: hidden;
+		color: #101010;
+		font-size: inherit;
 	}
 </style>

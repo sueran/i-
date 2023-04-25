@@ -3,33 +3,43 @@
         <view class="headerBackground"></view>
         <view class="wrap">
             <view class="charts-box">
-                <qiun-data-charts type="ring" :opts="opts" :chartData="chartData" />
+                <qiun-data-charts 
+					type="ring" 
+					:opts="opts" 
+					:chartData="chartData"
+					@getIndex="handleTap"/>
             </view>
             <u-cell-group>
-		        <u-cell title="未消缺" value="2" @click="handleJump"></u-cell>
+		        <u-cell title="未消缺" @click="handleJump"><text slot='value'>{{unDealTotal}}</text></u-cell>
 	        </u-cell-group>
             <u-cell-group>
-		        <u-cell title="本周新增" value="2"></u-cell>
-                <u-cell title="本周消缺" value="2"></u-cell>
+		        <u-cell title="本周新增"><text slot='value'>{{week.add}}</text></u-cell>
+                <u-cell title="本周消缺"><text slot='value'>{{week.deal}}</text></u-cell>
 	        </u-cell-group>
             <u-cell-group>
-		        <u-cell title="本月新增" value="2"></u-cell>
-                <u-cell title="本月消缺" value="2"></u-cell>
+		        <u-cell title="本月新增"><text slot='value'>{{month.deal}}</text></u-cell>
+                <u-cell title="本月消缺"><text slot='value'>{{month.deal}}</text></u-cell>
 	        </u-cell-group>
         </view>
     </view>
 </template>
 
 <script>
+import { request } from "../request/request"
 export default {
     data() {
         return {
             chartData: {},
+			total: 0,			// 缺陷总数
+			unDealTotal: 0,		// 当前未消缺总数
+			week: {},			// 本周数据
+			month: {},			// 本月数据
             opts: {
                 rotate: false,
                 rotateLock: false,
-                color: ["#1890FF", "#91CB74", "#FAC858", "#EE6666", "#73C0DE", "#3CA272", "#FC8452", "#9A60B4", "#ea7ccc"],
+                color: ["#187759", "#f9ae3d", "#f56c6c"],
                 padding: [5, 5, 5, 5],
+
                 dataLabel: true,
                 legend: {
                     show: true,
@@ -42,7 +52,7 @@ export default {
                     color: "#666666"
                 },
                 subtitle: {
-                    name: "70%",
+                    name: "",
                     fontSize: 25,
                     color: "#7cb5ec"
                 },
@@ -63,29 +73,61 @@ export default {
     },
 
     methods: {
-        handleJump() {
+		
+		handleTap(e) {
+			console.log('e', e.currentIndex)
+			if(e.currentIndex === 0) {
+				this.handleJump('一般')
+			}else if(e.currentIndex === 1) {
+				this.handleJump('危急')
+			}else {
+				this.handleJump('严重')
+			}
+		},
+		
+        handleJump(type) {
             uni.navigateTo({
-                url: '../flawDesign/flawDesign_list'
-            });
+                url: `../flawDesign/flawDesign_list?level=${type}`
+            })
         },
-        getServerData() {
-            //模拟从服务器获取数据时的延时
-            setTimeout(() => {
-                //模拟服务器返回数据，如果数据格式和标准格式不同，需自行按下面的格式拼接
-                let res = {
-                    series: [
-                        {
-                            data: [{ "name": "一般", "value": 50 }, { "name": "危急", "value": 30 }, { "name": "严重", "value": 20 }]
-                        }
-                    ]
-                };
-                this.chartData = JSON.parse(JSON.stringify(res));
-            }, 500);
-        },
+
+        // 根据获取缺陷设计列表
+        handleGetDefect() {
+			let url = this.base_url + '/idata/homePage/getDefectStatistics'
+			uni.request({
+				url,
+				method: 'POST',
+				success: res => {
+					this.total = res.data.data.total
+					this.unDealTotal = res.data.data.unDealTotal
+					this.week = res.data.data.week
+					this.month = res.data.data.month
+					
+					let result = {
+					    series: [
+					        {
+					            data: [
+					                { "name": "一般", "value": res.data.data.defect.general },
+					                { "name": "危急", "value": res.data.data.defect.crisis }, 
+					                { "name": "严重", "value": res.data.data.defect.series }
+					            ]
+					        }
+					    ]
+					};
+					this.chartData = JSON.parse(JSON.stringify(result));
+				}
+			})
+        }
+		
+		// 根据缺陷程度获取列表
+		// handleGetDefectList(type) {
+		// 	let url = this.base_url + `/idata/homePage/getDefectList?defectType&defectLevel=${type}&page=1&limit=6000`
+			
+		// }
     },
 
     onReady() {
-        this.getServerData();
+        this.handleGetDefect()
     },
 }
 </script>
